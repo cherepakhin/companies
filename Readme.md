@@ -65,7 +65,13 @@ flyway:
 Миграции в src/resources/migration. При изменении структуры вручную выполнить:
 
 ````shell
-mvn flyway:migrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.url=jdbc:postgresql://127.0.0.1:5432/companies
+$mvn flyway:migrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.url=jdbc:postgresql://127.0.0.1:5432/companies
+````
+
+### Тестирование
+
+````shell
+$./mvnw test
 ````
 
 ### TODO:
