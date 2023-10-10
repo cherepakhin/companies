@@ -25,7 +25,7 @@
    5.1 Необходимых для запуска web-приложения настроек в профиле<br/>
    5.2 REST API web-приложения<br/>
 
-Установка версии java:<br/>
+### Установка версии java:<br/>
 
 ````shell
 $export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
@@ -43,4 +43,31 @@ OS name: "linux", version: "5.4.0-150-generic", arch: "amd64", family: "unix"
 
 ````
 
+### Использование базы данных
 
+Используется программа psql из дистрибутива PostgreSQL.
+
+Создание базы:
+
+````shell
+$ psql
+# create database companies; 
+````
+Для подключения к БД используются user/password из переменных операционной системы PG_USER, PG_PASSWORD. По умолчанию значения обеих переменных 'postgres'.
+
+Для версионирования БД используется flyway (<b>в задании liquibase. ЗАМЕНИТЬ останется время</b>). Автообновление БД отключено. В application.yaml установлен флаг: 
+
+````yaml
+flyway:
+    enabled: false
+````
+
+Миграции в src/resources/migration. При изменении структуры вручную выполнить:
+
+````shell
+mvn flyway:migrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.url=jdbc:postgresql://127.0.0.1:5432/companies
+````
+
+### TODO:
+
+- Заменить flyway на liquibase
