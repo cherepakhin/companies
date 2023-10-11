@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -33,4 +32,80 @@ public class CompanyEntity {
     @JoinColumn(name = "director_n", nullable = false)
     PeopleEntity director = new PeopleEntity();
 
+    public Long getN() {
+        return n;
+    }
+
+    public void setN(Long n) {
+        this.n = n;
+    }
+
+    public String getShortname() {
+        return shortname;
+    }
+
+    public void setShortname(String shortname) {
+        this.shortname = shortname;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getInn() {
+        return inn;
+    }
+
+    public void setInn(String inn) {
+        this.inn = inn;
+    }
+
+    public String getOgrn() {
+        return ogrn;
+    }
+
+    public void setOgrn(String ogrn) {
+        this.ogrn = ogrn;
+    }
+
+    public String getAddressPost() {
+        return addressPost;
+    }
+
+    public void setAddressPost(String addressPost) {
+        this.addressPost = addressPost;
+    }
+
+    public String getAddressUr() {
+        return addressUr;
+    }
+
+    public void setAddressUr(String addressUr) {
+        this.addressUr = addressUr;
+    }
+
+    public PeopleEntity getDirector() {
+        return director;
+    }
+
+    public void setDirector(PeopleEntity director) {
+        this.director = director;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CompanyEntity)) return false;
+        CompanyEntity that = (CompanyEntity) o;
+        return Objects.equals(n, that.n) && Objects.equals(shortname, that.shortname) && Objects.equals(fullname, that.fullname) && Objects.equals(inn, that.inn) && Objects.equals(ogrn, that.ogrn) && Objects.equals(addressPost, that.addressPost) && Objects.equals(addressUr, that.addressUr) && Objects.equals(director.getN(), that.director.getN());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(n, shortname, fullname, inn, ogrn, addressPost, addressUr, director.getN());
+    }
 }
