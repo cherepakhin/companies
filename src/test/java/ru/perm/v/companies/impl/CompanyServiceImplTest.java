@@ -28,10 +28,9 @@ public class CompanyServiceImplTest {
         assertEquals(0, company.getN());
     }
 
-//    @Test
-//    public void getByNotExistN() {
-//        CompanyEntity company = companyService.getByN(-100L);
-//        assertEquals(-100,company.getN());
-//        assertEquals("-100",company.getFullname());
-//    }
+    @Test
+    public void getByNotExistN() {
+        CompanyEntity company = companyService.getByN(-100L);
+        assertEquals(-1, company.getN());
+    }
 }

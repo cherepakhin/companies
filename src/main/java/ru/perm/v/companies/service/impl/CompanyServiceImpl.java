@@ -16,6 +16,7 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyRepository companyRepository;
 
     private CompanyEntity nullCompany;
+
     @Override
     public List<CompanyEntity> getAll() {
         return companyRepository.findAll();
@@ -24,11 +25,11 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyEntity getByN(Long n) {
         Optional<CompanyEntity> res = companyRepository.findById(n);
-        return res.orElse(nullCompany);
+        return res.orElseGet(this::getNotFonded);
     }
 
     private CompanyEntity getNotFonded() {
-        if(nullCompany == null) {
+        if (nullCompany == null) {
             nullCompany = new CompanyEntity();
             nullCompany.setN(-1L);
         }
