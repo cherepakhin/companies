@@ -3,10 +3,7 @@ package ru.perm.v.companies.entity;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -16,6 +13,8 @@ import java.util.Objects;
 @NoArgsConstructor
 public class PeopleEntity {
     @Id
+    @Column(name = "n", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long n = 0L; // имя "n" , не "id" , т.к. в нектр. БД слово id ключевое
     @Column(name = "firstname", columnDefinition = "varchar(255) default ''")
     private String firstname = "";
