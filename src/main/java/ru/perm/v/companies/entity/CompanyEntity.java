@@ -11,11 +11,13 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "people")
+@Table(name = "company")
 @AllArgsConstructor
 @NoArgsConstructor
-public class PeopleDB {
+public class CompanyEntity {
     @Id
+    @Column(name = "n", columnDefinition = "varchar(255) default ''")
+    // имя "n" , не "id" , т.к. в нектр. БД слово id ключевое
     private Long n = 0L;
     @Column(name = "firstname", columnDefinition = "varchar(255) default ''")
     private String firstname = "";
@@ -69,9 +71,9 @@ public class PeopleDB {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PeopleDB)) return false;
-        PeopleDB peopleDB = (PeopleDB) o;
-        return Objects.equals(n, peopleDB.n) && Objects.equals(firstname, peopleDB.firstname) && Objects.equals(lastname, peopleDB.lastname) && Objects.equals(fathername, peopleDB.fathername) && Objects.equals(birthday, peopleDB.birthday);
+        if (!(o instanceof CompanyEntity)) return false;
+        CompanyEntity that = (CompanyEntity) o;
+        return Objects.equals(n, that.n) && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(fathername, that.fathername) && Objects.equals(birthday, that.birthday);
     }
 
     @Override
