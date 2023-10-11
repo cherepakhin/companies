@@ -28,8 +28,9 @@ public class CompanyEntity {
     private String addressPost = "";
     @Column(name = "address_ur", columnDefinition = "varchar(100) default ''")
     private String addressUr = "";
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "director_n", nullable = false)
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+//    @JoinColumn(name = "director_n", nullable = false)
+    @Transient
     PeopleEntity director = new PeopleEntity();
 
     public Long getN() {
