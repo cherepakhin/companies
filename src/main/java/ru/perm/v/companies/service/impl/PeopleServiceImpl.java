@@ -7,12 +7,15 @@ import ru.perm.v.companies.repository.PeopleRepository;
 import ru.perm.v.companies.service.PeopleService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PeopleServiceImpl implements PeopleService {
 
     @Autowired
     private PeopleRepository peopleRepository;
+
+    private static PeopleEntity nullPeople = new PeopleEntity(-1);
 
     @Override
     public List<PeopleEntity> getAll() {
@@ -21,6 +24,12 @@ public class PeopleServiceImpl implements PeopleService {
 
     @Override
     public PeopleEntity getByN(Long n) {
-        return peopleRepository.getById(n);
+        Optional<PeopleEntity> res = peopleRepository.findById(n);
+        return res.orElseGet(this::getNotFonded);
     }
+
+    private PeopleEntity getNotFonded() {
+        return nullPeople;
+    }
+
 }

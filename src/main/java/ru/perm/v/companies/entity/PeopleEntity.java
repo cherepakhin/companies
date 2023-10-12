@@ -25,6 +25,11 @@ public class PeopleEntity {
     @Column(name = "birthday", columnDefinition = "TIMESTAMP")
     private LocalDate birthday = LocalDate.now();
 
+    public PeopleEntity(long n) {
+        super();
+        this.n = n;
+    }
+
     public Long getN() {
         return n;
     }
