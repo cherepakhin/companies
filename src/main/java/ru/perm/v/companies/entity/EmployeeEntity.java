@@ -8,10 +8,10 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "people")
+@Table(name = "employee")
 @AllArgsConstructor
 @NoArgsConstructor
-public class PeopleEntity {
+public class EmployeeEntity {
     @Id
     @Column(name = "n", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class PeopleEntity {
     @Column(name = "birthday", columnDefinition = "TIMESTAMP")
     private LocalDate birthday = LocalDate.now();
 
-    public PeopleEntity(long n) {
+    public EmployeeEntity(long n) {
         super();
         this.n = n;
     }
@@ -73,9 +73,9 @@ public class PeopleEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PeopleEntity)) return false;
-        PeopleEntity peopleEntity = (PeopleEntity) o;
-        return Objects.equals(n, peopleEntity.n) && Objects.equals(firstname, peopleEntity.firstname) && Objects.equals(lastname, peopleEntity.lastname) && Objects.equals(fathername, peopleEntity.fathername) && Objects.equals(birthday, peopleEntity.birthday);
+        if (!(o instanceof EmployeeEntity)) return false;
+        EmployeeEntity employeeEntity = (EmployeeEntity) o;
+        return Objects.equals(n, employeeEntity.n) && Objects.equals(firstname, employeeEntity.firstname) && Objects.equals(lastname, employeeEntity.lastname) && Objects.equals(fathername, employeeEntity.fathername) && Objects.equals(birthday, employeeEntity.birthday);
     }
 
     @Override

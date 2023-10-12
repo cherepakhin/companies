@@ -31,7 +31,7 @@ public class CompanyEntity {
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 //    @JoinColumn(name = "director_n", nullable = false)
     @Transient
-    PeopleEntity director = new PeopleEntity();
+EmployeeEntity director = new EmployeeEntity();
 
     public CompanyEntity(long n) {
         super();
@@ -94,11 +94,11 @@ public class CompanyEntity {
         this.addressUr = addressUr;
     }
 
-    public PeopleEntity getDirector() {
+    public EmployeeEntity getDirector() {
         return director;
     }
 
-    public void setDirector(PeopleEntity director) {
+    public void setDirector(EmployeeEntity director) {
         this.director = director;
     }
 
