@@ -18,12 +18,3 @@ server:
   servlet:
     context-path: /api
 
-logging:
-  level:
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: debug
-    root: info
-  file: log/app.log
-  logback:
-    rollingpolicy:
-      max-file-size: 1MB

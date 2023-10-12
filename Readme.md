@@ -80,6 +80,10 @@ $mvn flyway:migrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.u
 $./mvnw test
 ````
 
+### Логирование
+
+Сделана настройка вывода протоколв работы через logback в папку logs. Настройки в файле resources/logback-spring.xml
+
 ### TODO:
 
 - Заменить flyway на liquibase
