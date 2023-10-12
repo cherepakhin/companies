@@ -15,7 +15,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
-    private CompanyEntity nullCompany;
+    private static CompanyEntity nullCompany = new CompanyEntity(-1);
 
     @Override
     public List<CompanyEntity> getAll() {
@@ -29,10 +29,6 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     private CompanyEntity getNotFonded() {
-        if (nullCompany == null) {
-            nullCompany = new CompanyEntity();
-            nullCompany.setN(-1L);
-        }
         return nullCompany;
     }
 }

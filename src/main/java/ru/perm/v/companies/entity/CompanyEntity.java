@@ -33,6 +33,11 @@ public class CompanyEntity {
     @Transient
     PeopleEntity director = new PeopleEntity();
 
+    public CompanyEntity(long n) {
+        super();
+        this.n =n;
+    }
+
     public Long getN() {
         return n;
     }
