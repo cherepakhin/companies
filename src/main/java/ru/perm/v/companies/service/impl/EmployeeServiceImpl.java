@@ -25,10 +25,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeEntity getByN(Long n) {
         Optional<EmployeeEntity> res = employeeRepository.findById(n);
-        return res.orElseGet(this::getNotFonded);
+        return res.orElseGet(this::getNotFounded);
     }
 
-    private EmployeeEntity getNotFonded() {
+    private EmployeeEntity getNotFounded() {
         return nullEmployee;
     }
 

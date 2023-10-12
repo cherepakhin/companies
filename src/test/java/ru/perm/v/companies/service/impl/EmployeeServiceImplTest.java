@@ -28,4 +28,11 @@ class EmployeeServiceImplTest {
         EmployeeEntity employee = employeeService.getByN(0L);
         assertEquals(0L, employee.getN());
     }
+
+    @Test
+    void getByForNotExistN() {
+        EmployeeEntity employee = employeeService.getByN(-100L);
+        assertEquals(-1L, employee.getN());
+    }
+
 }
