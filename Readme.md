@@ -87,3 +87,7 @@ $./mvnw test
 ### TODO:
 
 - Заменить flyway на liquibase
+
+### Примечания
+
+[Optional: Кот Шрёдингера в Java 8](https://habr.com/ru/articles/346782/)
