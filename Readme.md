@@ -80,12 +80,11 @@ $mvn flyway:migrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.u
 $./mvnw test
 ````
 
-Сборка с пропуском unit tests:
+Сборка с пропуском всех тестов:
 
 ````shell
 ./mvnw package -DskipTests
 ````
-
 
 ### Логирование
 
