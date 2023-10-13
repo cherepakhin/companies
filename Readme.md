@@ -91,3 +91,4 @@ $./mvnw test
 ### Примечания
 
 [Optional: Кот Шрёдингера в Java 8](https://habr.com/ru/articles/346782/)
+[Integration Tests With Maven(dzone)](https://dzone.com/articles/integration-tests-with-maven)
