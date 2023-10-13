@@ -31,7 +31,7 @@ public class CompanyEntity {
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 //    @JoinColumn(name = "director_n", nullable = false)
     @Transient
-EmployeeEntity director = new EmployeeEntity();
+    EmployeeEntity director = new EmployeeEntity();
 
     public CompanyEntity(long n) {
         super();

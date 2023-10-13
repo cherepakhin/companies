@@ -25,6 +25,10 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyEntity getByN(Long n) {
         Optional<CompanyEntity> res = companyRepository.findById(n);
+        // если null:
+        // можно просто ВЕРНУТЬ объект (orElse)
+        // return res.orElse(nullCompany);
+        // или ВЫЗВАТЬ метод (orElseGet)
         return res.orElseGet(this::getNotFonded);
     }
 
