@@ -92,3 +92,4 @@ $./mvnw test
 
 [Optional: Кот Шрёдингера в Java 8](https://habr.com/ru/articles/346782/)
 [Integration Tests With Maven(dzone)](https://dzone.com/articles/integration-tests-with-maven)
+[example project](https://github.com/gkatzioura/egkatzioura.wordpress.com/tree/master/IntegrationTestMaven/src)
