@@ -80,6 +80,13 @@ $mvn flyway:migrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.u
 $./mvnw test
 ````
 
+Сборка с пропуском unit tests:
+
+````shell
+./mvnw package -DskipTests
+````
+
+
 ### Логирование
 
 Сделана настройка вывода протоколв работы через logback в папку logs. Настройки в файле resources/logback-spring.xml
@@ -91,3 +98,4 @@ $./mvnw test
 ### Примечания
 
 [Optional: Кот Шрёдингера в Java 8](https://habr.com/ru/articles/346782/)
+
