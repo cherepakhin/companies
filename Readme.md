@@ -1,4 +1,4 @@
-## Типовой прект "Companies" (backend)
+## Типовой проект "Companies" (backend)
 
 Задание:<br/>
 1. Создать новый пустой Spring (5) Java-проект Web-приложения с поддержкой Maven, Java 11.  
