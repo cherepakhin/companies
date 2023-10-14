@@ -84,6 +84,22 @@ $./mvnw test
 
 Сделана настройка вывода протоколв работы через logback в папку logs. Настройки в файле resources/logback-spring.xml
 
+### Конфигурации (spring profiles)
+
+Конфигурация для разработки расположена в application-dev.yml, для production версии в application-prod.yml. С какой конфигурацией запускать указано в application.yml
+
+````yaml
+spring:
+  profiles:
+    active: dev
+````
+
+Профиль можно указать при запуске:
+
+````shell
+ java -jar target/companies-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+````
+
 ### TODO:
 
 - Заменить flyway на liquibase
