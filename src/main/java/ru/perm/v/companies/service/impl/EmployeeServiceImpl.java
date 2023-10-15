@@ -1,11 +1,14 @@
 package ru.perm.v.companies.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import ru.perm.v.companies.entity.EmployeeEntity;
 import ru.perm.v.companies.repository.EmployeeRepository;
 import ru.perm.v.companies.service.EmployeeService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,13 +24,35 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeEntity> getAll() {
-        return employeeRepository.findAll();
+        List<EmployeeEntity> ret = new ArrayList<>();
+        employeeRepository.findAll().forEach(ret::add);
+        return ret;
     }
 
     @Override
     public EmployeeEntity getByN(Long n) {
         Optional<EmployeeEntity> res = employeeRepository.findById(n);
         return res.orElseGet(this::getNotFounded);
+    }
+
+    @Override
+    public List<EmployeeEntity> getByFirstName(String name) {
+        EmployeeEntity query = new EmployeeEntity();
+        query.setFirstname(name);
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnorePaths("n", "lastname", "fathername", "birthday")
+                .withIncludeNullValues()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        ArrayList<EmployeeEntity> ret = new ArrayList<EmployeeEntity>();
+        Example<EmployeeEntity> example = Example.of(query, matcher);
+// Выборка подробно
+//        Iterable<EmployeeEntity> all = employeeRepository.findAll(example);
+//        all.forEach(ret::add);
+// Выборка коротко
+        employeeRepository.findAll(example).forEach(ret::add);
+        return ret;
     }
 
     private EmployeeEntity getNotFounded() {

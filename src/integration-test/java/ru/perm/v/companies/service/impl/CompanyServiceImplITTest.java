@@ -39,4 +39,10 @@ public class CompanyServiceImplITTest {
         CompanyEntity company = companyService.getByN(3L);
         assertEquals(2L, company.getDirector().getN());
     }
+
+//    @Test
+//    public void getByShortName() {
+//        List<CompanyEntity> companies = companyService.getByShortName("shortname_1");
+//        assertEquals(1, companies.size());
+//    }
 }

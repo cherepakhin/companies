@@ -35,4 +35,11 @@ public class EmployeeServiceImplITTest {
         assertEquals(-1L, employee.getN());
     }
 
+    @Test
+    public void getByFirstName() {
+        List<EmployeeEntity> empls = employeeService.getByFirstName("firstname_2");
+        assertEquals(1, empls.size());
+        assertEquals("firstname_2", empls.get(0).getFirstname());
+    }
+
 }

@@ -8,4 +8,5 @@ public interface EmployeeService {
     List<EmployeeEntity> getAll();
 
     EmployeeEntity getByN(Long n);
+    List<EmployeeEntity> getByFirstName(String name);
 }

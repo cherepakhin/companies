@@ -1,6 +1,7 @@
 package ru.perm.v.companies.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.repository.CompanyRepository;
@@ -32,6 +33,16 @@ public class CompanyServiceImpl implements CompanyService {
         return res.orElse(nullCompany);
         // или ВЫЗВАТЬ метод (orElseGet)
 //        return res.orElseGet(this::getNotFonded);
+    }
+
+    @Override
+    public List<CompanyEntity> getByShortName(String name) {
+        CompanyEntity example = new CompanyEntity();
+        
+        example.setShortname(name);
+
+        List<CompanyEntity> companies = companyRepository.findAll(Example.of(example));
+        return companies;
     }
 
 }
