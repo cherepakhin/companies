@@ -76,8 +76,22 @@ $mvn flyway:migrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.u
 
 ### Тестирование
 
+Прогон всех тестов (включая интеграционные):
+
 ````shell
 $./mvnw test
+````
+
+Исключение интеграционных тестов (прогон только unit тестов):
+
+````shell
+$./mvnw test -Dtest=\!*ITTest
+````
+
+### Запуск проекта
+
+````shell
+./mvnw clean spring-boot:run
 ````
 
 ### Логирование
