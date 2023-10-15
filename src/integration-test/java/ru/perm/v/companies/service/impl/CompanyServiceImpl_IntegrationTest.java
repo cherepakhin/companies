@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class CompanyServiceImplIntegrationTest {
+public class CompanyServiceImpl_IntegrationTest {
 
     @Autowired
     CompanyService companyService;

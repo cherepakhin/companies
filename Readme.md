@@ -85,7 +85,7 @@ $./mvnw test
 Исключение интеграционных тестов (прогон только unit тестов):
 
 ````shell
-$./mvnw test -Dtest=\!*ITTest
+$./mvnw test -Dtest=\!*_IntegrationTest
 ````
 
 ### Запуск проекта
