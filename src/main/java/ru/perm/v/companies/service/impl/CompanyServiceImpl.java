@@ -12,10 +12,13 @@ import java.util.Optional;
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
-    @Autowired
     private CompanyRepository companyRepository;
 
     private static CompanyEntity nullCompany = new CompanyEntity(-1);
+
+    public CompanyServiceImpl(@Autowired CompanyRepository companyRepository) {
+        this.companyRepository= companyRepository;
+    }
 
     @Override
     public List<CompanyEntity> getAll() {
