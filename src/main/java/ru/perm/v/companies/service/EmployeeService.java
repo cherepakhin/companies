@@ -9,4 +9,7 @@ public interface EmployeeService {
 
     EmployeeEntity getByN(Long n);
     List<EmployeeEntity> getByFirstName(String name);
+    // с обратной сортировкой!
+    List<EmployeeEntity> findByLastNameOrderByNDesc(String lastName);
+    List<EmployeeEntity> findByLastNameLikeOrderByN(String lastName);
 }

@@ -20,7 +20,7 @@ public class EmployeeServiceImplITTest {
     @Test
     public void getAll() {
         List<EmployeeEntity> empls = employeeService.getAll();
-        assertEquals(4, empls.size());
+        assertEquals(6, empls.size());
     }
 
     @Test
@@ -37,9 +37,16 @@ public class EmployeeServiceImplITTest {
 
     @Test
     public void getByFirstName() {
-        List<EmployeeEntity> empls = employeeService.getByFirstName("firstname_2");
+        List<EmployeeEntity> empls = employeeService.getByFirstName("firstname_20");
         assertEquals(1, empls.size());
-        assertEquals("firstname_2", empls.get(0).getFirstname());
+        assertEquals("firstname_20", empls.get(0).getFirstname());
     }
+
+//    @Test
+//    void findByLastnameLikeOrderByN() {
+//        String lastName = "0";
+//        List<EmployeeEntity> empls = employeeService.findByLastNameLikeOrderByN(lastName);
+//        assertEquals(2, empls.size());
+//    }
 
 }

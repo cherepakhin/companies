@@ -5,7 +5,12 @@ import org.springframework.data.repository.query.QueryByExampleExecutor;
 import org.springframework.stereotype.Repository;
 import ru.perm.v.companies.entity.EmployeeEntity;
 
+import java.util.List;
+
 @Repository
 public interface EmployeeRepository
         extends CrudRepository<EmployeeEntity, Long>, QueryByExampleExecutor<EmployeeEntity> {
+    List<EmployeeEntity> findByLastnameOrderByFirstnameAsc(String lastName);
+
+    List<EmployeeEntity> findByLastnameOrderByNDesc(String lastName);
 }

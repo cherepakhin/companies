@@ -55,6 +55,41 @@ public class EmployeeServiceImpl implements EmployeeService {
         return ret;
     }
 
+    @Override
+    public List<EmployeeEntity> findByLastNameOrderByNDesc(String lastName) {
+        EmployeeEntity query = new EmployeeEntity();
+        query.setLastname(lastName);
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnorePaths("n", "firstname", "fathername", "birthday")
+                .withIncludeNullValues()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        ArrayList<EmployeeEntity> ret = new ArrayList<EmployeeEntity>();
+        Example<EmployeeEntity> example = Example.of(query, matcher);
+// Выборка подробно
+//        Iterable<EmployeeEntity> all = employeeRepository.findAll(example);
+//        all.forEach(ret::add);
+// Выборка коротко
+        employeeRepository.findAll(example).forEach(ret::add);
+        return ret;
+    }
+
+    @Override
+    public List<EmployeeEntity> findByLastNameLikeOrderByN(String lastName) {
+        return null;
+    }
+
+    //    @Override
+//    public List<EmployeeEntity> findByLastnameOrderByNDesc(String lastName) {
+//        return employeeRepository.findByLastnameOrderByNDesc(lastName);
+//    }
+//
+//    @Override
+//    public List<EmployeeEntity> findByLastnameLikeOrderByN(String lastName) {
+//        return employeeRepository.findByLastnameOrderByFirstnameAsc(lastName);
+//    }
+//
     private EmployeeEntity getNotFounded() {
         return nullEmployee;
     }
