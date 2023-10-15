@@ -80,12 +80,24 @@ $mvn flyway:migrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.u
 
 ````shell
 $./mvnw test
+
+Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
 ````
 
-Исключение интеграционных тестов (прогон только unit тестов):
+Прогон только интеграционных тестов:
 
 ````shell
-$./mvnw test -Dtest=\!*_IntegrationTest
+ 
+$./mvnw test -Dtest=*_IntegrationTest
+
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
+````
+
+Прогон только unit тестов:
+````shell
+$./mvnw test -Dtest=\!*_IntegrationTest 
+
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 ````
 
 ### Запуск проекта
