@@ -7,6 +7,7 @@ import ru.perm.v.companies.entity.EmployeeEntity;
 import ru.perm.v.companies.service.EmployeeService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -47,6 +48,12 @@ public class EmployeeServiceImplITTest {
         String lastName = "0";
         List<EmployeeEntity> empls = employeeService.findByLastNameLikeOrderByN(lastName);
         assertEquals(2, empls.size());
+
+        // demo map
+        List<Long> nn = empls.stream().map(EmployeeEntity::getN).collect(Collectors.toList());
+        assertEquals(List.of(4L, 5L), nn);
+        List<String> names = empls.stream().map(EmployeeEntity::getFirstname).collect(Collectors.toList());
+        assertEquals(List.of("firstname_30", "firstname_20"), names);
     }
 
 }
