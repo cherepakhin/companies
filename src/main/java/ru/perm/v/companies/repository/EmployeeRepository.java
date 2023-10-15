@@ -13,4 +13,5 @@ public interface EmployeeRepository
     List<EmployeeEntity> findByLastnameOrderByFirstnameAsc(String lastName);
 
     List<EmployeeEntity> findByLastnameOrderByNDesc(String lastName);
+    List<EmployeeEntity> findByLastnameLikeOrderByNDesc(String lastName);
 }

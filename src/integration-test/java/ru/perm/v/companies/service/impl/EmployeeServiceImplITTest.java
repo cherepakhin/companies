@@ -42,11 +42,11 @@ public class EmployeeServiceImplITTest {
         assertEquals("firstname_20", empls.get(0).getFirstname());
     }
 
-//    @Test
-//    void findByLastnameLikeOrderByN() {
-//        String lastName = "0";
-//        List<EmployeeEntity> empls = employeeService.findByLastNameLikeOrderByN(lastName);
-//        assertEquals(2, empls.size());
-//    }
+    @Test
+    void findByLastNameLikeOrderByN() {
+        String lastName = "0";
+        List<EmployeeEntity> empls = employeeService.findByLastNameLikeOrderByN(lastName);
+        assertEquals(2, empls.size());
+    }
 
 }

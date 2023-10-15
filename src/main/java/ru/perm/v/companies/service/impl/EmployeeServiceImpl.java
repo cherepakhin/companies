@@ -77,7 +77,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeEntity> findByLastNameLikeOrderByN(String lastName) {
-        return null;
+        EmployeeEntity query = new EmployeeEntity();
+        query.setLastname(lastName);
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnorePaths("n", "firstname", "fathername", "birthday")
+                .withIncludeNullValues()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        ArrayList<EmployeeEntity> ret = new ArrayList<EmployeeEntity>();
+        Example<EmployeeEntity> example = Example.of(query, matcher);
+        employeeRepository.findAll(example).forEach(ret::add);
+        return ret;
     }
 
     //    @Override
