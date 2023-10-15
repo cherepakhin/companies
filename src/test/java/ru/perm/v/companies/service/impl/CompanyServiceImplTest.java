@@ -5,6 +5,8 @@ import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.repository.CompanyRepository;
 import ru.perm.v.companies.service.CompanyService;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,17 @@ public class CompanyServiceImplTest {
 
         assertEquals(2, companyService.getAll().size());
     }
+
+    @Test
+    public void getAll_asList() {
+        CompanyEntity company1 = new CompanyEntity(1);
+        CompanyEntity company2 = new CompanyEntity(2);
+        when(companyRepository.findAll()).thenReturn(Arrays.asList(company1, company2));
+        CompanyService companyService = new CompanyServiceImpl(companyRepository);
+
+        assertEquals(2, companyService.getAll().size());
+    }
+
 
     @Test
     public void getByN() {
