@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //TODO: add fake data for test
 @SpringBootTest
-public class EmployeeServiceImplITTest {
+public class EmployeeServiceImplIntegrationTest {
 
     @Autowired
     EmployeeService employeeService;
