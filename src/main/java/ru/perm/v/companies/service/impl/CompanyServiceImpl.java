@@ -30,12 +30,12 @@ public class CompanyServiceImpl implements CompanyService {
         Optional<CompanyEntity> res = companyRepository.findById(n);
         // если null:
         // можно просто ВЕРНУТЬ объект (orElse)
-        // return res.orElse(nullCompany);
+         return res.orElse(nullCompany);
         // или ВЫЗВАТЬ метод (orElseGet)
-        return res.orElseGet(this::getNotFonded);
+//        return res.orElseGet(this::getNotFonded);
     }
 
-    private CompanyEntity getNotFonded() {
-        return nullCompany;
-    }
+//    private CompanyEntity getNotFonded() {
+//        return nullCompany;
+//    }
 }

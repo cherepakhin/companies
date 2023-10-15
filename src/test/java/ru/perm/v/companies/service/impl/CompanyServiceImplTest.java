@@ -6,6 +6,7 @@ import ru.perm.v.companies.repository.CompanyRepository;
 import ru.perm.v.companies.service.CompanyService;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -16,11 +17,29 @@ public class CompanyServiceImplTest {
 
     @Test
     public void getAll() {
-        CompanyService companyService = new CompanyServiceImpl(companyRepository);
         CompanyEntity company1 = new CompanyEntity(1);
         CompanyEntity company2 = new CompanyEntity(2);
         when(companyRepository.findAll()).thenReturn(List.of(company1, company2));
+        CompanyService companyService = new CompanyServiceImpl(companyRepository);
 
         assertEquals(2, companyService.getAll().size());
     }
+
+    @Test
+    public void getByN() {
+        long ID = 2;
+        CompanyEntity COMPANY = new CompanyEntity(ID);
+        when(companyRepository.findById(ID)).thenReturn(java.util.Optional.of(COMPANY));
+        CompanyService companyService = new CompanyServiceImpl(companyRepository);
+        assertEquals(COMPANY, companyService.getByN(ID));
+    }
+
+    @Test
+    public void notFoundGetByN() {
+        long ID = 2;
+        when(companyRepository.findById(ID)).thenReturn(Optional.empty());
+        CompanyService companyService = new CompanyServiceImpl(companyRepository);
+        assertEquals(-1, companyService.getByN(ID).getN());
+    }
+
 }
