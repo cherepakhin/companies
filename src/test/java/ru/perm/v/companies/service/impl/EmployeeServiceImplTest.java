@@ -6,6 +6,7 @@ import ru.perm.v.companies.repository.EmployeeRepository;
 import ru.perm.v.companies.service.EmployeeService;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -29,5 +30,11 @@ public class EmployeeServiceImplTest {
 
     @Test
     void getByN() {
+        EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
+        EmployeeEntity employee1 = new EmployeeEntity(1L);
+
+        when(employeeRepository.findById(1L)).thenReturn(Optional.of(employee1));
+
+        assertEquals(1L, employeeService.getByN(1L).getN());
     }
 }
