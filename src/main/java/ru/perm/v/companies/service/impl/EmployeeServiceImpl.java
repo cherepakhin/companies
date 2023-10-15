@@ -12,10 +12,13 @@ import java.util.Optional;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    @Autowired
     private EmployeeRepository employeeRepository;
 
     private static EmployeeEntity nullEmployee = new EmployeeEntity(-1);
+
+    public EmployeeServiceImpl(@Autowired EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     @Override
     public List<EmployeeEntity> getAll() {
