@@ -11,9 +11,6 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompanyEntity {
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "director_n", nullable = false)
-    EmployeeEntity director = new EmployeeEntity();
     @Id
     @Column(name = "n", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +28,9 @@ public class CompanyEntity {
     private String addressPost = "";
     @Column(name = "address_ur", columnDefinition = "varchar(100) default ''")
     private String addressUr = "";
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "director_n", nullable = false)
+    EmployeeEntity director = new EmployeeEntity();
 
     public CompanyEntity(long n) {
         super();
