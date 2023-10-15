@@ -20,7 +20,7 @@ public class EmployeeServiceImplITTest {
     @Test
     public void getAll() {
         List<EmployeeEntity> empls = employeeService.getAll();
-        assertEquals(1, empls.size());
+        assertEquals(4, empls.size());
     }
 
     @Test

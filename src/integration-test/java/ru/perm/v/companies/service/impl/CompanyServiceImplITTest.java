@@ -19,7 +19,7 @@ public class CompanyServiceImplITTest {
     @Test
     public void getAll() {
         List<CompanyEntity> companies = companyService.getAll();
-        assertEquals(1, companies.size());
+        assertEquals(4, companies.size());
     }
 
     @Test
@@ -32,5 +32,11 @@ public class CompanyServiceImplITTest {
     public void getByNotExistN() {
         CompanyEntity company = companyService.getByN(-100L);
         assertEquals(-1, company.getN());
+    }
+
+    @Test
+    public void getByN_check_director() {
+        CompanyEntity company = companyService.getByN(3L);
+        assertEquals(2L, company.getDirector().getN());
     }
 }
