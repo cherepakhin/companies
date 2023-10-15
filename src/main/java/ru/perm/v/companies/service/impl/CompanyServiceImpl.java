@@ -35,7 +35,4 @@ public class CompanyServiceImpl implements CompanyService {
 //        return res.orElseGet(this::getNotFonded);
     }
 
-//    private CompanyEntity getNotFonded() {
-//        return nullCompany;
-//    }
 }
