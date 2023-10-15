@@ -5,7 +5,6 @@ import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.repository.CompanyRepository;
 import ru.perm.v.companies.service.CompanyService;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;

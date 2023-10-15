@@ -12,9 +12,8 @@ import java.util.Optional;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private EmployeeRepository employeeRepository;
-
     private static EmployeeEntity nullEmployee = new EmployeeEntity(-1);
+    private EmployeeRepository employeeRepository;
 
     public EmployeeServiceImpl(@Autowired EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
