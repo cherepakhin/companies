@@ -24,7 +24,7 @@ public class CompanyServiceImpl_IntegrationTest {
     @Autowired
     CompanyService companyService;
 
-        @Test
+    @Test
     public void getAll() {
         List<CompanyDto> companies = companyService.getAll();
         assertNotNull(companies);
