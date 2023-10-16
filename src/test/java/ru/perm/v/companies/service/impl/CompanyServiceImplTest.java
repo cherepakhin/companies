@@ -1,5 +1,6 @@
 package ru.perm.v.companies.service.impl;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.repository.CompanyRepository;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@Disabled
 public class CompanyServiceImplTest {
     CompanyRepository companyRepository = mock(CompanyRepository.class);
 

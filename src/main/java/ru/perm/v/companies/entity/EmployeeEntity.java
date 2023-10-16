@@ -15,7 +15,7 @@ public class EmployeeEntity {
     @Id
     @Column(name = "n", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long n = 0L; // имя "n" , не "id" , т.к. в нектр. БД слово id ключевое
+    private Long n; // имя "n" , не "id" , т.к. в нектр. БД слово id ключевое
     @Column(name = "firstname", columnDefinition = "varchar(255) default ''")
     private String firstname = "";
     @Column(name = "lastname", columnDefinition = "varchar(255) default ''")

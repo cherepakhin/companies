@@ -1,41 +1,36 @@
-package ru.perm.v.companies.entity;
+package ru.perm.v.companies.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "company")
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyEntity {
-    @Id
-    @Column(name = "n", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // имя "n" , не "id" , т.к. в нектр. БД слово id ключевое
+public class CompanyDto {
     private Long n;
-    @Column(name = "shortname", columnDefinition = "varchar(255) default ''")
     private String shortname = "";
-    @Column(name = "fullname", columnDefinition = "varchar(255) default ''")
     private String fullname = "";
-    @Column(name = "inn", columnDefinition = "varchar(13) default ''")
     private String inn = "";
-    @Column(name = "ogrn", columnDefinition = "varchar(15) default ''")
     private String ogrn = "";
-    @Column(name = "address_post", columnDefinition = "varchar(100) default ''")
     private String addressPost = "";
-    @Column(name = "address_ur", columnDefinition = "varchar(100) default ''")
     private String addressUr = "";
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "director_n", nullable = false)
-    EmployeeEntity director = new EmployeeEntity();
+//    EmployeeEntity director = new EmployeeEntity();
 
-    public CompanyEntity(long n) {
-        super();
-        this.n = n;
-    }
+//    public CompanyDto() {
+//
+//    }
+//
+//    public CompanyDto(Long n, String shortname, String fullname, String inn, String ogrn, String addressPost, String addressUr) {
+//        this.n = n;
+//        this.shortname = shortname;
+//        this.fullname = fullname;
+//        this.inn = inn;
+//        this.ogrn = ogrn;
+//        this.addressPost = addressPost;
+//        this.addressUr = addressUr;
+////        this.director = director;
+//    }
 
     public Long getN() {
         return n;
@@ -93,25 +88,17 @@ public class CompanyEntity {
         this.addressUr = addressUr;
     }
 
-    public EmployeeEntity getDirector() {
-        return director;
-    }
-
-    public void setDirector(EmployeeEntity director) {
-        this.director = director;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CompanyEntity)) return false;
-        CompanyEntity that = (CompanyEntity) o;
-        return Objects.equals(n, that.n) && Objects.equals(shortname, that.shortname) && Objects.equals(fullname, that.fullname) && Objects.equals(inn, that.inn) && Objects.equals(ogrn, that.ogrn) && Objects.equals(addressPost, that.addressPost) && Objects.equals(addressUr, that.addressUr) && Objects.equals(director.getN(), that.director.getN());
+        if (!(o instanceof CompanyDto)) return false;
+        CompanyDto that = (CompanyDto) o;
+        return Objects.equals(n, that.n) && Objects.equals(shortname, that.shortname) && Objects.equals(fullname, that.fullname) && Objects.equals(inn, that.inn) && Objects.equals(ogrn, that.ogrn) && Objects.equals(addressPost, that.addressPost) && Objects.equals(addressUr, that.addressUr);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(n, shortname, fullname, inn, ogrn, addressPost, addressUr, director.getN());
+        return Objects.hash(n, shortname, fullname, inn, ogrn, addressPost, addressUr);
     }
 
     @Override
@@ -124,7 +111,6 @@ public class CompanyEntity {
                 ", ogrn='" + ogrn + '\'' +
                 ", addressPost='" + addressPost + '\'' +
                 ", addressUr='" + addressUr + '\'' +
-                ", director=" + director +
                 '}';
     }
 }
