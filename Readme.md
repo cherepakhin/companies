@@ -78,7 +78,7 @@ flyway:
 Миграции в src/resources/migration. При изменении структуры вручную выполнить:
 
 ````shell
-$mvn flyway:migrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.url=jdbc:postgresql://127.0.0.1:5432/companies
+$ ./mvnw flyway:migrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.url=jdbc:postgresql://127.0.0.1:5432/companies
 ````
 
 ### Тестирование
@@ -86,7 +86,7 @@ $mvn flyway:migrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.u
 Прогон всех тестов (включая интеграционные):
 
 ````shell
-$./mvnw test
+$ ./mvnw test
 
 Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
 ````
@@ -95,14 +95,14 @@ Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
 
 ````shell
  
-./mvnw test -Dtest=*_IntegrationTest
+$ ./mvnw test -Dtest=*_IntegrationTest
 
 Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
 ````
 
 Прогон только unit тестов:
 ````shell
-./mvnw test -Dtest=\!*_IntegrationTest 
+$ ./mvnw test -Dtest=\!*_IntegrationTest 
 
 Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 ````
@@ -112,7 +112,7 @@ Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 Использован [jacoco](https://www.eclemma.org/jacoco/). Отчет формируется при прогоне тестов
 
 ````shell
-./mvnw test jacocoTestReport
+$ ./mvnw test jacocoTestReport
 ````
 
 Отчет будет в папке target/site/jacoco/index.html
@@ -128,7 +128,7 @@ Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 ### Запуск проекта
 
 ````shell
-./mvnw clean spring-boot:run
+$ ./mvnw clean spring-boot:run
 ````
 
 ### Логирование
@@ -148,7 +148,7 @@ spring:
 Профиль можно указать при запуске:
 
 ````shell
- java -jar target/companies-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+$ java -jar target/companies-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
 ````
 
 ### Примечания:
