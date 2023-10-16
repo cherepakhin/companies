@@ -68,7 +68,7 @@ $ psql
 $ psql --dbname=companies 
 ````
 
-Для версионирования БД используется flyway. Автообновление БД отключено. В application.yaml установлен флаг: 
+Для версионирования БД используется [flyway](https://flywaydb.org/). Автообновление БД отключено. В application.yaml установлен флаг: 
 
 ````yaml
 flyway:
