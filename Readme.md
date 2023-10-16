@@ -35,12 +35,12 @@
 ### Установка версии java:<br/>
 
 ````shell
-$export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
+$ export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
 ````
 Проверка:
 
 ````shell
-$./mvnw -version
+$ ./mvnw -version
 
 Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /home/vasi/.m2/wrapper/dists/apache-maven-3.6.3-bin/1iopthnavndlasol9gbrbg6bf2/apache-maven-3.6.3
@@ -94,7 +94,7 @@ Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
 Прогон только интеграционных тестов:
 
 ````shell
- $ ./mvnw test -Dtest=*_IntegrationTest
+$ ./mvnw test -Dtest=*_IntegrationTest
 
 Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
 ````
