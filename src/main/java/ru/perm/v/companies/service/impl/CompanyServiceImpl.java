@@ -74,6 +74,7 @@ public class CompanyServiceImpl implements CompanyService {
         return companies;
     }
 
+// Разные способы получения результата отбора
 //    @Override
 //    public List<CompanyEntity> getByShortName(String name) {
 //        QCompanyEntity company = QCompanyEntity.companyEntity;
