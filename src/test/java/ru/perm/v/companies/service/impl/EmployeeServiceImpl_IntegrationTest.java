@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.perm.v.companies.entity.EmployeeEntity;
 import ru.perm.v.companies.service.EmployeeService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //TODO: add fake data for test
 @SpringBootTest
+@Transactional
 public class EmployeeServiceImpl_IntegrationTest {
 
     @Autowired

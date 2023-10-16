@@ -1,10 +1,8 @@
 package ru.perm.v.companies.service.impl;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.service.CompanyService;
@@ -16,7 +14,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
 public class CompanyServiceImpl_IntegrationTest {
