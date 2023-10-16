@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -66,17 +65,13 @@ public class CompanyServiceImpl implements CompanyService {
     public List<CompanyEntity> getByShortName(String name) {
         QCompanyEntity qCompany = QCompanyEntity.companyEntity;
         List<BooleanExpression> predicates = new ArrayList<>();
-        if(!name.isEmpty()) {
+        if (!name.isEmpty()) {
             predicates.add(qCompany.shortname.containsIgnoreCase(name));
         }
-        BooleanExpression expression = predicates.stream().reduce((predicate,accum) -> accum.and(predicate)).orElse(null);
-        Iterable<CompanyEntity> iterCompany = companyRepository.findAll(expression);
-
-        List<CompanyEntity> entities = StreamSupport.stream(iterCompany.spliterator(), false).collect(Collectors.toList());
-        if(entities==null) {
-            entities= new ArrayList<CompanyEntity>();
-        }
-        return entities;
+        BooleanExpression expression = predicates.stream().reduce((predicate, accum) -> accum.and(predicate)).orElse(null);
+        ArrayList<CompanyEntity> companies = new ArrayList<CompanyEntity>();
+        companyRepository.findAll(expression).forEach(companies::add);
+        return companies;
     }
 
 //    @Override
