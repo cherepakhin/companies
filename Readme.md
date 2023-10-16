@@ -95,14 +95,14 @@ Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
 
 ````shell
  
-$./mvnw test -Dtest=*_IntegrationTest
+./mvnw test -Dtest=*_IntegrationTest
 
 Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
 ````
 
 Прогон только unit тестов:
 ````shell
-$./mvnw test -Dtest=\!*_IntegrationTest 
+./mvnw test -Dtest=\!*_IntegrationTest 
 
 Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 ````
