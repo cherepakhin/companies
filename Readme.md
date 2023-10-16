@@ -117,11 +117,9 @@ Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 
 Отчет будет в папке target/site/jacoco/index.html
 
-![jacoco](doc/jacoco_report.png)
+![jacoco_report](doc/jacoco_report.png)
 
 Пример отчета по конкретному классу:
-
-![jacoco_example](doc/jacoco_example.png)
 
 ![jacoco_class](doc/jacoco_class.png)
 
