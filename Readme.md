@@ -107,6 +107,26 @@ $./mvnw test -Dtest=\!*_IntegrationTest
 Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 ````
 
+### Покрытие тестами
+
+Использован [jacoco](https://www.eclemma.org/jacoco/). Отчет формируется при прогоне тестов
+
+````shell
+./mvnw test jacocoTestReport
+````
+
+Отчет будет в папке target/site/jacoco/index.html
+
+![jacoco](doc/jacoco_report.png)
+
+Пример отчета по конкретному классу:
+
+![jacoco_example](doc/jacoco_example.png)
+
+![jacoco_class](doc/jacoco_class.png)
+
+Красным или желтым выделены непротестированные участки кода.
+
 ### Запуск проекта
 
 ````shell
