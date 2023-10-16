@@ -151,9 +151,9 @@ spring:
  java -jar target/companies-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
 ````
 
-### TODO:
+### Примечания:
 
-- Заменить flyway на liquibase
+Для гибкой работы с СУБД используется [http://querydsl.com/](http://querydsl.com/)
 
 ### Ссылки
 
