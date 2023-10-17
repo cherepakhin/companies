@@ -45,7 +45,7 @@ public class CompanyRest {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getById(@PathVariable Long id) {
+    public ResponseEntity<CompanyDto> getById(@PathVariable Long id) {
         log.info(String.format("get /company/getById/%d", id));
         try {
             return ResponseEntity.ok(companyService.getByN(id));
