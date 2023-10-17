@@ -42,7 +42,7 @@ public class CompanyRest {
     }
 
     @GetMapping("/{id}")
-    public CompanyDto getById(@PathVariable Long id) {
+    public CompanyDto getById(@PathVariable Long id) throws Exception {
         log.info(String.format("get /company/getById/%d", id));
         return companyService.getByN(id);
     }

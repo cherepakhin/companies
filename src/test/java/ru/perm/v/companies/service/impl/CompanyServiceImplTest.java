@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -45,7 +45,11 @@ public class CompanyServiceImplTest {
         CompanyEntity COMPANY = new CompanyEntity(ID);
         when(companyRepository.findById(ID)).thenReturn(java.util.Optional.of(COMPANY));
         CompanyService companyService = new CompanyServiceImpl(companyRepository);
-        assertEquals(new CompanyDto(2L), companyService.getByN(ID));
+        try {
+            assertEquals(new CompanyDto(2L), companyService.getByN(ID));
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     @Test
@@ -53,7 +57,16 @@ public class CompanyServiceImplTest {
         long ID = 2;
         when(companyRepository.findById(ID)).thenReturn(Optional.empty());
         CompanyService companyService = new CompanyServiceImpl(companyRepository);
-        assertEquals(-1, companyService.getByN(ID).getN());
+        boolean OK = false;
+        String errorMessage = "";
+        try {
+            companyService.getByN(ID);
+        } catch (Exception e) {
+            OK = true;
+            errorMessage = e.getMessage();
+        }
+        assertTrue(OK);
+        assertEquals("Company with id=2 NOT FOUND", errorMessage);
     }
 
 }

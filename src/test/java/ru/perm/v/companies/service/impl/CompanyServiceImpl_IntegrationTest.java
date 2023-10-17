@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -29,19 +30,24 @@ public class CompanyServiceImpl_IntegrationTest {
     }
 
     @Test
-    public void getByN() {
+    public void getByN() throws Exception {
         CompanyDto company = companyService.getByN(0L);
         assertEquals(0, company.getN());
     }
 
     @Test
-    public void getByNotExistN() {
-        CompanyDto company = companyService.getByN(-100L);
-        assertEquals(-1, company.getN());
+    public void getByNotExistN() throws Exception {
+        String errorMessage = "";
+        try {
+            companyService.getByN(-100L);
+        } catch (Exception excp) {
+            errorMessage = excp.getMessage();
+        }
+        assertEquals("Company with id=-100 NOT FOUND", errorMessage);
     }
 
     @Test
-    public void getByN_by_N1() {
+    public void getByN_by_N1() throws Exception {
         CompanyDto company = companyService.getByN(1L);
         assertEquals(1, company.getN());
     }

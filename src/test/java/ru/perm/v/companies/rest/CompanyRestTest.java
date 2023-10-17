@@ -28,7 +28,7 @@ public class CompanyRestTest {
     }
 
     @Test
-    public void getById() {
+    public void getById() throws Exception {
         Long ID = 100L;
         CompanyRest rest = new CompanyRest(companyService);
         CompanyDto company1 = new CompanyDto();

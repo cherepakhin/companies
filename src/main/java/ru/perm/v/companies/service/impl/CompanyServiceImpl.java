@@ -52,7 +52,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyDto getByN(Long n) {
+    public CompanyDto getByN(Long n) throws Exception {
         Optional<CompanyEntity> res = companyRepository.findById(n);
         // если null:
         // можно просто ВЕРНУТЬ объект (orElse)
@@ -60,7 +60,7 @@ public class CompanyServiceImpl implements CompanyService {
             CompanyEntity companyEntity = res.get();
             return fromEntityToDto(companyEntity);
         } else {
-            return nullCompany;
+            throw new Exception(String.format("Company with id=%s NOT FOUND", n));
         }
         // или ВЫЗВАТЬ метод (orElseGet)
 //        return res.orElseGet(this::getNotFonded);

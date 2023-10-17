@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface CompanyService {
     List<CompanyDto> getAll();
-    CompanyDto getByN(Long n);
+    CompanyDto getByN(Long n) throws Exception;
     List<CompanyDto> getByShortName(String name);
 }
