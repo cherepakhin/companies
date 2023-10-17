@@ -46,10 +46,12 @@ public class CompanyRest {
 
     @GetMapping("/{id}")
     public ResponseEntity<CompanyDto> getById(@PathVariable Long id) {
+        log.info("------------------------");
         log.info(String.format("get /company/getById/%d", id));
         try {
             return ResponseEntity.ok(companyService.getByN(id));
         } catch (Exception e) {
+            log.error(e.getMessage());
             return new ResponseEntity(String.format("Company not found id=%s", id), HttpStatus.BAD_GATEWAY);
         }
     }

@@ -39,7 +39,7 @@
     </root>
 
     <!-- LOG "ru.perm.v*" at TRACE level -->
-    <logger name="ru.perm.v" level="error" additivity="false">
+    <logger name="ru.perm.v" level="info" additivity="false">
         <appender-ref ref="RollingFile"/>
         <appender-ref ref="Console"/>
     </logger>
