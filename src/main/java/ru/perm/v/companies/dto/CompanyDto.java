@@ -17,9 +17,10 @@ public class CompanyDto {
     private String addressUr = "";
 //    EmployeeEntity director = new EmployeeEntity();
 
-//    public CompanyDto() {
-//
-//    }
+    public CompanyDto(Long n) {
+        this();
+        this.n = n;
+    }
 //
 //    public CompanyDto(Long n, String shortname, String fullname, String inn, String ogrn, String addressPost, String addressUr) {
 //        this.n = n;

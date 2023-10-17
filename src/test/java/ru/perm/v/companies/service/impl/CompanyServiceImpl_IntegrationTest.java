@@ -30,34 +30,28 @@ public class CompanyServiceImpl_IntegrationTest {
 
     @Test
     public void getByN() {
-        CompanyEntity company = companyService.getByN(0L);
+        CompanyDto company = companyService.getByN(0L);
         assertEquals(0, company.getN());
     }
 
     @Test
     public void getByNotExistN() {
-        CompanyEntity company = companyService.getByN(-100L);
+        CompanyDto company = companyService.getByN(-100L);
         assertEquals(-1, company.getN());
     }
 
     @Test
-    public void getByN_check_director() {
-        CompanyEntity company = companyService.getByN(3L);
-        assertEquals(2L, company.getDirector().getN());
-    }
-
-    @Test
     public void getByN_by_N1() {
-        CompanyEntity company = companyService.getByN(1L);
+        CompanyDto company = companyService.getByN(1L);
         assertEquals(1, company.getN());
     }
 
     @Test
     public void getByShortName() {
-        List<CompanyEntity> companiesIds = companyService.getByShortName("shortname_1");
-        for (CompanyEntity c : companiesIds) {
+        List<CompanyDto> companies = companyService.getByShortName("shortname_1");
+        for (CompanyDto c : companies) {
             System.out.println(c.getN());
         }
-        assertEquals(1, companiesIds.size());
+        assertEquals(1, companies.size());
     }
 }

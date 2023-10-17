@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
-    private static CompanyEntity nullCompany = new CompanyEntity(-1);
+    private static CompanyDto nullCompany = new CompanyDto(-1L);
     private CompanyRepository companyRepository;
 
     public CompanyServiceImpl(@Autowired CompanyRepository companyRepository) {
@@ -52,17 +52,32 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyEntity getByN(Long n) {
+    public CompanyDto getByN(Long n) {
         Optional<CompanyEntity> res = companyRepository.findById(n);
         // если null:
         // можно просто ВЕРНУТЬ объект (orElse)
-        return res.orElse(nullCompany);
+        if(res.isPresent()) {
+            CompanyEntity companyEntity = res.get();
+            return fromEntityToDto(companyEntity);
+        } else {
+            return nullCompany;
+        }
         // или ВЫЗВАТЬ метод (orElseGet)
 //        return res.orElseGet(this::getNotFonded);
     }
 
+    public static CompanyDto fromEntityToDto(CompanyEntity companyEntity) {
+        return new CompanyDto(companyEntity.getN(),
+                companyEntity.getShortname(),
+                companyEntity.getFullname(),
+                companyEntity.getInn(),
+                companyEntity.getOgrn(),
+                companyEntity.getAddressPost(),
+                companyEntity.getAddressUr());
+    }
+
     @Override
-    public List<CompanyEntity> getByShortName(String name) {
+    public List<CompanyDto> getByShortName(String name) {
         QCompanyEntity qCompany = QCompanyEntity.companyEntity;
         List<BooleanExpression> predicates = new ArrayList<>();
         if (!name.isEmpty()) {
@@ -71,7 +86,9 @@ public class CompanyServiceImpl implements CompanyService {
         BooleanExpression expression = predicates.stream().reduce((predicate, accum) -> accum.and(predicate)).orElse(null);
         ArrayList<CompanyEntity> companies = new ArrayList<CompanyEntity>();
         companyRepository.findAll(expression).forEach(companies::add);
-        return companies;
+        List<CompanyDto> dtos = companies.stream().map(CompanyServiceImpl::fromEntityToDto)
+                .collect(Collectors.toList());
+        return dtos;
     }
 
 // Разные способы получения результата отбора

@@ -1,6 +1,7 @@
 package ru.perm.v.companies.service.impl;
 
 import org.junit.jupiter.api.Test;
+import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.repository.CompanyRepository;
 import ru.perm.v.companies.service.CompanyService;
@@ -44,7 +45,7 @@ public class CompanyServiceImplTest {
         CompanyEntity COMPANY = new CompanyEntity(ID);
         when(companyRepository.findById(ID)).thenReturn(java.util.Optional.of(COMPANY));
         CompanyService companyService = new CompanyServiceImpl(companyRepository);
-        assertEquals(COMPANY, companyService.getByN(ID));
+        assertEquals(new CompanyDto(2L), companyService.getByN(ID));
     }
 
     @Test
