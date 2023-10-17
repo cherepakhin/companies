@@ -7,7 +7,7 @@ import ru.perm.v.companies.entity.CompanyEntity;
 
 import java.util.Optional;
 
-//@Repository
+@Repository
 public interface CompanyRepository
         extends JpaRepository<CompanyEntity, Long>, QuerydslPredicateExecutor<CompanyEntity> {
     @Override

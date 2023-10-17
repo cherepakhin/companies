@@ -108,10 +108,11 @@ Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 
 ### Покрытие тестами
 
-Использован [jacoco](https://www.eclemma.org/jacoco/). Отчет формируется при прогоне тестов
+Использован [jacoco](https://www.eclemma.org/jacoco/). Генерация отчета:
 
 ````shell
-$ ./mvnw test jacocoTestReport
+$ ./mvnw test
+$ ./mvnw jacoco:report
 ````
 
 Отчет будет в папке target/site/jacoco/index.html

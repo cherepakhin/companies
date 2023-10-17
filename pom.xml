@@ -20,7 +20,7 @@
 		<java.version>11</java.version>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
-		<querydsl.version>5.0.0</querydsl.version>
+		<querydsl.version>4.1.4</querydsl.version>
 	</properties>
 
 	<dependencies>
@@ -49,11 +49,17 @@
 			<version>${querydsl.version}</version>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>com.querydsl</groupId>-->
-<!--			<artifactId>querydsl-core</artifactId>-->
-<!--			<version>${querydsl.version}</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-apt</artifactId>
+			<version>${querydsl.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-core</artifactId>
+			<version>${querydsl.version}</version>
+		</dependency>
 
 <!--		<dependency>-->
 <!--			<groupId>jakarta.persistence</groupId>-->
@@ -152,6 +158,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Покрытие тестами -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
