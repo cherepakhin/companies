@@ -55,8 +55,23 @@ public class EmployeeServiceImpl implements EmployeeService {
         return ret;
     }
 
+
+    public List<EmployeeEntity> findByLastnameOrderByNAsc(String lastName) {
+        return employeeRepository.findByLastnameOrderByNAsc(lastName);
+    }
+
     @Override
-    public List<EmployeeEntity> findByLastNameOrderByNDesc(String lastName) {
+    public List<EmployeeEntity> findByLastnameLikeOrderByNDesc(String lastName) {
+        return null;
+    }
+
+    @Override
+    public List<EmployeeEntity> findByLastnameOrderByLastnameAsc(String lastName) {
+        return employeeRepository.findByLastnameOrderByLastnameAsc(lastName);
+    }
+
+    @Override
+    public List<EmployeeEntity> findByLastnameOrderByNDesc(String lastName) {
         EmployeeEntity query = new EmployeeEntity();
         query.setLastname(lastName);
 
@@ -76,7 +91,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeEntity> findByLastNameLikeOrderByN(String lastName) {
+    public List<EmployeeEntity> findByLastnameLikeOrderByN(String lastName) {
         EmployeeEntity query = new EmployeeEntity();
         query.setLastname(lastName);
 
@@ -91,15 +106,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return ret;
     }
 
-//    @Override
-//    public List<EmployeeEntity> findByLastNameOrderByNDesc(String lastName) {
-//        return null;
-//    }
-    //    @Override
-//    public List<EmployeeEntity> findByLastnameOrderByNDesc(String lastName) {
-//        return employeeRepository.findByLastnameOrderByNDesc(lastName);
-//    }
-//
 //    @Override
 //    public List<EmployeeEntity> findByLastnameLikeOrderByN(String lastName) {
 //        return employeeRepository.findByLastnameOrderByFirstnameAsc(lastName);

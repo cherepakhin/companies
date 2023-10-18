@@ -13,5 +13,7 @@ public interface EmployeeRepository
     List<EmployeeEntity> findByLastnameOrderByFirstnameAsc(String lastName);
 
     List<EmployeeEntity> findByLastnameOrderByNDesc(String lastName);
+    List<EmployeeEntity> findByLastnameOrderByNAsc(String lastName);
     List<EmployeeEntity> findByLastnameLikeOrderByNDesc(String lastName);
+    List<EmployeeEntity> findByLastnameOrderByLastnameAsc(String lastName);
 }

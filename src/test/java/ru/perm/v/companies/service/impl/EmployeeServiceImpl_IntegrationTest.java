@@ -48,7 +48,7 @@ public class EmployeeServiceImpl_IntegrationTest {
     @Test
     void findByLastNameLikeOrderByN() {
         String lastName = "0";
-        List<EmployeeEntity> empls = employeeService.findByLastNameLikeOrderByN(lastName);
+        List<EmployeeEntity> empls = employeeService.findByLastnameLikeOrderByN(lastName);
         assertEquals(2, empls.size());
 
         // demo map
@@ -56,6 +56,14 @@ public class EmployeeServiceImpl_IntegrationTest {
         assertEquals(List.of(4L, 5L), nn);
         List<String> names = empls.stream().map(EmployeeEntity::getFirstname).collect(Collectors.toList());
         assertEquals(List.of("firstname_30", "firstname_20"), names);
+    }
+
+    @Test
+    void findByLastnameLikeOrderByNAsc() {
+        String lastName = "lastname_1";
+        List<EmployeeEntity> empls = employeeService.findByLastnameOrderByNAsc(lastName);
+        assertEquals(1, empls.size());
+        assertEquals(lastName, empls.get(0).getLastname());
     }
 
 }
