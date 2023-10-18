@@ -52,12 +52,13 @@ public class CompanyServiceImpl_IntegrationTest {
     }
 
     @Test
-    @Disabled
     public void getByShortName() {
-        List<CompanyDto> companies = companyService.getByShortName("shortname_1");
+        String TEST_SHORT_NAME="shortname_1";
+        List<CompanyDto> companies = companyService.getByShortName(TEST_SHORT_NAME);
         for (CompanyDto c : companies) {
             System.out.println(c.getN());
         }
         assertEquals(1, companies.size());
+        assertEquals(TEST_SHORT_NAME, companies.get(0).getShortname());
     }
 }
