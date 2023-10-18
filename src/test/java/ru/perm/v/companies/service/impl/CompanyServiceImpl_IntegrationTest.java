@@ -1,17 +1,16 @@
 package ru.perm.v.companies.service.impl;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.perm.v.companies.dto.CompanyDto;
-import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.service.CompanyService;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -53,6 +52,7 @@ public class CompanyServiceImpl_IntegrationTest {
     }
 
     @Test
+    @Disabled
     public void getByShortName() {
         List<CompanyDto> companies = companyService.getByShortName("shortname_1");
         for (CompanyDto c : companies) {

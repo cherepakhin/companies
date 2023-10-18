@@ -31,7 +31,6 @@ public class CompanyRestTest {
     }
 
     @Test
-    @Disabled
     public void getAll() {
         CompanyRest rest = new CompanyRest(companyService);
         CompanyDto company1 = new CompanyDto();
@@ -41,7 +40,7 @@ public class CompanyRestTest {
 
         when(companyService.getAll()).thenReturn(List.of(company1, company2));
 
-        assertEquals(List.of(company1, company2), rest.getAll());
+        assertEquals(List.of(company1, company2), rest.getAll().getBody());
     }
 
 }

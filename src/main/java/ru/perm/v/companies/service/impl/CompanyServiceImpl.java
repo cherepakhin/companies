@@ -51,18 +51,21 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyDto getByN(Long n) throws Exception {
-        Optional<CompanyEntity> res = companyRepository.findById(n);
-        // если null:
-        // можно просто ВЕРНУТЬ объект (orElse)
+    public CompanyDto getByN(Long id) throws Exception {
+        CompanyEntity companyEntity = getEntityById(id);
+        return fromEntityToDto(companyEntity);
+    }
+
+    protected CompanyEntity getEntityById(Long id) throws Exception {
+        Optional<CompanyEntity> res = companyRepository.findById(id);
         if(res.isPresent()) {
             CompanyEntity companyEntity = res.get();
-            return fromEntityToDto(companyEntity);
+            return companyEntity;
         } else {
-            throw new Exception(String.format("Company with id=%s NOT FOUND", n));
+            throw new Exception(String.format("Company with id=%s NOT FOUND", id));
         }
         // или ВЫЗВАТЬ метод (orElseGet)
-//        return res.orElseGet(this::getNotFonded);
+        // return res.orElseGet(this::getNotFonded);
     }
 
     public static CompanyDto fromEntityToDto(CompanyEntity companyEntity) {
@@ -88,6 +91,11 @@ public class CompanyServiceImpl implements CompanyService {
         List<CompanyDto> dtos = companies.stream().map(CompanyServiceImpl::fromEntityToDto)
                 .collect(Collectors.toList());
         return dtos;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
     }
 
 // Разные способы получения результата отбора

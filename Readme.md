@@ -106,6 +106,17 @@ $ ./mvnw test -Dtest=\!*_IntegrationTest
 Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 ````
 
+Прогон конкретного тестового класса:
+````shell
+./mvnw test -Dtest="CompanyServiceImplTest"
+````
+
+Прогон конкретного метода конкретного тестового класса:
+````shell
+./mvnw test -Dtest="CompanyServiceImplTest#getAll"
+./mvnw test -Dtest=CompanyServiceImplTest#getAll
+````
+
 ### Покрытие тестами
 
 Использован [jacoco](https://www.eclemma.org/jacoco/). Генерация отчета:
