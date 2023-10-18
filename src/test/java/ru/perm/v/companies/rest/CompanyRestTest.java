@@ -28,6 +28,7 @@ public class CompanyRestTest {
         when(companyService.getByN(ID)).thenReturn(company1);
 
         assertEquals(new ResponseEntity<>(company1, HttpStatus.OK), rest.getById(ID));
+        assertEquals(company1, rest.getById(ID).getBody());
     }
 
     @Test
