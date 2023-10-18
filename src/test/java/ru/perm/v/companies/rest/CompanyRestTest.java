@@ -1,6 +1,5 @@
 package ru.perm.v.companies.rest;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +25,11 @@ public class CompanyRestTest {
 
         when(companyService.getByN(ID)).thenReturn(company1);
 
-        assertEquals(new ResponseEntity<>(company1, HttpStatus.OK), rest.getById(ID));
-        assertEquals(HttpStatus.OK, rest.getById(ID).getStatusCode());
-        assertEquals(company1, rest.getById(ID).getBody());
+        ResponseEntity<CompanyDto> responseCompany = rest.getById(ID);
+
+        assertEquals(new ResponseEntity<>(company1, HttpStatus.OK), responseCompany);
+        assertEquals(HttpStatus.OK, responseCompany.getStatusCode());
+        assertEquals(company1, responseCompany.getBody());
     }
 
     @Test
