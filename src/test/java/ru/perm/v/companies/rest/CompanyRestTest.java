@@ -34,10 +34,8 @@ public class CompanyRestTest {
     @Test
     public void getAll() {
         CompanyRest rest = new CompanyRest(companyService);
-        CompanyDto company1 = new CompanyDto();
-        company1.setN(1L);
-        CompanyDto company2 = new CompanyDto();
-        company2.setN(2L);
+        CompanyDto company1 = new CompanyDto(1L);
+        CompanyDto company2 = new CompanyDto(2L);
 
         when(companyService.getAll()).thenReturn(List.of(company1, company2));
 
