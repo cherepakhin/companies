@@ -18,7 +18,6 @@ public class CompanyRestTest {
     CompanyService companyService = mock(CompanyService.class);
 
     @Test
-    @Disabled
     public void getById() throws Exception {
         Long ID = 100L;
         CompanyRest rest = new CompanyRest(companyService);
@@ -28,6 +27,7 @@ public class CompanyRestTest {
         when(companyService.getByN(ID)).thenReturn(company1);
 
         assertEquals(new ResponseEntity<>(company1, HttpStatus.OK), rest.getById(ID));
+        assertEquals(HttpStatus.OK, rest.getById(ID).getStatusCode());
         assertEquals(company1, rest.getById(ID).getBody());
     }
 
