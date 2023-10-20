@@ -1,12 +1,7 @@
 package ru.perm.v.companies.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 import java.util.Objects;
 
-@AllArgsConstructor
-@NoArgsConstructor
 public class CompanyDto {
     private Long n;
     private String shortname = "";
@@ -17,11 +12,25 @@ public class CompanyDto {
     private String addressUr = "";
 //    EmployeeEntity director = new EmployeeEntity();
 
+
+    public CompanyDto() {
+    }
+
     public CompanyDto(Long n) {
-        this();
         this.n = n;
     }
-//
+
+    public CompanyDto(Long n, String shortname, String fullname, String inn, String ogrn, String addressPost, String addressUr) {
+        this.n = n;
+        this.shortname = shortname;
+        this.fullname = fullname;
+        this.inn = inn;
+        this.ogrn = ogrn;
+        this.addressPost = addressPost;
+        this.addressUr = addressUr;
+    }
+
+    //
 //    public CompanyDto(Long n, String shortname, String fullname, String inn, String ogrn, String addressPost, String addressUr) {
 //        this.n = n;
 //        this.shortname = shortname;
@@ -90,19 +99,6 @@ public class CompanyDto {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CompanyDto)) return false;
-        CompanyDto that = (CompanyDto) o;
-        return Objects.equals(n, that.n) && Objects.equals(shortname, that.shortname) && Objects.equals(fullname, that.fullname) && Objects.equals(inn, that.inn) && Objects.equals(ogrn, that.ogrn) && Objects.equals(addressPost, that.addressPost) && Objects.equals(addressUr, that.addressUr);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(n, shortname, fullname, inn, ogrn, addressPost, addressUr);
-    }
-
-    @Override
     public String toString() {
         return "CompanyEntity{" +
                 "n=" + n +
@@ -113,5 +109,18 @@ public class CompanyDto {
                 ", addressPost='" + addressPost + '\'' +
                 ", addressUr='" + addressUr + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CompanyDto)) return false;
+        CompanyDto that = (CompanyDto) o;
+        return Objects.equals(n, that.n) && Objects.equals(shortname, that.shortname) && Objects.equals(fullname, that.fullname) && Objects.equals(inn, that.inn) && Objects.equals(ogrn, that.ogrn) && Objects.equals(addressPost, that.addressPost) && Objects.equals(addressUr, that.addressUr);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(n, shortname, fullname, inn, ogrn, addressPost, addressUr);
     }
 }

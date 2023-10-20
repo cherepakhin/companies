@@ -1,6 +1,7 @@
 package ru.perm.v.companies.rest;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +12,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@Slf4j
 @RequestMapping("/company")
 public class CompanyRest {
+
+    Logger log = LoggerFactory.getLogger(CompanyRest.class);
 
     private CompanyService companyService;
 
@@ -57,7 +59,7 @@ public class CompanyRest {
     public ResponseEntity<Long> deleteById(@PathVariable Long id) {
         log.info(String.format("delete /company/deleteById/%d", id));
         try {
-            //TODO: delete
+            companyService.deleteById(id);
             return ResponseEntity.ok(id);
         } catch (Exception e) {
             log.error(e.getMessage());

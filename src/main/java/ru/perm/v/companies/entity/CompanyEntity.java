@@ -1,15 +1,11 @@
 package ru.perm.v.companies.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "company")
-@AllArgsConstructor
-@NoArgsConstructor
 public class CompanyEntity {
     @Id
     @Column(name = "n", nullable = false)
@@ -31,6 +27,9 @@ public class CompanyEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "director_n", nullable = false)
     EmployeeEntity director = new EmployeeEntity();
+
+    public CompanyEntity() {
+    }
 
     public CompanyEntity(long n) {
         super();

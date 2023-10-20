@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.entity.CompanyEntity;
-import ru.perm.v.companies.entity.QCompanyEntity;
 import ru.perm.v.companies.repository.CompanyRepository;
 import ru.perm.v.companies.service.CompanyService;
 
@@ -81,17 +80,19 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<CompanyDto> getByShortName(String name) {
-        QCompanyEntity qCompany = QCompanyEntity.companyEntity;
-        List<BooleanExpression> predicates = new ArrayList<>();
-        if (!name.isEmpty()) {
-            predicates.add(qCompany.shortname.containsIgnoreCase(name));
-        }
-        BooleanExpression expression = predicates.stream().reduce((predicate, accum) -> accum.and(predicate)).orElse(null);
-        ArrayList<CompanyEntity> companies = new ArrayList<CompanyEntity>();
-        companyRepository.findAll(expression).forEach(companies::add);
-        List<CompanyDto> dtos = companies.stream().map(CompanyServiceImpl::fromEntityToDto)
-                .collect(Collectors.toList());
-        return dtos;
+//TODO: uncomment sql
+//        QCompanyEntity qCompany = QCompanyEntity.companyEntity;
+//        List<BooleanExpression> predicates = new ArrayList<>();
+//        if (!name.isEmpty()) {
+//            predicates.add(qCompany.shortname.containsIgnoreCase(name));
+//        }
+//        BooleanExpression expression = predicates.stream().reduce((predicate, accum) -> accum.and(predicate)).orElse(null);
+//        ArrayList<CompanyEntity> companies = new ArrayList<CompanyEntity>();
+//        companyRepository.findAll(expression).forEach(companies::add);
+//        List<CompanyDto> dtos = companies.stream().map(CompanyServiceImpl::fromEntityToDto)
+//                .collect(Collectors.toList());
+//        return dtos;
+        return null;
     }
 
     @Override

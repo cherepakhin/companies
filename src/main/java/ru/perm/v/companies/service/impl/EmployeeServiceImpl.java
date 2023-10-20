@@ -4,18 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import ru.perm.v.companies.dto.EmployeeDto;
 import ru.perm.v.companies.entity.EmployeeEntity;
 import ru.perm.v.companies.repository.EmployeeRepository;
 import ru.perm.v.companies.service.EmployeeService;
+import ru.perm.v.companies.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     private static EmployeeEntity nullEmployee = new EmployeeEntity(-1);
+    private static EmployeeDto nullEmployeeDto = new EmployeeDto(-1L, "", "", "", "");
     private EmployeeRepository employeeRepository;
 
     public EmployeeServiceImpl(@Autowired EmployeeRepository employeeRepository) {
@@ -23,20 +27,35 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeEntity> getAll() {
-        List<EmployeeEntity> ret = new ArrayList<>();
-        employeeRepository.findAll().forEach(ret::add);
-        return ret;
+    public EmployeeDto create(EmployeeDto employee) {
+        //TODO validate employee
+        EmployeeEntity entity = convertFromDtoToEntity(employee);
+        EmployeeEntity created = employeeRepository.create(entity);
+        return convertFromEntityToDto(created);
     }
 
     @Override
-    public EmployeeEntity getByN(Long n) {
+    public List<EmployeeDto> getAll() {
+        ArrayList<EmployeeDto> dtos = new ArrayList<EmployeeDto>();
+
+        Iterable<EmployeeEntity> all = employeeRepository.findAll();
+        all.iterator().forEachRemaining(entity -> dtos.add(this.convertFromEntityToDto(entity)));
+//        List<EmployeeEntity> enities = Streamable.of(all).toList(); OK
+        return dtos;
+    }
+
+    @Override
+    public EmployeeDto getByN(Long n) {
         Optional<EmployeeEntity> res = employeeRepository.findById(n);
-        return res.orElseGet(this::getNotFounded);
+//        employeeRepository.findById(n).ifPresent(employee -> new EmployeeDto(employee));
+        if (res.isPresent()) {
+            return convertFromEntityToDto(res.get());
+        }
+        return nullEmployeeDto;
     }
 
     @Override
-    public List<EmployeeEntity> getByFirstName(String name) {
+    public List<EmployeeDto> getByFirstName(String name) {
         EmployeeEntity query = new EmployeeEntity();
         query.setFirstname(name);
 
@@ -45,33 +64,34 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .withIncludeNullValues()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
-        ArrayList<EmployeeEntity> ret = new ArrayList<EmployeeEntity>();
+        ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
         Example<EmployeeEntity> example = Example.of(query, matcher);
 // Выборка подробно
 //        Iterable<EmployeeEntity> all = employeeRepository.findAll(example);
 //        all.forEach(ret::add);
 // Выборка коротко
-        employeeRepository.findAll(example).forEach(ret::add);
-        return ret;
+        employeeRepository.findAll(example).forEach(entities::add);
+        return convertFromListEntity(entities);
     }
 
 
-    public List<EmployeeEntity> findByLastnameOrderByNAsc(String lastName) {
-        return employeeRepository.findByLastnameOrderByNAsc(lastName);
-    }
-
-    @Override
-    public List<EmployeeEntity> findByLastnameLikeOrderByNDesc(String lastName) {
-        return null;
+    public List<EmployeeDto> findByLastnameOrderByNAsc(String lastName) {
+        return convertFromListEntity(employeeRepository.findByLastnameOrderByNAsc(lastName));
     }
 
     @Override
-    public List<EmployeeEntity> findByLastnameOrderByLastnameAsc(String lastName) {
-        return employeeRepository.findByLastnameOrderByLastnameAsc(lastName);
+    public List<EmployeeDto> findByLastnameLikeOrderByNDesc(String lastName) {
+        return convertFromListEntity(employeeRepository.findByLastnameOrderByNDesc(lastName));
     }
 
     @Override
-    public List<EmployeeEntity> findByLastnameOrderByNDesc(String lastName) {
+    public List<EmployeeDto> findByLastnameOrderByLastnameAsc(String lastName) {
+        return convertFromListEntity(employeeRepository.findByLastnameOrderByLastnameAsc(lastName));
+    }
+
+
+    @Override
+    public List<EmployeeDto> findByLastnameOrderByNDesc(String lastName) {
         EmployeeEntity query = new EmployeeEntity();
         query.setLastname(lastName);
 
@@ -87,11 +107,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        all.forEach(ret::add);
 // Выборка коротко
         employeeRepository.findAll(example).forEach(ret::add);
-        return ret;
+        return convertFromListEntity(ret);
     }
 
     @Override
-    public List<EmployeeEntity> findByLastnameLikeOrderByN(String lastName) {
+    public List<EmployeeDto> findByLastnameLikeOrderByN(String lastName) {
         EmployeeEntity query = new EmployeeEntity();
         query.setLastname(lastName);
 
@@ -103,16 +123,31 @@ public class EmployeeServiceImpl implements EmployeeService {
         ArrayList<EmployeeEntity> ret = new ArrayList<EmployeeEntity>();
         Example<EmployeeEntity> example = Example.of(query, matcher);
         employeeRepository.findAll(example).forEach(ret::add);
-        return ret;
+        return convertFromListEntity(ret);
     }
 
-//    @Override
-//    public List<EmployeeEntity> findByLastnameLikeOrderByN(String lastName) {
-//        return employeeRepository.findByLastnameOrderByFirstnameAsc(lastName);
-//    }
-//
-    private EmployeeEntity getNotFounded() {
-        return nullEmployee;
+    public static List<EmployeeDto> convertFromListEntity(List<EmployeeEntity> entities) {
+        return entities.stream().map(e -> convertFromEntityToDto(e)).collect(Collectors.toList());
+    }
+
+    public static EmployeeEntity convertFromDtoToEntity(EmployeeDto dto) {
+        return new EmployeeEntity(
+                dto.getN(),
+                dto.getFirstname(),
+                dto.getLastname(),
+                dto.getFathername(),
+                Util.fromStringToDate(dto.getBirthday())
+        );
+    }
+
+    public static EmployeeDto convertFromEntityToDto(EmployeeEntity entity) {
+        return new EmployeeDto(
+                entity.getN(),
+                entity.getFirstname(),
+                entity.getLastname(),
+                entity.getFathername(),
+                Util.fromDateToString(entity.getBirthday())
+        );
     }
 
 }

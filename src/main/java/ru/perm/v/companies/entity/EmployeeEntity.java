@@ -1,16 +1,11 @@
 package ru.perm.v.companies.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 @Table(name = "employee")
-@AllArgsConstructor
-@NoArgsConstructor
 public class EmployeeEntity {
     @Id
     @Column(name = "n", nullable = false)
@@ -25,9 +20,20 @@ public class EmployeeEntity {
     @Column(name = "birthday", columnDefinition = "TIMESTAMP")
     private LocalDate birthday = LocalDate.now();
 
+    public EmployeeEntity() {
+    }
+
     public EmployeeEntity(long n) {
         super();
         this.n = n;
+    }
+
+    public EmployeeEntity(Long n, String firstname, String lastname, String fathername, LocalDate birthday) {
+        this.n = n;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.fathername = fathername;
+        this.birthday = birthday;
     }
 
     public Long getN() {

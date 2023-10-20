@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+
 public class CompanyRestTest {
 
     CompanyService companyService = mock(CompanyService.class);
@@ -19,6 +20,7 @@ public class CompanyRestTest {
     @Test
     public void getById() throws Exception {
         Long ID = 100L;
+
         CompanyRest rest = new CompanyRest(companyService);
         CompanyDto company1 = new CompanyDto();
         company1.setN(ID);
