@@ -1,15 +1,16 @@
 package ru.perm.v.companies.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.QueryByExampleExecutor;
 import org.springframework.stereotype.Repository;
 import ru.perm.v.companies.entity.EmployeeEntity;
 
 import java.util.List;
 
+//        extends CrudRepository<EmployeeEntity, Long>, QueryByExampleExecutor<EmployeeEntity> {
+
 @Repository
 public interface EmployeeRepository
-        extends CrudRepository<EmployeeEntity, Long>, QueryByExampleExecutor<EmployeeEntity> {
+        extends CrudRepository<EmployeeEntity, Long> {
     List<EmployeeEntity> findByLastnameOrderByFirstnameAsc(String lastName);
 
 

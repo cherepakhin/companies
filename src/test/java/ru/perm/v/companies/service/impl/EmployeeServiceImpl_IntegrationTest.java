@@ -46,7 +46,7 @@ public class EmployeeServiceImpl_IntegrationTest {
     }
 
     @Test
-    void findByLastNameLikeOrderByN() {
+    public void findByLastNameLikeOrderByN() {
         String lastName = "0";
         List<EmployeeDto> empls = employeeService.findByLastnameLikeOrderByN(lastName);
         assertEquals(2, empls.size());
@@ -59,7 +59,7 @@ public class EmployeeServiceImpl_IntegrationTest {
     }
 
     @Test
-    void findByLastnameLikeOrderByNAsc() {
+    public void findByLastnameLikeOrderByNAsc() {
         String lastName = "lastname_1";
         List<EmployeeDto> empls = employeeService.findByLastnameOrderByNAsc(lastName);
         assertEquals(1, empls.size());

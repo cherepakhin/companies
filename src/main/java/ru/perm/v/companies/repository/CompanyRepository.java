@@ -1,12 +1,13 @@
 package ru.perm.v.companies.repository;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import ru.perm.v.companies.entity.CompanyEntity;
 
-import java.util.List;
-import java.util.Optional;
+// , QueryByExampleExecutor<CompanyEntity>
 
+@Repository
 public interface CompanyRepository extends CrudRepository<CompanyEntity, Long> {
-    Optional<CompanyEntity> findById(Long n);
-    List<CompanyEntity> findAll();
+//    Optional<CompanyEntity> findById(Long n);
+//    List<CompanyEntity> findAll();
 }

@@ -7,6 +7,7 @@ import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.repository.CompanyRepository;
 import ru.perm.v.companies.service.CompanyService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,10 +24,11 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<CompanyDto> getAll() {
-        List<CompanyEntity> companies = companyRepository.findAll();
-        for (CompanyEntity c : companies) {
-            System.out.println(c.getN());
-        }
+        List<CompanyEntity> companies = new ArrayList<>();
+        companyRepository.findAll().forEach(companies::add);
+//        for (CompanyEntity c : companies) {
+//            System.out.println(c.getN());
+//        }
         List<CompanyDto> dtos = companies.stream().map(entity -> new CompanyDto(
                 entity.getN(),
                 entity.getShortname(),
@@ -36,7 +38,7 @@ public class CompanyServiceImpl implements CompanyService {
                 entity.getAddressPost(),
                 entity.getAddressUr()
         )).collect(Collectors.toList());
-        System.out.println(dtos);
+//        System.out.println(dtos);
         return dtos;
     }
 
