@@ -1,6 +1,5 @@
 package ru.perm.v.companies.service.impl;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.perm.v.companies.dto.CompanyDto;
@@ -8,7 +7,6 @@ import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.repository.CompanyRepository;
 import ru.perm.v.companies.service.CompanyService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,7 +56,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     protected CompanyEntity getEntityById(Long id) throws Exception {
         Optional<CompanyEntity> res = companyRepository.findById(id);
-        if(res.isPresent()) {
+        if (res.isPresent()) {
             CompanyEntity companyEntity = res.get();
             return companyEntity;
         } else {

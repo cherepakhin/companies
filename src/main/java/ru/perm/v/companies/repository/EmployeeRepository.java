@@ -12,6 +12,7 @@ public interface EmployeeRepository
         extends CrudRepository<EmployeeEntity, Long>, QueryByExampleExecutor<EmployeeEntity> {
     List<EmployeeEntity> findByLastnameOrderByFirstnameAsc(String lastName);
 
+
     List<EmployeeEntity> findByLastnameOrderByNDesc(String lastName);
     List<EmployeeEntity> findByLastnameOrderByNAsc(String lastName);
     List<EmployeeEntity> findByLastnameLikeOrderByNDesc(String lastName);

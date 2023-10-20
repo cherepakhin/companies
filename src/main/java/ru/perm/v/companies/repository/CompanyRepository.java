@@ -1,15 +1,12 @@
 package ru.perm.v.companies.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 import ru.perm.v.companies.entity.CompanyEntity;
 
+import java.util.List;
 import java.util.Optional;
 
-@Repository
-public interface CompanyRepository
-        extends JpaRepository<CompanyEntity, Long>, QuerydslPredicateExecutor<CompanyEntity> {
-    @Override
+public interface CompanyRepository extends CrudRepository<CompanyEntity, Long> {
     Optional<CompanyEntity> findById(Long n);
+    List<CompanyEntity> findAll();
 }

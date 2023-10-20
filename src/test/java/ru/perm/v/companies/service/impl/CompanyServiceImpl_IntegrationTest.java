@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.service.CompanyService;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
