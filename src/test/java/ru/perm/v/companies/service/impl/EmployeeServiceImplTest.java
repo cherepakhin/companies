@@ -6,6 +6,7 @@ import ru.perm.v.companies.entity.EmployeeEntity;
 import ru.perm.v.companies.repository.EmployeeRepository;
 import ru.perm.v.companies.service.EmployeeService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,5 +38,23 @@ public class EmployeeServiceImplTest {
         when(employeeRepository.findById(1L)).thenReturn(Optional.of(employee1));
 
         assertEquals(1L, employeeService.getByN(1L).getN());
+    }
+
+    @Test
+    void convertFromEntityToDto() {
+        Long N = 100L;
+        String FIRST_NAME = "FIRST_NAME_100";
+        String LAST_NAME = "LAST_NAME_100";
+        String FATHER_NAME = "FATHER_NAME_100";
+        LocalDate BIRTHDAY = LocalDate.of(2023, 12,1);
+        EmployeeEntity entity = new EmployeeEntity(N, FIRST_NAME, LAST_NAME,FATHER_NAME, BIRTHDAY);
+
+        EmployeeDto dto = EmployeeServiceImpl.convertFromEntityToDto(entity);
+
+        assertEquals(N, dto.getN());
+        assertEquals(FIRST_NAME, dto.getFirstname());
+        assertEquals(LAST_NAME, dto.getLastname());
+        assertEquals(FATHER_NAME, dto.getFathername());
+        assertEquals("01/12/2023", dto.getBirthday());
     }
 }
