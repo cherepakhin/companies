@@ -57,4 +57,21 @@ public class EmployeeServiceImplTest {
         assertEquals(FATHER_NAME, dto.getFathername());
         assertEquals("01/12/2023", dto.getBirthday());
     }
+
+    @Test
+    void convertFromDtoToEntity() {
+        Long N = 100L;
+        String FIRST_NAME = "FIRST_NAME_100";
+        String LAST_NAME = "LAST_NAME_100";
+        String FATHER_NAME = "FATHER_NAME_100";
+        LocalDate BIRTHDAY = LocalDate.of(2023, 12,1);
+        EmployeeDto dto = new EmployeeDto(N, FIRST_NAME, LAST_NAME, FATHER_NAME, "01/12/2023");
+        EmployeeEntity entity = EmployeeServiceImpl.convertFromDtoToEntity(dto);
+
+        assertEquals(N, entity.getN());
+        assertEquals(FIRST_NAME, entity.getFirstname());
+        assertEquals(LAST_NAME, entity.getLastname());
+        assertEquals(FATHER_NAME, entity.getFathername());
+        assertEquals(BIRTHDAY, entity.getBirthday());
+    }
 }
