@@ -81,6 +81,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         return convertFromListEntity(entities);
     }
 
+    public List<EmployeeDto> findByLastnameLikeOrderByN(String lastName) {
+        return convertFromListEntity(employeeRepository.findByLastnameContainingOrderByNAsc(lastName));
+    }
+
 
     public List<EmployeeDto> findByLastnameOrderByNAsc(String lastName) {
         return convertFromListEntity(employeeRepository.findByLastnameOrderByNAsc(lastName));
@@ -124,7 +128,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeDto> findByLastnameLikeOrderByN(String lastName) {
+    public List<EmployeeDto> findByLastnameLikeOrderByNAsc(String lastName) {
         EmployeeEntity query = new EmployeeEntity();
         query.setLastname(lastName);
 
@@ -134,6 +138,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
         ArrayList<EmployeeEntity> ret = new ArrayList<EmployeeEntity>();
+        Example<EmployeeEntity> example = Example.of(query, matcher);
+        employeeRepository.findAll(example).forEach(ret::add);
 //        Example<EmployeeEntity> example = Example.of(query, matcher);
 //        employeeRepository.findAll(example).forEach(ret::add);
         return convertFromListEntity(ret);

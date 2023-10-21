@@ -16,7 +16,8 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 
     List<EmployeeEntity> findByLastnameOrderByNDesc(String lastName);
     List<EmployeeEntity> findByLastnameOrderByNAsc(String lastName);
-    List<EmployeeEntity> findByLastnameLikeOrderByNDesc(String lastName);
+    List<EmployeeEntity> findByLastnameContainingOrderByNAsc(String lastName);
     List<EmployeeEntity> findByLastnameOrderByLastnameAsc(String lastName);
+
 //    EmployeeEntity create(EmployeeEntity employee);
 }
