@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//TODO: add fake data for test
+//TODO: add config with fake data for test
 @SpringBootTest
 public class EmployeeServiceImpl_IntegrationTest {
 
