@@ -118,7 +118,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        Iterable<EmployeeEntity> all = employeeRepository.findAll(example);
 //        all.forEach(ret::add);
 // Выборка коротко
-//        employeeRepository.findAll(example).forEach(ret::add);
+        employeeRepository.findAll(example).forEach(ret::add);
+//        employeeRepository.findAll().forEach(ret::add);
         return convertFromListEntity(ret);
     }
 

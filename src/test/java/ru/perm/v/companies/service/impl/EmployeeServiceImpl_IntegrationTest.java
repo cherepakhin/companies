@@ -66,17 +66,19 @@ public class EmployeeServiceImpl_IntegrationTest {
     }
 
     @Test
-    @Disabled
-    public void findByLastNameLikeOrderByN() {
-        String lastName = "0";
-        List<EmployeeDto> empls = employeeService.findByLastnameLikeOrderByN(lastName);
+    public void findByLastnameOrderByNDesc() {
+        String lastName = "lastname_2";
+        List<EmployeeDto> empls = employeeService.findByLastnameOrderByNDesc(lastName);
+        for(EmployeeDto empl: empls) {
+            System.out.println(empl.getN());
+        }
         assertEquals(2, empls.size());
 
         // demo map
         List<Long> nn = empls.stream().map(EmployeeDto::getN).collect(Collectors.toList());
-        assertEquals(List.of(4L, 5L), nn);
+        assertEquals(List.of(2L, 5L), nn);
         List<String> names = empls.stream().map(EmployeeDto::getFirstname).collect(Collectors.toList());
-        assertEquals(List.of("firstname_30", "firstname_20"), names);
+        assertEquals(List.of("firstname_2", "firstname_20"), names);
     }
 
     @Test

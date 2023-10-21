@@ -115,6 +115,7 @@ NOTE: No tests were executed!  -DfailIfNoTests=false to ignore this error
 Прогон конкретного метода конкретного тестового класса:
 ````shell
 ./mvnw test -Dtest="CompanyServiceImplTest#getAll"
+./mvnw test -Dtest="EmployeeServiceImpl_IntegrationTest#findByLastNameLikeOrderByN"
 ./mvnw test -Dtest=CompanyServiceImplTest#getAll
 ````
 
