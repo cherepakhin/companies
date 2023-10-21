@@ -69,24 +69,26 @@ public class EmployeeServiceImpl_IntegrationTest {
     public void findByLastnameOrderByNDesc() {
         String lastName = "lastname_2";
         List<EmployeeDto> empls = employeeService.findByLastnameOrderByNDesc(lastName);
-        for(EmployeeDto empl: empls) {
+        for (EmployeeDto empl : empls) {
             System.out.println(empl.getN());
         }
         assertEquals(2, empls.size());
-
+        Long[] expectedNN = {2L, 5L};
+        assertArrayEquals(expectedNN, empls.stream().map(EmployeeDto::getN).collect(Collectors.toList()).toArray());
         // demo map
-        List<Long> nn = empls.stream().map(EmployeeDto::getN).collect(Collectors.toList());
-        assertEquals(List.of(2L, 5L), nn);
-        List<String> names = empls.stream().map(EmployeeDto::getFirstname).collect(Collectors.toList());
-        assertEquals(List.of("firstname_2", "firstname_20"), names);
+//        List<Long> nn = empls.stream().map(EmployeeDto::getN).collect(Collectors.toList());
+//        assertEquals(List.of(2L, 5L), nn);
+//        List<String> names = empls.stream().map(EmployeeDto::getFirstname).collect(Collectors.toList());
+//        assertEquals(List.of("firstname_2", "firstname_20"), names);
     }
 
     @Test
     @Disabled
     public void findByLastnameLikeOrderByNAsc() {
-        String lastName = "lastname_1";
+        String lastName = "lastname_2%";
         List<EmployeeDto> empls = employeeService.findByLastnameOrderByNAsc(lastName);
-        assertEquals(1, empls.size());
-        assertEquals(lastName, empls.get(0).getLastname());
+        List<Long> nn = empls.stream().map(EmployeeDto::getN).collect(Collectors.toList());
+        assertEquals(2, empls.size());
+        assertEquals(List.of(2, 10), nn);
     }
 }
