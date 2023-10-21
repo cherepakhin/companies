@@ -10,7 +10,8 @@ import ru.perm.v.companies.service.EmployeeService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //TODO: add config with fake data for test
 @SpringBootTest
@@ -45,6 +46,10 @@ public class EmployeeServiceImpl_IntegrationTest {
 
         //compare array
         assertArrayEquals(List.of(0L, 1L, 2L, 3L, 4L, 5L).toArray(),
+                empls.stream().map(EmployeeDto::getN).toArray());
+
+        Long[] arr = {0L, 1L, 2L, 3L, 4L, 5L};
+        assertArrayEquals(arr,
                 empls.stream().map(EmployeeDto::getN).toArray());
 
         List<Long> listN = empls.stream().map(EmployeeDto::getN).collect(Collectors.toList());
