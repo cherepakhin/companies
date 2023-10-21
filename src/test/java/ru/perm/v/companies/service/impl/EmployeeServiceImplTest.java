@@ -74,4 +74,22 @@ public class EmployeeServiceImplTest {
         assertEquals(FATHER_NAME, entity.getFathername());
         assertEquals(BIRTHDAY, entity.getBirthday());
     }
+
+    @Test
+    void create() {
+        Long N = 100L;
+        String FIRST_NAME = "FIRST_NAME_100";
+        String LAST_NAME = "LAST_NAME_100";
+        String FATHER_NAME = "FATHER_NAME_100";
+        LocalDate BIRTHDAY = LocalDate.of(2023, 12,1);
+        EmployeeDto dto = new EmployeeDto(N, FIRST_NAME, LAST_NAME, FATHER_NAME, "01/12/2023");
+        EmployeeEntity entity = new EmployeeEntity(N, FIRST_NAME, LAST_NAME, FATHER_NAME, BIRTHDAY);
+        when(employeeRepository.save(entity)).thenReturn(entity);
+
+        EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
+
+        EmployeeDto createdEmployee = employeeService.create(dto);
+
+        assertEquals(dto, createdEmployee);
+    }
 }
