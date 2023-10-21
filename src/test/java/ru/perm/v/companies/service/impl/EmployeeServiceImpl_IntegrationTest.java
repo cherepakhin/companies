@@ -42,7 +42,7 @@ public class EmployeeServiceImpl_IntegrationTest {
     public void findAllByOrderByNAsc() {
         List<EmployeeDto> empls = employeeService.findAllByOrderByNAsc();
         assertEquals(6, empls.size());
-        assertArrayEquals(List.of(0L,1L,2L,3L,4L,5L).toArray(), empls.stream().map(EmployeeDto::getN).collect(Collectors.toList()).toArray());
+        assertArrayEquals(List.of(0L, 1L, 2L, 3L, 4L, 5L).toArray(), empls.stream().map(EmployeeDto::getN).collect(Collectors.toList()).toArray());
     }
 
     @Test
