@@ -43,10 +43,12 @@ public class EmployeeServiceImpl_IntegrationTest {
 
         assertEquals(6, empls.size());
 
+        //compare array
         assertArrayEquals(List.of(0L, 1L, 2L, 3L, 4L, 5L).toArray(),
                 empls.stream().map(EmployeeDto::getN).toArray());
 
         List<Long> listN = empls.stream().map(EmployeeDto::getN).collect(Collectors.toList());
+        //compare list
         assertEquals(List.of(0L, 1L, 2L, 3L, 4L, 5L), listN);
     }
 
