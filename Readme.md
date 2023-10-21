@@ -186,3 +186,5 @@ $ java -jar target/companies-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
 
 keyboard shortcuts:
 Alt-F12 - переход в терминал  
+
+Разные варианты LIKE [https://www.baeldung.com/spring-jpa-like-queries](https://www.baeldung.com/spring-jpa-like-queries)

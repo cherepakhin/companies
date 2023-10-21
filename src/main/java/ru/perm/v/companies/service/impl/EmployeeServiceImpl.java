@@ -116,7 +116,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .withIncludeNullValues()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
-        ArrayList<EmployeeEntity> ret = new ArrayList<EmployeeEntity>();
+        ArrayList<EmployeeEntity> ret = new ArrayList<>();
         Example<EmployeeEntity> example = Example.of(query, matcher);
 // Выборка подробно
 //        Iterable<EmployeeEntity> all = employeeRepository.findAll(example);
