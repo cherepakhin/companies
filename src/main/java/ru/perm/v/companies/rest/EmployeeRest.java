@@ -16,12 +16,14 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/employee")
 public class EmployeeRest {
+
+    @Autowired
     private EmployeeService employeeService;
 
     Logger log = LoggerFactory.getLogger(EmployeeRest.class);
 
-    public EmployeeRest(@Autowired EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public EmployeeRest() {
+        super();
     }
 
     @GetMapping("/")
@@ -41,4 +43,5 @@ public class EmployeeRest {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(dtos);
     }
+
 }

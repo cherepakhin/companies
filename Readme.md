@@ -108,13 +108,20 @@ Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 
 Прогон конкретного тестового класса:
 ````shell
-./mvnw test -Dtest="CompanyServiceImplTest"
+./mvnw test -Dtest=CompanyServiceImplTest -DfailIfNoTests=false
 ````
+NOTE: No tests were executed!  -DfailIfNoTests=false to ignore this error
 
 Прогон конкретного метода конкретного тестового класса:
 ````shell
 ./mvnw test -Dtest="CompanyServiceImplTest#getAll"
 ./mvnw test -Dtest=CompanyServiceImplTest#getAll
+````
+
+Разные варианты прогона тестов:
+````shell
+./mvnw test -Dtest=*ImplTest -DfailIfNoTests=false
+./mvnw test -Dtest=*IntegrationTest -DfailIfNoTests=false
 ````
 
 ### Покрытие тестами
@@ -171,3 +178,10 @@ $ java -jar target/companies-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
 [Optional: Кот Шрёдингера в Java 8](https://habr.com/ru/articles/346782/)
 [Integration Tests With Maven(dzone)](https://dzone.com/articles/integration-tests-with-maven)
 [example project](https://github.com/gkatzioura/egkatzioura.wordpress.com/tree/master/IntegrationTestMaven/src)
+
+### Разное
+
+[IntelliJ IDEA's top keyboard shortcuts](https://www.jetbrains.com/help/idea/reference-keymap-win-default.html)
+
+keyboard shortcuts:
+Alt-F12 - переход в терминал  

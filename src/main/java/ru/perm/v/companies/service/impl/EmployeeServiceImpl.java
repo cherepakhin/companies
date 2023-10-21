@@ -20,9 +20,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private static EmployeeEntity nullEmployee = new EmployeeEntity(-1);
     private static EmployeeDto nullEmployeeDto = new EmployeeDto(-1L, "", "", "", "");
+
+    @Autowired
     private EmployeeRepository employeeRepository;
 
-    public EmployeeServiceImpl(@Autowired EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl() {
+        super();
+    }
+
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+        this();
         this.employeeRepository = employeeRepository;
     }
 
@@ -30,7 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDto create(EmployeeDto employee) {
         //TODO validate employee
         EmployeeEntity entity = convertFromDtoToEntity(employee);
-        EmployeeEntity created = employeeRepository.create(entity);
+        EmployeeEntity created = employeeRepository.save(entity);
         return convertFromEntityToDto(created);
     }
 

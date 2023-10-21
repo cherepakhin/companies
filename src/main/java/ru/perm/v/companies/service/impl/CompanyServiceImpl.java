@@ -16,9 +16,16 @@ import java.util.stream.Collectors;
 public class CompanyServiceImpl implements CompanyService {
 
     private static CompanyDto nullCompany = new CompanyDto(-1L);
+
+    @Autowired
     private CompanyRepository companyRepository;
 
-    public CompanyServiceImpl(@Autowired CompanyRepository companyRepository) {
+    public CompanyServiceImpl() {
+        super();
+    }
+
+    public CompanyServiceImpl(CompanyRepository companyRepository) {
+        this();
         this.companyRepository = companyRepository;
     }
 
