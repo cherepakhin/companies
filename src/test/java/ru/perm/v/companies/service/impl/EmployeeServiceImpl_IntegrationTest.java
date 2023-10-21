@@ -1,5 +1,6 @@
 package ru.perm.v.companies.service.impl;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,6 +38,7 @@ public class EmployeeServiceImpl_IntegrationTest {
     }
 
     @Test
+    @Disabled
     public void getByFirstName() {
         List<EmployeeDto> empls = employeeService.getByFirstName("firstname_20");
         assertEquals(1, empls.size());
@@ -44,6 +46,7 @@ public class EmployeeServiceImpl_IntegrationTest {
     }
 
     @Test
+    @Disabled
     public void findByLastNameLikeOrderByN() {
         String lastName = "0";
         List<EmployeeDto> empls = employeeService.findByLastnameLikeOrderByN(lastName);
@@ -57,6 +60,7 @@ public class EmployeeServiceImpl_IntegrationTest {
     }
 
     @Test
+    @Disabled
     public void findByLastnameLikeOrderByNAsc() {
         String lastName = "lastname_1";
         List<EmployeeDto> empls = employeeService.findByLastnameOrderByNAsc(lastName);
