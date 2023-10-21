@@ -33,9 +33,6 @@ public class CompanyServiceImpl implements CompanyService {
     public List<CompanyDto> getAll() {
         List<CompanyEntity> companies = new ArrayList<>();
         companyRepository.findAll().forEach(companies::add);
-//        for (CompanyEntity c : companies) {
-//            System.out.println(c.getN());
-//        }
         List<CompanyDto> dtos = companies.stream().map(entity -> new CompanyDto(
                 entity.getN(),
                 entity.getShortname(),
@@ -45,16 +42,7 @@ public class CompanyServiceImpl implements CompanyService {
                 entity.getAddressPost(),
                 entity.getAddressUr()
         )).collect(Collectors.toList());
-//        System.out.println(dtos);
         return dtos;
-    }
-
-    private void print(List<CompanyEntity> compamies) {
-        System.out.println("PRINT-----------------------------------------------------");
-        for (CompanyEntity c : compamies) {
-            System.out.println(c);
-        }
-        System.out.println("END PRINT-----------------------------------------------------");
     }
 
     @Override
@@ -104,7 +92,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void deleteById(Long id) {
-
+        //TODO
     }
 
 // Разные способы получения результата отбора

@@ -43,7 +43,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeDto> getAll() {
-        ArrayList<EmployeeDto> dtos = new ArrayList<EmployeeDto>();
+        ArrayList<EmployeeDto> dtos = new ArrayList<>();
 
         Iterable<EmployeeEntity> all = employeeRepository.findAll();
         all.iterator().forEachRemaining(entity -> dtos.add(this.convertFromEntityToDto(entity)));
