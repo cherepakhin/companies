@@ -10,6 +10,7 @@ import ru.perm.v.companies.service.EmployeeService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //TODO: add config with fake data for test
@@ -35,6 +36,13 @@ public class EmployeeServiceImpl_IntegrationTest {
     public void getByForNotExistN() {
         EmployeeDto employee = employeeService.getByN(-100L);
         assertEquals(-1L, employee.getN());
+    }
+
+    @Test
+    public void findAllByOrderByNAsc() {
+        List<EmployeeDto> empls = employeeService.findAllByOrderByNAsc();
+        assertEquals(6, empls.size());
+        assertArrayEquals(List.of(0L,1L,2L,3L,4L,5L).toArray(), empls.stream().map(EmployeeDto::getN).collect(Collectors.toList()).toArray());
     }
 
     @Test

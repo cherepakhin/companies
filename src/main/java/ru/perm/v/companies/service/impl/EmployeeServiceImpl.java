@@ -96,6 +96,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return convertFromListEntity(employeeRepository.findByLastnameOrderByLastnameAsc(lastName));
     }
 
+    @Override
+    public List<EmployeeDto> findAllByOrderByNAsc() {
+        return convertFromListEntity(employeeRepository.findAllByOrderByNAsc());
+    }
+
 
     @Override
     public List<EmployeeDto> findByLastnameOrderByNDesc(String lastName) {

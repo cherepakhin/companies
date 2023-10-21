@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
+    List<EmployeeEntity> findAllByOrderByNAsc();
     List<EmployeeEntity> findByLastnameOrderByFirstnameAsc(String lastName);
 
 
