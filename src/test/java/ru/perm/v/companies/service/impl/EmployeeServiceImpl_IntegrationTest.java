@@ -74,12 +74,16 @@ public class EmployeeServiceImpl_IntegrationTest {
         }
         assertEquals(2, empls.size());
         Long[] expectedNN = {2L, 5L};
+        // мой вариант
         assertArrayEquals(expectedNN, empls.stream().map(EmployeeDto::getN).collect(Collectors.toList()).toArray());
-        // demo map
-//        List<Long> nn = empls.stream().map(EmployeeDto::getN).collect(Collectors.toList());
-//        assertEquals(List.of(2L, 5L), nn);
-//        List<String> names = empls.stream().map(EmployeeDto::getFirstname).collect(Collectors.toList());
-//        assertEquals(List.of("firstname_2", "firstname_20"), names);
+        // так короче
+        assertArrayEquals(expectedNN, empls.stream().map(EmployeeDto::getN).toArray());
+        // можно через List, а не через Array
+        List<Long> nn = empls.stream().map(EmployeeDto::getN).collect(Collectors.toList());
+        assertEquals(List.of(2L, 5L), nn);
+        // демо map
+        List<String> names = empls.stream().map(EmployeeDto::getFirstname).collect(Collectors.toList());
+        assertEquals(List.of("firstname_2", "firstname_20"), names);
     }
 
     @Test
