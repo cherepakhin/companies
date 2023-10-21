@@ -58,7 +58,6 @@ public class EmployeeServiceImpl_IntegrationTest {
     }
 
     @Test
-    @Disabled
     public void getByFirstName() {
         List<EmployeeDto> empls = employeeService.getByFirstName("firstname_20");
         assertEquals(1, empls.size());

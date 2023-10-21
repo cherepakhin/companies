@@ -63,21 +63,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeDto> getByFirstName(String name) {
-//        EmployeeEntity query = new EmployeeEntity();
-//        query.setFirstname(name);
+        EmployeeEntity query = new EmployeeEntity();
+        query.setFirstname(name);
 //
-//        ExampleMatcher matcher = ExampleMatcher.matching()
-//                .withIgnorePaths("n", "lastname", "fathername", "birthday")
-//                .withIncludeNullValues()
-//                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnorePaths("n", "lastname", "fathername", "birthday")
+                .withIncludeNullValues()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
         ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
-//        Example<EmployeeEntity> example = Example.of(query, matcher);
+        Example<EmployeeEntity> example = Example.of(query, matcher);
 // Выборка подробно
 //        Iterable<EmployeeEntity> all = employeeRepository.findAll(example);
 //        all.forEach(ret::add);
 // Выборка коротко
-//        employeeRepository.findAll(example).forEach(entities::add);
+        employeeRepository.findAll(example).forEach(entities::add);
         return convertFromListEntity(entities);
     }
 
