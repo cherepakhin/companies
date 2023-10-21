@@ -1,7 +1,7 @@
 package ru.perm.v.companies.util;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
