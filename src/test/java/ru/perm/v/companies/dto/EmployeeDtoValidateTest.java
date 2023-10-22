@@ -11,7 +11,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class EmployeeDtoTest {
+class EmployeeDtoValidateTest {
     @Test
     void validateFirstname() {
         EmployeeDto dto = new EmployeeDto();
