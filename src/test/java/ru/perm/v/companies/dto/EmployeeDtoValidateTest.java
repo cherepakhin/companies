@@ -16,8 +16,8 @@ class EmployeeDtoValidateTest {
     void validateFirstname() {
         EmployeeDto dto = new EmployeeDto();
         dto.setFirstname("");
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
+
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
         Set<ConstraintViolation<EmployeeDto>> violations = validator.validate(dto);
 
@@ -36,8 +36,7 @@ class EmployeeDtoValidateTest {
         EmployeeDto dto = new EmployeeDto();
         dto.setFirstname("FIRSTNAME");
         dto.setLastname("");
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
         Set<ConstraintViolation<EmployeeDto>> violations = validator.validate(dto);
 
@@ -56,8 +55,8 @@ class EmployeeDtoValidateTest {
         dto.setFirstname("FIRSTNAME");
         dto.setLastname("LASTNAME");
         dto.setBirthday("");
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
+
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
         Set<ConstraintViolation<EmployeeDto>> violations = validator.validate(dto);
 
