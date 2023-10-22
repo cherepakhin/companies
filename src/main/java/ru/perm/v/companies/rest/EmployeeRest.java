@@ -17,13 +17,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/employee")
 public class EmployeeRest {
 
-    @Autowired
     private EmployeeService employeeService;
 
     Logger log = LoggerFactory.getLogger(EmployeeRest.class);
 
-    public EmployeeRest() {
+    public EmployeeRest(@Autowired EmployeeService employeeService) {
         super();
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/")

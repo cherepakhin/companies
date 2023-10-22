@@ -123,4 +123,6 @@ public class CompanyDto {
     public int hashCode() {
         return Objects.hash(n, shortname, fullname, inn, ogrn, addressPost, addressUr);
     }
+
+
 }

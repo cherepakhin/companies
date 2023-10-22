@@ -64,12 +64,23 @@ public class EmployeeDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof EmployeeDto)) return false;
-        EmployeeDto that = (EmployeeDto) o;
-        return Objects.equals(n, that.n) && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(fathername, that.fathername) && Objects.equals(birthday, that.birthday);
+        EmployeeDto dto = (EmployeeDto) o;
+        return Objects.equals(n, dto.n) && Objects.equals(firstname, dto.firstname) && Objects.equals(lastname, dto.lastname) && Objects.equals(fathername, dto.fathername) && Objects.equals(birthday, dto.birthday);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(n, firstname, lastname, fathername, birthday);
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeDto{" +
+                "n=" + n +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", fathername='" + fathername + '\'' +
+                ", birthday='" + birthday + '\'' +
+                '}';
     }
 }
