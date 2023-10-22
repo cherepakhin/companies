@@ -4,6 +4,7 @@ import ru.perm.v.companies.dto.EmployeeDto;
 
 import java.util.List;
 
+//TODO: modify, delete
 public interface EmployeeService {
     EmployeeDto create(EmployeeDto employee);
 

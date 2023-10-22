@@ -13,6 +13,7 @@ import ru.perm.v.companies.service.EmployeeService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//TODO: modify, delete
 @RestController
 @RequestMapping("/employee")
 public class EmployeeRest {

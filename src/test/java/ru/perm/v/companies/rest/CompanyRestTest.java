@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
+//TODO: delete, modify
 public class CompanyRestTest {
 
     CompanyService companyService = mock(CompanyService.class);
