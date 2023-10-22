@@ -1,12 +1,17 @@
 package ru.perm.v.companies.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 public class EmployeeDto {
     private Long n;
-    private String firstname = "";
-    private String lastname = "";
+    @NotBlank(message = "Firstname empty")
+    private String firstname = "-";
+    @NotBlank(message = "Lastname empty")
+    private String lastname = "-";
     private String fathername = "";
+    @NotEmpty(message = "No birthday")
     private String birthday = "1990/01/01";
 
     public EmployeeDto() {

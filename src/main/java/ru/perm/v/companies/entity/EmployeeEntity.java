@@ -11,12 +11,12 @@ public class EmployeeEntity {
     @Column(name = "n", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long n; // имя "n" , не "id" , т.к. в нектр. БД слово id ключевое
-    @Column(name = "firstname", columnDefinition = "varchar(255) default ''")
-    private String firstname = "";
-    @Column(name = "lastname", columnDefinition = "varchar(255) default ''")
-    private String lastname = "";
-    @Column(name = "fathername", columnDefinition = "varchar(255) default ''")
-    private String fathername = "";
+    @Column(name = "firstname", columnDefinition = "varchar(255) default '-'")
+    private String firstname = "-";
+    @Column(name = "lastname", columnDefinition = "varchar(255) default '-'")
+    private String lastname = "-";
+    @Column(name = "fathername", columnDefinition = "varchar(255) default '-'")
+    private String fathername = "-";
     @Column(name = "birthday", columnDefinition = "TIMESTAMP")
     private LocalDate birthday = LocalDate.now();
 
