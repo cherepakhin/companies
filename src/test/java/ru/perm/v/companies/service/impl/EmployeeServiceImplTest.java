@@ -19,28 +19,6 @@ public class EmployeeServiceImplTest {
     EmployeeRepository employeeRepository = mock(EmployeeRepository.class);
 
     @Test
-    public void getAll() {
-        EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
-        EmployeeEntity employee1 = new EmployeeEntity(1L);
-        EmployeeEntity employee2 = new EmployeeEntity(2L);
-        when(employeeRepository.findAll()).thenReturn(List.of(employee1, employee2));
-
-        List<EmployeeDto> empls = employeeService.getAll();
-
-        assertEquals(2, empls.size());
-    }
-
-    @Test
-    void getByN() {
-        EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
-        EmployeeEntity employee1 = new EmployeeEntity(1L);
-
-        when(employeeRepository.findById(1L)).thenReturn(Optional.of(employee1));
-
-        assertEquals(1L, employeeService.getByN(1L).getN());
-    }
-
-    @Test
     void convertFromEntityToDto() {
         Long N = 100L;
         String FIRST_NAME = "FIRST_NAME_100";
@@ -73,6 +51,28 @@ public class EmployeeServiceImplTest {
         assertEquals(LAST_NAME, entity.getLastname());
         assertEquals(FATHER_NAME, entity.getFathername());
         assertEquals(BIRTHDAY, entity.getBirthday());
+    }
+
+    @Test
+    void getByN() {
+        EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
+        EmployeeEntity employee1 = new EmployeeEntity(1L);
+
+        when(employeeRepository.findById(1L)).thenReturn(Optional.of(employee1));
+
+        assertEquals(1L, employeeService.getByN(1L).getN());
+    }
+
+    @Test
+    public void getAll() {
+        EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
+        EmployeeEntity employee1 = new EmployeeEntity(1L);
+        EmployeeEntity employee2 = new EmployeeEntity(2L);
+        when(employeeRepository.findAll()).thenReturn(List.of(employee1, employee2));
+
+        List<EmployeeDto> empls = employeeService.getAll();
+
+        assertEquals(2, empls.size());
     }
 
     @Test
