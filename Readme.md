@@ -188,3 +188,5 @@ keyboard shortcuts:
 Alt-F12 - переход в терминал  
 
 Разные варианты LIKE [https://www.baeldung.com/spring-jpa-like-queries](https://www.baeldung.com/spring-jpa-like-queries)
+
+Неожиданно стал СИЛЬНО ТОРМОЗИТЬ запуск тестов в Idea. Удалил папку ".idea". 
