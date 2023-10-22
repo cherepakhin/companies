@@ -144,18 +144,28 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    void findByLastnameOrderByLastnameAsc() {
-        String LAST_NAME1 = "LAST_NAME_1";
-        String LAST_NAME2 = "LAST_NAME_2";
+    void findByLastnameLikeOrderByNDesc() {
+        String LAST_NAME = "LAST_NAME_100";
 
         EmployeeEntity employee1 = new EmployeeEntity();
         Long ID_1 = 1L;
         employee1.setN(ID_1);
-        employee1.setLastname(LAST_NAME1);
 
         EmployeeEntity employee2 = new EmployeeEntity();
         Long ID_2 = 2L;
         employee2.setN(ID_2);
-        employee2.setLastname(LAST_NAME2);
+
+        when(employeeRepository.findByLastnameOrderByNDesc(LAST_NAME))
+                .thenReturn(List.of(employee1, employee2));
+        EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
+
+        List<EmployeeDto> dtos = employeeService.findByLastnameLikeOrderByNDesc(LAST_NAME);
+
+        assertNotNull(dtos);
+        assertEquals(2, dtos.size());
+        assertEquals(ID_1, dtos.get(0).getN());
+        assertEquals(ID_2, dtos.get(1).getN());
+        verify(employeeRepository, times(1))
+                .findByLastnameOrderByNDesc(LAST_NAME);
     }
 }
