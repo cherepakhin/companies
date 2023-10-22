@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -68,6 +67,7 @@ class EmployeeDtoValidateTest {
                         violation.getMessage()));
 
         assertEquals(1, errors.size());
+        assertEquals(Set.of("birthday"), errors.keySet());
         assertEquals("No birthday", errors.get("birthday"));
     }
 }
