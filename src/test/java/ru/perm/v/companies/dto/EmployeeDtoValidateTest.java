@@ -45,6 +45,7 @@ class EmployeeDtoValidateTest {
                 errors.put(
                         violation.getPropertyPath().toString(),
                         violation.getMessage()));
+
         assertEquals(1, errors.size());
         assertEquals("Lastname empty", errors.get("lastname"));
     }
@@ -65,6 +66,7 @@ class EmployeeDtoValidateTest {
                 errors.put(
                         violation.getPropertyPath().toString(),
                         violation.getMessage()));
+
         assertEquals(1, errors.size());
         assertEquals("No birthday", errors.get("birthday"));
     }
