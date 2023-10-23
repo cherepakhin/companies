@@ -47,8 +47,22 @@ public class EmployeeRest {
         return ResponseEntity.ok(dtos);
     }
 
+    @PutMapping(value = "/", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<EmployeeDto> create(@RequestBody EmployeeDto dto) {
+        List<String> errors = validatorEmployeeDto.validate(dto);
+        if (errors.size() > 0) {
+            ApiError apiError =
+                    new ApiError(HttpStatus.BAD_REQUEST, String.format("Errors in input dto: %s", dto), errors);
+            return new ResponseEntity(
+                    apiError, new HttpHeaders(), apiError.getStatus());
+        }
+
+        EmployeeDto createdDto = employeeService.create(dto);
+        return ResponseEntity.ok(createdDto);
+    }
+
     @PostMapping(value = "/", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<EmployeeDto> save(@RequestBody EmployeeDto dto) {
+    public ResponseEntity<EmployeeDto> update(@RequestBody EmployeeDto dto) {
         if (dto.getN() == null) {
             ApiError apiError =
                     new ApiError(HttpStatus.BAD_REQUEST, "Identificator N is null. For create use PUT method", "");
@@ -63,7 +77,7 @@ public class EmployeeRest {
                     apiError, new HttpHeaders(), apiError.getStatus());
         }
 
-        EmployeeDto savedDto = employeeService.save(dto);
+        EmployeeDto savedDto = employeeService.update(dto);
         return ResponseEntity.ok(savedDto);
     }
 }

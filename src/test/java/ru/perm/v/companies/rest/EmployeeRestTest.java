@@ -47,7 +47,7 @@ public class EmployeeRestTest {
     }
 
     @Test
-    public void postBadEmployee() {
+    public void updateBadEmployee() {
         EmployeeDto employee1 = new EmployeeDto();
         employee1.setN(1L);
         employee1.setFirstname(""); // empty!
@@ -56,7 +56,7 @@ public class EmployeeRestTest {
         employee1.setBirthday("2021/01/01");
 
         EmployeeRest employeeRest = new EmployeeRest(employeeService);
-        ResponseEntity response = employeeRest.save(employee1);
+        ResponseEntity response = employeeRest.update(employee1);
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         ApiError apiError = (ApiError) response.getBody();

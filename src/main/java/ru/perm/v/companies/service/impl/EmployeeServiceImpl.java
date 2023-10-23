@@ -43,10 +43,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto save(EmployeeDto employee) {
+    public EmployeeDto update(EmployeeDto employee) {
         EmployeeEntity entity = convertFromDtoToEntity(employee);
-        EmployeeEntity created = employeeRepository.save(entity);
-        return convertFromEntityToDto(created);
+        EmployeeEntity updated = employeeRepository.save(entity);
+        return convertFromEntityToDto(updated);
     }
 
     @Override

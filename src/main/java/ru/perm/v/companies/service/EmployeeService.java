@@ -22,6 +22,6 @@ public interface EmployeeService {
     List<EmployeeDto> findByLastnameOrderByLastnameAsc(String lastName);
 
     EmployeeDto create(EmployeeDto employee);
-    EmployeeDto save(EmployeeDto employee);
+    EmployeeDto update(EmployeeDto employee);
     Long getNextN();
 }
