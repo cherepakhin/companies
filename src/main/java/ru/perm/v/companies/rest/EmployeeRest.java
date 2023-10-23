@@ -47,8 +47,9 @@ public class EmployeeRest {
         return ResponseEntity.ok(dtos);
     }
 
+    // for demo validator
     @PostMapping(value = "/validate", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<EmployeeDto> create(@RequestBody EmployeeDto dto) {
+    public ResponseEntity<EmployeeDto> validate(@RequestBody EmployeeDto dto) {
         List<String> errors = validator.validate(dto);
         if (errors.size() > 0) {
             ApiError apiError =
