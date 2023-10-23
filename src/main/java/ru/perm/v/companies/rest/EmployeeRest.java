@@ -52,7 +52,7 @@ public class EmployeeRest {
         List<String> errors = validator.validate(dto);
         if (errors.size() > 0) {
             ApiError apiError =
-                    new ApiError(HttpStatus.BAD_REQUEST, String.format("Input dto: %s", dto), errors);
+                    new ApiError(HttpStatus.BAD_REQUEST, String.format("Errors in input dto: %s", dto), errors);
             return new ResponseEntity(
                     apiError, new HttpHeaders(), apiError.getStatus());
         }

@@ -18,7 +18,6 @@ public class ValidatorEmployeeDto {
         Set<ConstraintViolation<EmployeeDto>> validates = validator.validate(dto);
         List<String> ret = new ArrayList<>();
         if (validates.size() > 0) {
-//            StringBuilder err = new StringBuilder(String.format("%s. Errors: ", dto.toString()));
             List<ConstraintViolation<EmployeeDto>> errors = validates.stream().collect(Collectors.toList());
             for (ConstraintViolation<EmployeeDto> validateErr : errors) {
                 ret.add(String.format("field: %s, error: %s", validateErr.getPropertyPath(), validateErr.getMessage()));
