@@ -155,7 +155,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Long getNextN() {
-        return employeeRepository.getNextN() + 1;
+        return employeeRepository.getNextN();
     }
 
     public static List<EmployeeDto> convertFromListEntity(List<EmployeeEntity> entities) {

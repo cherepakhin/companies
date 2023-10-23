@@ -200,6 +200,6 @@ public class EmployeeServiceImplTest {
         when(employeeRepository.getNextN())
                 .thenReturn(100L);
         EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
-        assertEquals(101L, employeeService.getNextN());
+        assertEquals(100, employeeService.getNextN());
     }
 }
