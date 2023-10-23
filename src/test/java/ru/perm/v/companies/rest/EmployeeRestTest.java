@@ -56,7 +56,7 @@ public class EmployeeRestTest {
         employee1.setBirthday("2021/01/01");
 
         EmployeeRest employeeRest = new EmployeeRest(employeeService);
-        ResponseEntity response = employeeRest.validate(employee1);
+        ResponseEntity response = employeeRest.save(employee1);
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         ApiError apiError = (ApiError) response.getBody();

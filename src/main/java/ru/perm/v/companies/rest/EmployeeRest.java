@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class EmployeeRest {
 
     private EmployeeService employeeService;
-    private ValidatorEmployeeDto validator = new ValidatorEmployeeDto();
+    private ValidatorEmployeeDto validatorEmployeeDto = new ValidatorEmployeeDto();
 
     Logger log = LoggerFactory.getLogger(EmployeeRest.class);
 
@@ -47,16 +47,23 @@ public class EmployeeRest {
         return ResponseEntity.ok(dtos);
     }
 
-    // for demo validator
-    @PostMapping(value = "/validate", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<EmployeeDto> validate(@RequestBody EmployeeDto dto) {
-        List<String> errors = validator.validate(dto);
+    @PostMapping(value = "/", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<EmployeeDto> save(@RequestBody EmployeeDto dto) {
+        if (dto.getN() == null) {
+            ApiError apiError =
+                    new ApiError(HttpStatus.BAD_REQUEST, "Identificator N is null. For create use PUT method", "");
+            return new ResponseEntity(
+                    apiError, new HttpHeaders(), apiError.getStatus());
+        }
+        List<String> errors = validatorEmployeeDto.validate(dto);
         if (errors.size() > 0) {
             ApiError apiError =
                     new ApiError(HttpStatus.BAD_REQUEST, String.format("Errors in input dto: %s", dto), errors);
             return new ResponseEntity(
                     apiError, new HttpHeaders(), apiError.getStatus());
         }
-        return ResponseEntity.ok(dto);
+
+        EmployeeDto savedDto = employeeService.save(dto);
+        return ResponseEntity.ok(savedDto);
     }
 }
