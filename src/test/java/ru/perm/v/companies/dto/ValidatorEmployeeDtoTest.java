@@ -10,15 +10,15 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class EmployeeDtoValidateTest {
+class ValidatorEmployeeDtoTest {
     @Test
     void validateFirstname() {
-        EmployeeDto dto = new EmployeeDto();
-        dto.setFirstname("");
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setFirstname("");
 
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
-        Set<ConstraintViolation<EmployeeDto>> violations = validator.validate(dto);
+        Set<ConstraintViolation<EmployeeDto>> violations = validator.validate(employeeDto);
 
         HashMap<String, String> errors = new HashMap<>();
         violations.forEach(violation ->
@@ -32,12 +32,12 @@ class EmployeeDtoValidateTest {
 
     @Test
     void validateLastname() {
-        EmployeeDto dto = new EmployeeDto();
-        dto.setFirstname("FIRSTNAME");
-        dto.setLastname("");
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setFirstname("FIRSTNAME");
+        employeeDto.setLastname("");
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
-        Set<ConstraintViolation<EmployeeDto>> violations = validator.validate(dto);
+        Set<ConstraintViolation<EmployeeDto>> violations = validator.validate(employeeDto);
 
         HashMap<String, String> errors = new HashMap<>();
         violations.forEach(violation ->
@@ -51,14 +51,14 @@ class EmployeeDtoValidateTest {
 
     @Test
     void validateBirthday() {
-        EmployeeDto dto = new EmployeeDto();
-        dto.setFirstname("FIRSTNAME");
-        dto.setLastname("LASTNAME");
-        dto.setBirthday("");
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setFirstname("FIRSTNAME");
+        employeeDto.setLastname("LASTNAME");
+        employeeDto.setBirthday("");
 
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
-        Set<ConstraintViolation<EmployeeDto>> violations = validator.validate(dto);
+        Set<ConstraintViolation<EmployeeDto>> violations = validator.validate(employeeDto);
 
         HashMap<String, String> errors = new HashMap<>();
         violations.forEach(violation ->
