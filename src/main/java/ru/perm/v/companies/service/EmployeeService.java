@@ -24,4 +24,5 @@ public interface EmployeeService {
     EmployeeDto create(EmployeeDto employee);
     EmployeeDto update(EmployeeDto employee);
     Long getNextN();
+    void deleteByN(Long n);
 }

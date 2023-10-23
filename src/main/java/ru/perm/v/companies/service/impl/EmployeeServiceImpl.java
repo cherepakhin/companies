@@ -154,6 +154,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public void deleteByN(Long n) {
+        employeeRepository.deleteById(n);
+    }
+
+    @Override
     public Long getNextN() {
         return employeeRepository.getNextN();
     }

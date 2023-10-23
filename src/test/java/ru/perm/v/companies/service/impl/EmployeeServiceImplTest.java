@@ -178,12 +178,12 @@ public class EmployeeServiceImplTest {
         String LAST_NAME = "LAST_NAME_100";
 
         EmployeeEntity employee1 = new EmployeeEntity();
-        Long ID_1 = 1L;
-        employee1.setN(ID_1);
+        Long N_1 = 1L;
+        employee1.setN(N_1);
 
         EmployeeEntity employee2 = new EmployeeEntity();
-        Long ID_2 = 2L;
-        employee2.setN(ID_2);
+        Long N_2 = 2L;
+        employee2.setN(N_2);
 
         when(employeeRepository.findByLastnameOrderByLastnameAsc(LAST_NAME))
                 .thenReturn(List.of(employee1, employee2));
@@ -193,8 +193,8 @@ public class EmployeeServiceImplTest {
 
         assertNotNull(dtos);
         assertEquals(2, dtos.size());
-        assertEquals(ID_1, dtos.get(0).getN());
-        assertEquals(ID_2, dtos.get(1).getN());
+        assertEquals(N_1, dtos.get(0).getN());
+        assertEquals(N_2, dtos.get(1).getN());
         verify(employeeRepository, times(1))
                 .findByLastnameOrderByLastnameAsc(LAST_NAME);
     }
@@ -205,5 +205,15 @@ public class EmployeeServiceImplTest {
                 .thenReturn(100L);
         EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
         assertEquals(100, employeeService.getNextN());
+    }
+
+    @Test
+    void deleteByN() {
+        Long N = 100L;
+        doNothing().when(employeeRepository).deleteById(N);
+        EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
+        employeeService.deleteByN(N);
+        verify(employeeRepository, times(1))
+                .deleteById(N);
     }
 }
