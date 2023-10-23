@@ -170,6 +170,25 @@ spring:
 $ java -jar target/companies-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
 ````
 
+### Validate DTO
+
+````shell
+http POST :8080/api/employee/validate < src/test/test_jsons/empl_err1.json
+HTTP/1.1 400
+Connection: close
+Content-Type: application/json
+Date: Mon, 23 Oct 2023 06:49:26 GMT
+Transfer-Encoding: chunked
+
+{
+   "errors": [
+     "field: firstname, error: Firstname empty"
+   ],
+  "message": "Input dto: EmployeeDto{n=null, firstname='', lastname='LASTNAME_31', fathername='FATHERNAME_31', birthday='2023/01/01'}",
+  "status": "BAD_REQUEST"
+}
+````
+
 ### Примечания:
 
 Для гибкой работы с СУБД используется [http://querydsl.com/](http://querydsl.com/)
