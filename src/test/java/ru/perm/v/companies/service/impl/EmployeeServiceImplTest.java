@@ -24,8 +24,8 @@ public class EmployeeServiceImplTest {
         String FIRST_NAME = "FIRST_NAME_100";
         String LAST_NAME = "LAST_NAME_100";
         String FATHER_NAME = "FATHER_NAME_100";
-        LocalDate BIRTHDAY = LocalDate.of(2023, 12,1);
-        EmployeeEntity entity = new EmployeeEntity(N, FIRST_NAME, LAST_NAME,FATHER_NAME, BIRTHDAY);
+        LocalDate BIRTHDAY = LocalDate.of(2023, 12, 1);
+        EmployeeEntity entity = new EmployeeEntity(N, FIRST_NAME, LAST_NAME, FATHER_NAME, BIRTHDAY);
 
         EmployeeDto dto = EmployeeServiceImpl.convertFromEntityToDto(entity);
 
@@ -42,7 +42,7 @@ public class EmployeeServiceImplTest {
         String FIRST_NAME = "FIRST_NAME_100";
         String LAST_NAME = "LAST_NAME_100";
         String FATHER_NAME = "FATHER_NAME_100";
-        LocalDate BIRTHDAY = LocalDate.of(2023, 12,1);
+        LocalDate BIRTHDAY = LocalDate.of(2023, 12, 1);
         EmployeeDto dto = new EmployeeDto(N, FIRST_NAME, LAST_NAME, FATHER_NAME, "01/12/2023");
         EmployeeEntity entity = EmployeeServiceImpl.convertFromDtoToEntity(dto);
 
@@ -81,7 +81,7 @@ public class EmployeeServiceImplTest {
         String FIRST_NAME = "FIRST_NAME_100";
         String LAST_NAME = "LAST_NAME_100";
         String FATHER_NAME = "FATHER_NAME_100";
-        LocalDate BIRTHDAY = LocalDate.of(2023, 12,1);
+        LocalDate BIRTHDAY = LocalDate.of(2023, 12, 1);
         EmployeeDto dto = new EmployeeDto(N, FIRST_NAME, LAST_NAME, FATHER_NAME, "01/12/2023");
         EmployeeEntity entity = new EmployeeEntity(N, FIRST_NAME, LAST_NAME, FATHER_NAME, BIRTHDAY);
         when(employeeRepository.save(entity)).thenReturn(entity);
@@ -200,6 +200,6 @@ public class EmployeeServiceImplTest {
         when(employeeRepository.getNextN())
                 .thenReturn(100L);
         EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
-        assertEquals(101L,employeeService.getNextN());
+        assertEquals(101L, employeeService.getNextN());
     }
 }
