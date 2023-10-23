@@ -141,7 +141,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDto create(EmployeeDto employee) {
         //TODO validate employee
         EmployeeEntity entity = convertFromDtoToEntity(employee);
-        //TODO get N
+        entity.setN(this.getNextN());
         EmployeeEntity created = employeeRepository.save(entity);
         return convertFromEntityToDto(created);
     }

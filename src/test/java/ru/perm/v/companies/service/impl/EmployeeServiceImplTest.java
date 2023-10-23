@@ -77,20 +77,24 @@ public class EmployeeServiceImplTest {
 
     @Test
     void create() {
-        Long N = 100L;
         String FIRST_NAME = "FIRST_NAME_100";
         String LAST_NAME = "LAST_NAME_100";
         String FATHER_NAME = "FATHER_NAME_100";
         LocalDate BIRTHDAY = LocalDate.of(2023, 12, 1);
-        EmployeeDto dto = new EmployeeDto(N, FIRST_NAME, LAST_NAME, FATHER_NAME, "01/12/2023");
-        EmployeeEntity entity = new EmployeeEntity(N, FIRST_NAME, LAST_NAME, FATHER_NAME, BIRTHDAY);
-        when(employeeRepository.save(entity)).thenReturn(entity);
+        Long NEXT_N = 100L;
+        EmployeeDto dto = new EmployeeDto(NEXT_N, FIRST_NAME, LAST_NAME, FATHER_NAME, "01/12/2023");
+        when(employeeRepository.getNextN()).thenReturn(NEXT_N);
+        EmployeeEntity entityForSave = new EmployeeEntity(NEXT_N, FIRST_NAME, LAST_NAME, FATHER_NAME, BIRTHDAY);
+        EmployeeEntity entitySaved = new EmployeeEntity(NEXT_N, FIRST_NAME, LAST_NAME, FATHER_NAME, BIRTHDAY);
+        when(employeeRepository.save(entityForSave)).thenReturn(entitySaved);
 
         EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
 
         EmployeeDto createdEmployee = employeeService.create(dto);
 
         assertEquals(dto, createdEmployee);
+        verify(employeeRepository, times(1)).getNextN();
+        verify(employeeRepository, times(1)).save(entityForSave);
     }
 
     @Test
