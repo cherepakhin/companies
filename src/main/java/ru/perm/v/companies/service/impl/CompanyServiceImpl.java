@@ -1,10 +1,13 @@
 package ru.perm.v.companies.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.repository.CompanyRepository;
+import ru.perm.v.companies.rest.CompanyRest;
 import ru.perm.v.companies.service.CompanyService;
 
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
+    Logger log = LoggerFactory.getLogger(CompanyRest.class);
     private static CompanyDto nullCompany = new CompanyDto(-1L);
 
     @Autowired
@@ -92,7 +96,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void deleteById(Long id) {
-        //TODO
+        companyRepository.deleteById(id);
     }
 
 // Разные способы получения результата отбора

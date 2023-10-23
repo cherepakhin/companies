@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CompanyServiceImplTest {
     CompanyRepository companyRepository = mock(CompanyRepository.class);
@@ -68,4 +67,11 @@ public class CompanyServiceImplTest {
         assertEquals("Company with id=2 NOT FOUND", errorMessage);
     }
 
+    @Test
+    void deleteById() {
+        long ID = 2;
+        CompanyService companyService = new CompanyServiceImpl(companyRepository);
+        companyService.deleteById(ID);
+        verify(companyRepository, times(1)).deleteById(ID);
+    }
 }
