@@ -34,6 +34,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public EmployeeDto create(EmployeeDto employee) {
+        //TODO validate employee
+        EmployeeEntity entity = convertFromDtoToEntity(employee);
+        entity.setN(this.getNextN());
+        EmployeeEntity created = employeeRepository.save(entity);
+        return convertFromEntityToDto(created);
+    }
+
+    @Override
+    public EmployeeDto save(EmployeeDto employee) {
+        EmployeeEntity entity = convertFromDtoToEntity(employee);
+        EmployeeEntity created = employeeRepository.save(entity);
+        return convertFromEntityToDto(created);
+    }
+
+    @Override
     public List<EmployeeDto> getAll() {
         ArrayList<EmployeeDto> dtos = new ArrayList<>();
 
@@ -135,22 +151,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        Example<EmployeeEntity> example = Example.of(query, matcher);
 //        employeeRepository.findAll(example).forEach(ret::add);
         return convertFromListEntity(ret);
-    }
-
-    @Override
-    public EmployeeDto create(EmployeeDto employee) {
-        //TODO validate employee
-        EmployeeEntity entity = convertFromDtoToEntity(employee);
-        entity.setN(this.getNextN());
-        EmployeeEntity created = employeeRepository.save(entity);
-        return convertFromEntityToDto(created);
-    }
-
-    @Override
-    public EmployeeDto save(EmployeeDto employee) {
-        EmployeeEntity entity = convertFromDtoToEntity(employee);
-        EmployeeEntity created = employeeRepository.save(entity);
-        return convertFromEntityToDto(created);
     }
 
     @Override
