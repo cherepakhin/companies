@@ -6,8 +6,6 @@ import java.util.List;
 
 //TODO: modify, delete
 public interface EmployeeService {
-    EmployeeDto create(EmployeeDto employee);
-
     List<EmployeeDto> getAll();
     EmployeeDto getByN(Long n);
 
@@ -23,4 +21,7 @@ public interface EmployeeService {
     List<EmployeeDto> findByLastnameOrderByNDesc(String lastName);
     List<EmployeeDto> findByLastnameOrderByLastnameAsc(String lastName);
 
+    EmployeeDto create(EmployeeDto employee);
+    EmployeeDto save(EmployeeDto employee);
+    Long getNextN();
 }

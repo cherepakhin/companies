@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private static EmployeeEntity nullEmployee = new EmployeeEntity(-1);
-    private static EmployeeDto nullEmployeeDto = new EmployeeDto(-1L, "", "", "", "");
+    public static EmployeeEntity nullEmployee = new EmployeeEntity(-1);
+    public static EmployeeDto nullEmployeeDto = new EmployeeDto(-1L, "", "", "", "");
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -31,14 +31,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
         this();
         this.employeeRepository = employeeRepository;
-    }
-
-    @Override
-    public EmployeeDto create(EmployeeDto employee) {
-        //TODO validate employee
-        EmployeeEntity entity = convertFromDtoToEntity(employee);
-        EmployeeEntity created = employeeRepository.save(entity);
-        return convertFromEntityToDto(created);
     }
 
     @Override
@@ -143,6 +135,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        Example<EmployeeEntity> example = Example.of(query, matcher);
 //        employeeRepository.findAll(example).forEach(ret::add);
         return convertFromListEntity(ret);
+    }
+
+    @Override
+    public EmployeeDto create(EmployeeDto employee) {
+        //TODO validate employee
+        EmployeeEntity entity = convertFromDtoToEntity(employee);
+        //TODO get N
+        EmployeeEntity created = employeeRepository.save(entity);
+        return convertFromEntityToDto(created);
+    }
+
+    @Override
+    public EmployeeDto save(EmployeeDto employee) {
+        EmployeeEntity entity = convertFromDtoToEntity(employee);
+        EmployeeEntity created = employeeRepository.save(entity);
+        return convertFromEntityToDto(created);
+    }
+
+    @Override
+    public Long getNextN() {
+        return employeeRepository.getNextN() + 1;
     }
 
     public static List<EmployeeDto> convertFromListEntity(List<EmployeeEntity> entities) {

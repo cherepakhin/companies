@@ -194,4 +194,12 @@ public class EmployeeServiceImplTest {
         verify(employeeRepository, times(1))
                 .findByLastnameOrderByLastnameAsc(LAST_NAME);
     }
+
+    @Test
+    void getNextN() {
+        when(employeeRepository.getNextN())
+                .thenReturn(100L);
+        EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
+        assertEquals(101L,employeeService.getNextN());
+    }
 }

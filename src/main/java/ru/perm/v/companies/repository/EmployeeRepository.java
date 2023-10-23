@@ -1,6 +1,7 @@
 package ru.perm.v.companies.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.perm.v.companies.entity.EmployeeEntity;
 
@@ -19,5 +20,7 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
     List<EmployeeEntity> findByLastnameContainingOrderByNAsc(String lastName);
     List<EmployeeEntity> findByLastnameOrderByLastnameAsc(String lastName);
 
+    @Query(value = "SELECT max(id)+1 FROM EmployeeEntity")
+    Long getNextN();
 //    EmployeeEntity create(EmployeeEntity employee);
 }
