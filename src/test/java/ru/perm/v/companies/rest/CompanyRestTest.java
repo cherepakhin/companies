@@ -9,8 +9,7 @@ import ru.perm.v.companies.service.CompanyService;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 //TODO: delete, modify
 public class CompanyRestTest {
@@ -43,6 +42,18 @@ public class CompanyRestTest {
         when(companyService.getAll()).thenReturn(List.of(company1, company2));
 
         assertEquals(List.of(company1, company2), rest.getAll().getBody());
+    }
+
+    @Test
+    public void exceptionOnGetById() throws Exception {
+        Long ID = 100L;
+        CompanyRest rest = new CompanyRest(companyService);
+
+        when(companyService.getByN(ID)).thenThrow(new Exception(("NOT FOUND")));
+
+        ResponseEntity response = rest.getById(ID);
+        assertEquals(HttpStatus.BAD_GATEWAY, response.getStatusCode());
+        assertEquals("Company not found id=100", response.getBody());
     }
 
 }
