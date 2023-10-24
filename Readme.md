@@ -206,6 +206,11 @@ Keep-Alive: timeout=60
 Company not found id=1000
 ```
 
+````text
+app.log:
+ERROR [http-nio-8080-exec-1] ru.perm.v.companies.rest.CompanyRest: Company not found id=1000
+````
+
 ### Примечания:
 
 Для гибкой работы с СУБД используется [http://querydsl.com/](http://querydsl.com/)
