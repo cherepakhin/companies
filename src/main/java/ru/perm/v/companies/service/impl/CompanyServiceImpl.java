@@ -79,7 +79,10 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<CompanyDto> getByShortName(String name) {
-//TODO: uncomment sql
+        List<CompanyEntity> companies = companyRepository.findByShortnameOrderByNDesc(name);
+        List<CompanyDto> dtos = companies.stream().map(CompanyServiceImpl::fromEntityToDto).collect(Collectors.toList());
+        return dtos;
+//TODO: release on Q
 //        QCompanyEntity qCompany = QCompanyEntity.companyEntity;
 //        List<BooleanExpression> predicates = new ArrayList<>();
 //        if (!name.isEmpty()) {
@@ -91,7 +94,6 @@ public class CompanyServiceImpl implements CompanyService {
 //        List<CompanyDto> dtos = companies.stream().map(CompanyServiceImpl::fromEntityToDto)
 //                .collect(Collectors.toList());
 //        return dtos;
-        return null;
     }
 
     @Override

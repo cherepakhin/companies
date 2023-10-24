@@ -74,4 +74,23 @@ public class CompanyServiceImplTest {
         companyService.deleteById(ID);
         verify(companyRepository, times(1)).deleteById(ID);
     }
+
+    @Test
+    void getByShortName() {
+        String SHORTNAME = "SHORTNAME";
+        CompanyEntity company1 = new CompanyEntity(1);
+        company1.setShortname(SHORTNAME);
+        CompanyEntity company2 = new CompanyEntity(2);
+        company2.setShortname(SHORTNAME);
+
+        CompanyService companyService = new CompanyServiceImpl(companyRepository);
+        when(companyRepository.findByShortnameOrderByNDesc(SHORTNAME))
+                .thenReturn(List.of(company1, company2));
+
+        List<CompanyDto> companies = companyService.getByShortName(SHORTNAME);
+
+        assertEquals(2, companies.size());
+        assertEquals(SHORTNAME, companies.get(0).getShortname());
+        assertEquals(SHORTNAME, companies.get(1).getShortname());
+    }
 }
