@@ -216,4 +216,26 @@ public class EmployeeServiceImplTest {
         verify(employeeRepository, times(1))
                 .deleteById(N);
     }
+
+    @Test
+    void update() {
+        // prepare
+        Long N = 100L;
+        String FIRST_NAME = "OLD_FIRST_NAME_100";
+        String LAST_NAME = "LAST_NAME_100";
+        String FATHER_NAME = "FATHER_NAME_100";
+        String BIRTHDAY = "01/12/2023";
+        LocalDate BIRTHDAY_DATE = LocalDate.of(2023, 12, 1);
+        EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
+        EmployeeEntity employeeEntity = new EmployeeEntity(N, FIRST_NAME, LAST_NAME, FATHER_NAME, BIRTHDAY_DATE);
+        // employeeEntityUpdated only for check test
+        EmployeeEntity employeeEntityUpdated = new EmployeeEntity(N, FIRST_NAME, LAST_NAME, FATHER_NAME, BIRTHDAY_DATE);
+        when(employeeRepository.save(employeeEntity)).thenReturn(employeeEntityUpdated);
+        EmployeeDto employeeDto = new EmployeeDto(N, FIRST_NAME, LAST_NAME, FATHER_NAME, BIRTHDAY);
+        // do test
+        EmployeeDto updatedEmployeeDto = employeeService.update(employeeDto);
+        // verify
+        assertEquals(employeeDto, updatedEmployeeDto);
+        verify(employeeRepository, times(1)).save(employeeEntity);
+    }
 }
