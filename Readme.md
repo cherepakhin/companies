@@ -204,10 +204,9 @@ Content-Type: text/plain;charset=UTF-8
 Company not found id=1000
 ```
 
-log:
+app.log:
 
 ````text
-app.log:
 ERROR [http-nio-8080-exec-1] ru.perm.v.companies.rest.CompanyRest: Company not found id=1000
 ````
 
