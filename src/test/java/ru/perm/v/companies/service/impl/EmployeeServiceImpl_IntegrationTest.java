@@ -61,6 +61,8 @@ public class EmployeeServiceImpl_IntegrationTest {
         List<EmployeeDto> empls = employeeService.getByFirstName("firstname_20");
         assertEquals(1, empls.size());
         assertEquals("firstname_20", empls.get(0).getFirstname());
+        EmployeeDto expected = new EmployeeDto(5L,"firstname_20", "lastname_20", "fathername_20", "02/02/2020");
+        assertEquals(expected, empls.get(0));
     }
 
     @Test
