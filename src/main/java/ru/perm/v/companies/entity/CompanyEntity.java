@@ -27,7 +27,8 @@ public class CompanyEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "director_n", nullable = false)
     EmployeeEntity director = new EmployeeEntity();
-
+//TODO: Добавить сотрудников, либо тут через "OneToMany" List<EmployeeEntity>,
+// либо через отдельную сущность(таблицу) для "ManyToMany" (когда сотрудник работает в несклк. предприятиях)
     public CompanyEntity() {
     }
 
