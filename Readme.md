@@ -200,11 +200,11 @@ HTTP/1.1 502
 Connection: keep-alive
 Content-Length: 25
 Content-Type: text/plain;charset=UTF-8
-Date: Tue, 24 Oct 2023 12:10:31 GMT
-Keep-Alive: timeout=60
 
 Company not found id=1000
 ```
+
+log:
 
 ````text
 app.log:
