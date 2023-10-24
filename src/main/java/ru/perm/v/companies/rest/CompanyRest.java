@@ -50,8 +50,9 @@ public class CompanyRest {
         try {
             return ResponseEntity.ok(companyService.getByN(id));
         } catch (Exception e) {
-            log.error(e.getMessage());
-            return new ResponseEntity(String.format("Company not found id=%s", id), HttpStatus.BAD_GATEWAY);
+            String errorMessage = String.format("Company not found id=%s", id);
+            log.error(errorMessage);
+            return new ResponseEntity(errorMessage, HttpStatus.BAD_GATEWAY);
         }
     }
 
