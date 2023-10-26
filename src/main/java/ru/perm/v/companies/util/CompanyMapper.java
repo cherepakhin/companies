@@ -18,6 +18,7 @@ public class CompanyMapper {
     }
 
     public static CompanyDto fromEntityToDto(CompanyEntity entity) {
+        if(entity == null) return null;
         CompanyDto dto = new CompanyDto();
         dto.setN(entity.getN());
         dto.setShortname(entity.getShortname());

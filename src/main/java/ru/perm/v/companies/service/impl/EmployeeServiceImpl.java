@@ -35,7 +35,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDto create(EmployeeDto employee) {
-        //TODO validate employee
         EmployeeEntity entity = convertFromDtoToEntity(employee);
         entity.setN(this.getNextN());
         EmployeeEntity created = employeeRepository.save(entity);

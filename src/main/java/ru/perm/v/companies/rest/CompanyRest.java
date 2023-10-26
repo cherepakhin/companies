@@ -36,7 +36,8 @@ public class CompanyRest {
                         c.getInn(),
                         c.getOgrn(),
                         c.getAddressPost(),
-                        c.getAddressUr()
+                        c.getAddressUr(),
+                        c.getDirector()
                 ) {
                 })
                 .collect(Collectors.toList());

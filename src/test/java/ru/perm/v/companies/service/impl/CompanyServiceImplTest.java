@@ -2,9 +2,12 @@ package ru.perm.v.companies.service.impl;
 
 import org.junit.jupiter.api.Test;
 import ru.perm.v.companies.dto.CompanyDto;
+import ru.perm.v.companies.dto.EmployeeDto;
 import ru.perm.v.companies.entity.CompanyEntity;
+import ru.perm.v.companies.entity.EmployeeEntity;
 import ru.perm.v.companies.repository.CompanyRepository;
 import ru.perm.v.companies.service.CompanyService;
+import ru.perm.v.companies.util.CompanyMapper;
 
 import java.util.Arrays;
 import java.util.List;
@@ -92,5 +95,35 @@ public class CompanyServiceImplTest {
         assertEquals(2, companies.size());
         assertEquals(SHORTNAME, companies.get(0).getShortname());
         assertEquals(SHORTNAME, companies.get(1).getShortname());
+    }
+
+    @Test
+    void fromEntityToDto() {
+        CompanyEntity companyEntity = new CompanyEntity();
+        companyEntity.setN(100L);
+        companyEntity.setInn("1234");
+        companyEntity.setOgrn("OGRN");
+        companyEntity.setAddressUr("ADDRESS_UR");
+        companyEntity.setAddressPost("ADDRESS_POST");
+        companyEntity.setShortname("SHORTNAME");
+        EmployeeEntity DIRECTOR = new EmployeeEntity(10L);
+        companyEntity.setDirector(DIRECTOR);
+        companyEntity.setFullname("FULLNAME");
+
+        CompanyDto dto = CompanyMapper.fromEntityToDto(companyEntity);
+        CompanyDto expected = new CompanyDto();
+        expected.setN(100L);
+        expected.setInn("1234");
+        expected.setOgrn("OGRN");
+        expected.setAddressUr("ADDRESS_UR");
+        expected.setAddressPost("ADDRESS_POST");
+        expected.setShortname("SHORTNAME");
+        expected.setFullname("FULLNAME");
+        EmployeeDto DIRECTOR_DTO = new EmployeeDto();
+        Long DIRECTOR_N = 200L;
+        DIRECTOR_DTO.setN(DIRECTOR_N);
+        expected.setDirector(DIRECTOR_DTO);
+
+        assertEquals(expected, dto);
     }
 }

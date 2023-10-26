@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import ru.perm.v.companies.dto.CompanyDto;
+import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.service.CompanyService;
+import ru.perm.v.companies.util.CompanyMapper;
 
 import java.util.List;
 
@@ -21,9 +23,11 @@ public class CompanyRestTest {
         Long ID = 100L;
 
         CompanyRest rest = new CompanyRest(companyService);
+//        CompanyEntity company1 = new CompanyEntity();
+//        company1.setN(ID);
+//        CompanyDto company2 = CompanyMapper.fromEntityToDto(company1);
         CompanyDto company1 = new CompanyDto();
         company1.setN(ID);
-
         when(companyService.getByN(ID)).thenReturn(company1);
 
         ResponseEntity<CompanyDto> responseCompany = rest.getById(ID);

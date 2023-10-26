@@ -9,6 +9,8 @@ import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.repository.CompanyRepository;
 import ru.perm.v.companies.rest.CompanyRest;
 import ru.perm.v.companies.service.CompanyService;
+import ru.perm.v.companies.util.CompanyMapper;
+import ru.perm.v.companies.util.EmployeeMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +46,8 @@ public class CompanyServiceImpl implements CompanyService {
                 entity.getInn(),
                 entity.getOgrn(),
                 entity.getAddressPost(),
-                entity.getAddressUr()
+                entity.getAddressUr(),
+                EmployeeMapper.fromEntityToDto(entity.getDirector())
         )).collect(Collectors.toList());
         return dtos;
     }
@@ -52,7 +55,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyDto getByN(Long id) throws Exception {
         CompanyEntity companyEntity = getEntityById(id);
-        return fromEntityToDto(companyEntity);
+        return CompanyMapper.fromEntityToDto(companyEntity);
     }
 
     protected CompanyEntity getEntityById(Long id) throws Exception {
@@ -67,20 +70,10 @@ public class CompanyServiceImpl implements CompanyService {
         // return res.orElseGet(this::getNotFonded);
     }
 
-    public static CompanyDto fromEntityToDto(CompanyEntity companyEntity) {
-        return new CompanyDto(companyEntity.getN(),
-                companyEntity.getShortname(),
-                companyEntity.getFullname(),
-                companyEntity.getInn(),
-                companyEntity.getOgrn(),
-                companyEntity.getAddressPost(),
-                companyEntity.getAddressUr());
-    }
-
     @Override
     public List<CompanyDto> getByShortName(String name) {
         List<CompanyEntity> companies = companyRepository.findByShortnameOrderByNDesc(name);
-        List<CompanyDto> dtos = companies.stream().map(CompanyServiceImpl::fromEntityToDto).collect(Collectors.toList());
+        List<CompanyDto> dtos = companies.stream().map(CompanyMapper::fromEntityToDto).collect(Collectors.toList());
         return dtos;
 //TODO: release on Q
 //        QCompanyEntity qCompany = QCompanyEntity.companyEntity;
@@ -100,6 +93,18 @@ public class CompanyServiceImpl implements CompanyService {
     public void deleteById(Long id) {
         companyRepository.deleteById(id);
     }
+
+    @Override
+    public CompanyDto update(CompanyDto companyDto) throws Exception {
+        if (companyDto.getN() == null) {
+            throw new Exception(String.format("Company id is NULL"));
+        }
+        CompanyEntity companyEntity = CompanyMapper.fromDtoToEntity(companyDto);
+        CompanyEntity saved = companyRepository.save(companyEntity);
+
+        return CompanyMapper.fromEntityToDto(saved);
+    }
+
 
 // Разные способы получения результата отбора
 //    @Override

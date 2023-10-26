@@ -32,8 +32,7 @@ public class CompanyMapperTest {
         assertEquals(entity.getOgrn(), dto.getOgrn());
         assertEquals(entity.getAddressPost(), dto.getAddressPost());
         assertEquals(entity.getAddressUr(), dto.getAddressUr());
-        assertEquals(entity.getDirector(), dto.getDirector());
-        assertEquals(entity.getDirector(), dto.getDirector());
+        assertEquals(entity.getDirector().getN(), dto.getDirector().getN());
     }
 
     @Test
