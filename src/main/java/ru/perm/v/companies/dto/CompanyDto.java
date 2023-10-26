@@ -10,17 +10,17 @@ public class CompanyDto {
     private String ogrn = "";
     private String addressPost = "";
     private String addressUr = "";
-//    EmployeeEntity director = new EmployeeEntity();
+    private EmployeeDto director = new EmployeeDto();
 
-
-    public CompanyDto() {
-    }
 
     public CompanyDto(Long n) {
         this.n = n;
     }
 
-    public CompanyDto(Long n, String shortname, String fullname, String inn, String ogrn, String addressPost, String addressUr) {
+    public CompanyDto(
+            Long n, String shortname, String fullname,
+            String inn, String ogrn, String addressPost,
+            String addressUr, EmployeeDto director) {
         this.n = n;
         this.shortname = shortname;
         this.fullname = fullname;
@@ -28,6 +28,11 @@ public class CompanyDto {
         this.ogrn = ogrn;
         this.addressPost = addressPost;
         this.addressUr = addressUr;
+        this.director = director;
+    }
+
+    public CompanyDto() {
+
     }
 
     //
@@ -96,6 +101,14 @@ public class CompanyDto {
 
     public void setAddressUr(String addressUr) {
         this.addressUr = addressUr;
+    }
+
+    public EmployeeDto getDirector() {
+        return director;
+    }
+
+    public void setDirector(EmployeeDto director) {
+        this.director = director;
     }
 
     @Override
