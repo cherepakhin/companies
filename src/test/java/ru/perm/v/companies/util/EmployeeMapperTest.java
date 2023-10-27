@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//Generated EasyCode from Idea plugin. Prompt: Write unit tests for this code
+//Generated EasyCode from Idea plugin. Prompt: Write unit tests for this code ...
 public class EmployeeMapperTest {
 
     @Test
