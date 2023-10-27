@@ -1,4 +1,4 @@
-package ru.perm.v.companies.util;
+package ru.perm.v.companies.mappers;
 
 import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.entity.CompanyEntity;

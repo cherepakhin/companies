@@ -1,7 +1,8 @@
-package ru.perm.v.companies.util;
+package ru.perm.v.companies.mappers;
 
 import ru.perm.v.companies.dto.EmployeeDto;
 import ru.perm.v.companies.entity.EmployeeEntity;
+import ru.perm.v.companies.util.Util;
 
 public class EmployeeMapper {
 

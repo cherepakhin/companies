@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.entity.CompanyEntity;
+import ru.perm.v.companies.mappers.CompanyMapper;
+import ru.perm.v.companies.mappers.EmployeeMapper;
 import ru.perm.v.companies.repository.CompanyRepository;
 import ru.perm.v.companies.rest.CompanyRest;
 import ru.perm.v.companies.service.CompanyService;
-import ru.perm.v.companies.util.CompanyMapper;
-import ru.perm.v.companies.util.EmployeeMapper;
 
 import java.util.ArrayList;
 import java.util.List;

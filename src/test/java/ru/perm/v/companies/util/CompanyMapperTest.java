@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.entity.EmployeeEntity;
+import ru.perm.v.companies.mappers.CompanyMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;

@@ -5,9 +5,9 @@ import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.dto.EmployeeDto;
 import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.entity.EmployeeEntity;
+import ru.perm.v.companies.mappers.CompanyMapper;
 import ru.perm.v.companies.repository.CompanyRepository;
 import ru.perm.v.companies.service.CompanyService;
-import ru.perm.v.companies.util.CompanyMapper;
 
 import java.util.Arrays;
 import java.util.List;
