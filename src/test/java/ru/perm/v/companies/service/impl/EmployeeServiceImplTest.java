@@ -10,8 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class EmployeeServiceImplTest {
@@ -59,8 +58,11 @@ public class EmployeeServiceImplTest {
         EmployeeEntity employee1 = new EmployeeEntity(1L);
 
         when(employeeRepository.findById(1L)).thenReturn(Optional.of(employee1));
-
-        assertEquals(1L, employeeService.getByN(1L).getN());
+        try {
+            assertEquals(1L, employeeService.getByN(1L).getN());
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     @Test

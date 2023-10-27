@@ -59,13 +59,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto getByN(Long n) {
+    public EmployeeDto getByN(Long n)  throws Exception {
         Optional<EmployeeEntity> res = employeeRepository.findById(n);
 //        employeeRepository.findById(n).ifPresent(employee -> new EmployeeDto(employee));
         if (res.isPresent()) {
             return convertFromEntityToDto(res.get());
+        } else {
+            throw new Exception(String.format("Employee with n=%s not found", n));
         }
-        return nullEmployeeDto;
     }
 
     @Override

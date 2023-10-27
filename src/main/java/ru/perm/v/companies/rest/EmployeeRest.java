@@ -29,6 +29,18 @@ public class EmployeeRest {
         this.employeeService = employeeService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<EmployeeDto> getById(Long id) {
+        log.info(String.format("get /employee/getById/%d", id));
+        try {
+            return ResponseEntity.ok(employeeService.getByN(id));
+        } catch (Exception e) {
+            String errorMessage = String.format("Employee not found id=%s", id);
+            log.error(errorMessage);
+            return new ResponseEntity(errorMessage, HttpStatus.BAD_GATEWAY);
+        }
+    }
+
     @GetMapping("/")
     public ResponseEntity<List<EmployeeDto>> getAll() {
         log.info("get /company/getAll");

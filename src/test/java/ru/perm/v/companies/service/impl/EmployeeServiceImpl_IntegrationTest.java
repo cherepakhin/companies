@@ -9,8 +9,7 @@ import ru.perm.v.companies.service.EmployeeService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 //TODO: add config with fake data for test
 @SpringBootTest
@@ -26,15 +25,20 @@ public class EmployeeServiceImpl_IntegrationTest {
     }
 
     @Test
-    public void getByN() {
+    public void getByN() throws Exception {
         EmployeeDto employee = employeeService.getByN(0L);
         assertEquals(0L, employee.getN());
     }
 
     @Test
     public void getByForNotExistN() {
-        EmployeeDto employee = employeeService.getByN(-100L);
-        assertEquals(-1L, employee.getN());
+        String errorMessage= "";
+        try {
+            employeeService.getByN(-100L);
+        } catch (Exception e) {
+            errorMessage = e.getMessage();
+        }
+        assertEquals("Employee with n=-100 not found", errorMessage);
     }
 
     @Test
