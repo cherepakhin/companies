@@ -6,11 +6,10 @@ import ru.perm.v.companies.entity.EmployeeEntity;
 import ru.perm.v.companies.mappers.EmployeeMapper;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//Generated EasyCode from Idea plugin
+//Generated EasyCode from Idea plugin. Prompt: Write unit tests for this code
 public class EmployeeMapperTest {
 
     @Test
@@ -21,7 +20,8 @@ public class EmployeeMapperTest {
         dto.setLastname("Doe");
         dto.setFirstname("John");
         dto.setFathername("Jane");
-        dto.setBirthday("01.01.1990");
+
+        dto.setBirthday("01/01/1990");
 
         // Act
         EmployeeEntity entity = EmployeeMapper.fromDtoToEntity(dto);
@@ -31,7 +31,8 @@ public class EmployeeMapperTest {
         assertEquals("Doe", entity.getLastname());
         assertEquals("John", entity.getFirstname());
         assertEquals("Jane", entity.getFathername());
-        assertEquals(new Date(90, 0, 1), entity.getBirthday());
+
+        assertEquals(LocalDate.of(1990, 1, 1), entity.getBirthday());
     }
 
     @Test
