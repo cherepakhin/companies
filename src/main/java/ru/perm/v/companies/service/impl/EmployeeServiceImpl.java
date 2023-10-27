@@ -18,9 +18,6 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    public static EmployeeEntity nullEmployee = new EmployeeEntity(-1);
-    public static EmployeeDto nullEmployeeDto = new EmployeeDto(-1L, "", "", "", "");
-
     @Autowired
     private EmployeeRepository employeeRepository;
 
