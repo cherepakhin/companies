@@ -216,6 +216,8 @@ ERROR [http-nio-8080-exec-1] ru.perm.v.companies.rest.CompanyRest: Company not f
 
 1) Простой:
 
+CompanyRest.deleteById(...)
+
 ````java
     @DeleteMapping("/{id}")
     public ResponseEntity<Long> deleteById(@PathVariable Long id) {
