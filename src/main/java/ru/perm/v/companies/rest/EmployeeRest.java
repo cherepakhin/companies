@@ -19,10 +19,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/employee")
 public class EmployeeRest {
 
+    Logger log = LoggerFactory.getLogger(EmployeeRest.class);
     private EmployeeService employeeService;
     private ValidatorEmployeeDto validatorEmployeeDto = new ValidatorEmployeeDto();
-
-    Logger log = LoggerFactory.getLogger(EmployeeRest.class);
 
     public EmployeeRest(@Autowired EmployeeService employeeService) {
         super();

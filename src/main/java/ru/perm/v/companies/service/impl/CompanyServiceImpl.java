@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
-    Logger log = LoggerFactory.getLogger(CompanyRest.class);
     private static CompanyDto nullCompany = new CompanyDto(-1L);
+    Logger log = LoggerFactory.getLogger(CompanyRest.class);
 
     @Autowired
     private CompanyRepository companyRepository;

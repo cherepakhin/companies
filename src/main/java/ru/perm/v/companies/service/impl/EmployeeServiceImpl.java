@@ -33,6 +33,30 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
+    public static List<EmployeeDto> convertFromListEntity(List<EmployeeEntity> entities) {
+        return entities.stream().map(e -> convertFromEntityToDto(e)).collect(Collectors.toList());
+    }
+
+    public static EmployeeEntity convertFromDtoToEntity(EmployeeDto dto) {
+        return new EmployeeEntity(
+                dto.getN(),
+                dto.getFirstname(),
+                dto.getLastname(),
+                dto.getFathername(),
+                Util.fromStringToDate(dto.getBirthday())
+        );
+    }
+
+    public static EmployeeDto convertFromEntityToDto(EmployeeEntity entity) {
+        return new EmployeeDto(
+                entity.getN(),
+                entity.getFirstname(),
+                entity.getLastname(),
+                entity.getFathername(),
+                Util.fromDateToString(entity.getBirthday())
+        );
+    }
+
     @Override
     public EmployeeDto create(EmployeeDto employee) {
         EmployeeEntity entity = convertFromDtoToEntity(employee);
@@ -59,7 +83,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto getByN(Long n)  throws Exception {
+    public EmployeeDto getByN(Long n) throws Exception {
         Optional<EmployeeEntity> res = employeeRepository.findById(n);
 //        employeeRepository.findById(n).ifPresent(employee -> new EmployeeDto(employee));
         if (res.isPresent()) {
@@ -93,7 +117,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return convertFromListEntity(employeeRepository.findByLastnameContainingOrderByNAsc(lastName));
     }
 
-
     public List<EmployeeDto> findByLastnameOrderByNAsc(String lastName) {
         return convertFromListEntity(employeeRepository.findByLastnameOrderByNAsc(lastName));
     }
@@ -112,7 +135,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<EmployeeDto> findAllByOrderByNAsc() {
         return convertFromListEntity(employeeRepository.findAllByOrderByNAsc());
     }
-
 
     @Override
     public List<EmployeeDto> findByLastnameOrderByNDesc(String lastName) {
@@ -161,30 +183,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Long getNextN() {
         return employeeRepository.getNextN();
-    }
-
-    public static List<EmployeeDto> convertFromListEntity(List<EmployeeEntity> entities) {
-        return entities.stream().map(e -> convertFromEntityToDto(e)).collect(Collectors.toList());
-    }
-
-    public static EmployeeEntity convertFromDtoToEntity(EmployeeDto dto) {
-        return new EmployeeEntity(
-                dto.getN(),
-                dto.getFirstname(),
-                dto.getLastname(),
-                dto.getFathername(),
-                Util.fromStringToDate(dto.getBirthday())
-        );
-    }
-
-    public static EmployeeDto convertFromEntityToDto(EmployeeEntity entity) {
-        return new EmployeeDto(
-                entity.getN(),
-                entity.getFirstname(),
-                entity.getLastname(),
-                entity.getFathername(),
-                Util.fromDateToString(entity.getBirthday())
-        );
     }
 
 }

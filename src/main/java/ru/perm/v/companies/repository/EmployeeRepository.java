@@ -12,12 +12,15 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
     List<EmployeeEntity> findAllByOrderByNAsc();
+
     List<EmployeeEntity> findByLastnameOrderByFirstnameAsc(String lastName);
 
-
     List<EmployeeEntity> findByLastnameOrderByNDesc(String lastName);
+
     List<EmployeeEntity> findByLastnameOrderByNAsc(String lastName);
+
     List<EmployeeEntity> findByLastnameContainingOrderByNAsc(String lastName);
+
     List<EmployeeEntity> findByLastnameOrderByLastnameAsc(String lastName);
 
     @Query(value = "SELECT max(id)+1 FROM EmployeeEntity")

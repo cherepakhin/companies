@@ -4,14 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import ru.perm.v.companies.dto.CompanyDto;
-import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.service.CompanyService;
-import ru.perm.v.companies.util.CompanyMapper;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 //TODO: delete, modify
 public class CompanyRestTest {

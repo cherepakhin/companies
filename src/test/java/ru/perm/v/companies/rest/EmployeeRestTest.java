@@ -3,7 +3,6 @@ package ru.perm.v.companies.rest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.dto.EmployeeDto;
 import ru.perm.v.companies.rest.validate.ApiError;
 import ru.perm.v.companies.service.EmployeeService;

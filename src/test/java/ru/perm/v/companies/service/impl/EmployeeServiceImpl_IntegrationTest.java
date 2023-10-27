@@ -9,7 +9,8 @@ import ru.perm.v.companies.service.EmployeeService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //TODO: add config with fake data for test
 @SpringBootTest
@@ -32,7 +33,7 @@ public class EmployeeServiceImpl_IntegrationTest {
 
     @Test
     public void getByForNotExistN() {
-        String errorMessage= "";
+        String errorMessage = "";
         try {
             employeeService.getByN(-100L);
         } catch (Exception e) {
@@ -65,7 +66,7 @@ public class EmployeeServiceImpl_IntegrationTest {
         List<EmployeeDto> empls = employeeService.getByFirstName("firstname_20");
         assertEquals(1, empls.size());
         assertEquals("firstname_20", empls.get(0).getFirstname());
-        EmployeeDto expected = new EmployeeDto(5L,"firstname_20", "lastname_20", "fathername_20", "02/02/2020");
+        EmployeeDto expected = new EmployeeDto(5L, "firstname_20", "lastname_20", "fathername_20", "02/02/2020");
         assertEquals(expected, empls.get(0));
     }
 
