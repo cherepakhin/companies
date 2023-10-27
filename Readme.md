@@ -210,6 +210,39 @@ app.log:
 ERROR [http-nio-8080-exec-1] ru.perm.v.companies.rest.CompanyRest: Company not found id=1000
 ````
 
+### ResponseEntity
+
+Показаны разные способы возврата ошибки.
+
+1)
+
+````java
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> deleteById(@PathVariable Long id) {
+        try {
+            companyService.deleteById(id);
+            return ResponseEntity.ok(id);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_GATEWAY);
+        }
+    }
+````
+
+2) И через ApiError
+
+EmployeeRest.update():
+
+````java
+        if (errors.size() > 0) {
+            ApiError apiError =
+                    new ApiError(HttpStatus.BAD_REQUEST, String.format("Errors in input dto: %s", dto), errors);
+            return new ResponseEntity(
+                    apiError, new HttpHeaders(), apiError.getStatus());
+        }
+
+````
+
 ### Примечания:
 
 Для гибкой работы с СУБД используется [http://querydsl.com/](http://querydsl.com/)
