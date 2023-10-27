@@ -37,6 +37,9 @@ public class EmployeeRest {
         } catch (Exception e) {
             String errorMessage = String.format("Employee not found id=%s", id);
             log.error(errorMessage);
+            // можно так:
+            // return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(errorMessage);
+            // но нужно убирать <EmployeeDto> из ответа
             return new ResponseEntity(errorMessage, HttpStatus.BAD_GATEWAY);
         }
     }
