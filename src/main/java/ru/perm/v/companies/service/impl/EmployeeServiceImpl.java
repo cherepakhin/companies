@@ -176,8 +176,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteByN(Long n) {
-        employeeRepository.deleteById(n);
+    public void deleteByN(Long n) throws Exception {
+        Optional<EmployeeEntity> res = employeeRepository.findById(n);
+        if (res.isPresent()) {
+            employeeRepository.deleteById(n);
+        } else {
+            throw new Exception(String.format("Employee with n=%s not found", n));
+        }
+
     }
 
     @Override

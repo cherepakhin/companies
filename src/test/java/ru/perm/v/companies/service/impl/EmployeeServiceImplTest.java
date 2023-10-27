@@ -212,11 +212,16 @@ public class EmployeeServiceImplTest {
     @Test
     void deleteByN() {
         Long N = 100L;
+        when(employeeRepository.findById(N)).thenReturn(Optional.of(new EmployeeEntity()));
         doNothing().when(employeeRepository).deleteById(N);
         EmployeeService employeeService = new EmployeeServiceImpl(employeeRepository);
-        employeeService.deleteByN(N);
-        verify(employeeRepository, times(1))
-                .deleteById(N);
+        try {
+            employeeService.deleteByN(N);
+            verify(employeeRepository, times(1))
+                    .deleteById(N);
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     @Test

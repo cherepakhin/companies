@@ -34,5 +34,5 @@ public interface EmployeeService {
     Long getNextN();
 
     // TODO: add exception
-    void deleteByN(Long n);
+    void deleteByN(Long n) throws Exception;
 }
