@@ -214,7 +214,7 @@ ERROR [http-nio-8080-exec-1] ru.perm.v.companies.rest.CompanyRest: Company not f
 
 Показаны разные способы возврата ошибки.
 
-1)
+1) Простой:
 
 ````java
     @DeleteMapping("/{id}")
@@ -229,7 +229,7 @@ ERROR [http-nio-8080-exec-1] ru.perm.v.companies.rest.CompanyRest: Company not f
     }
 ````
 
-2) И через ApiError
+2) И через ApiError:
 
 EmployeeRest.update():
 
