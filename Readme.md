@@ -65,8 +65,24 @@ $ psql
 Подключение через psql:
 
 ````shell
-$ psql --dbname=companies 
+$ psql --dbname=companies
+ 
 ````
+
+Backup:
+
+````shell
+$ pg_dump -U vasi -W companies > companies.backup
+
+````
+
+Restore:
+
+````shell
+psql -U vasi -d companies < companies.backup
+
+````
+
 
 Для версионирования БД используется [flyway](https://flywaydb.org/). Автообновление БД отключено. В application.yaml установлен флаг: 
 
