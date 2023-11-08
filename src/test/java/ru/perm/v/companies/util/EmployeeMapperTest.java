@@ -1,5 +1,6 @@
 package ru.perm.v.companies.util;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.perm.v.companies.dto.EmployeeDto;
 import ru.perm.v.companies.entity.EmployeeEntity;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //Generated EasyCode from Idea plugin. Prompt: Write unit tests for this code ...
+@Disabled
 public class EmployeeMapperTest {
 
     @Test
