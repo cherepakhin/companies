@@ -144,6 +144,7 @@ Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 NOTE: No tests were executed!  -DfailIfNoTests=false to ignore this error
 
 Прогон конкретного метода конкретного тестового класса:
+
 ````shell
 ./mvnw test -Dtest="CompanyServiceImplTest#getAll"
 ./mvnw test -Dtest="EmployeeServiceImpl_IntegrationTest#findByLastNameLikeOrderByN"
@@ -151,9 +152,16 @@ NOTE: No tests were executed!  -DfailIfNoTests=false to ignore this error
 ````
 
 Разные варианты прогона тестов:
+
 ````shell
 ./mvnw test -Dtest=*ImplTest -DfailIfNoTests=false
 ./mvnw test -Dtest=*IntegrationTest -DfailIfNoTests=false
+````
+
+Сборка без тестов:
+
+````shell
+./mvnw package -DskipTests
 ````
 
 ### Покрытие тестами
