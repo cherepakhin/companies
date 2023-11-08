@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ru.perm.v</groupId>
 	<artifactId>companies</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 	<name>companies</name>
 	<description>Companies and employees</description>
 
