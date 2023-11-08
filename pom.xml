@@ -8,9 +8,9 @@
 		<version>2.5.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>ru.perm.v.</groupId>
+	<groupId>ru.perm.v</groupId>
 	<artifactId>companies</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>companies</name>
 	<description>Companies and employees</description>
 
@@ -145,4 +145,12 @@
 			</plugin>
 		</plugins>
 	</build>
+	<!-- run for deploy: mvn deploy-->
+	<distributionManagement>
+		<repository>
+			<id>ru.perm.v</id> <!-- by this id take name/pass from ~/.m2/settings.xml-->
+			<name>My Repository</name>
+			<url>http://v.perm.ru:8082/repository/ru.perm.v</url>
+		</repository>
+	</distributionManagement>
 </project>
