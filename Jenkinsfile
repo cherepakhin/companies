@@ -22,5 +22,12 @@ pipeline {
                 sh 'ls'
             }
         }
+        stage('deploy to nexus') {
+            steps {
+                sh 'ls'
+                sh 'cd companies;ls;./mvnw deploy'
+                sh 'ls'
+            }
+        }
     }
 }

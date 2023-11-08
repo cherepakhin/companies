@@ -317,6 +317,8 @@ pipeline {
 }
 ````
 
+![jenkins_pipeline](doc/jenkins_pipeline.png)
+
 ### Примечания:
 
 Для гибкой работы с СУБД используется [http://querydsl.com/](http://querydsl.com/)
