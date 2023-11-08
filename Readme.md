@@ -69,6 +69,14 @@ $ psql --dbname=companies
  
 ````
 
+Подключение через psql с бД на хосте 192.168.1.20:
+
+````shell
+$ psql -U vasi -d companies -h 192.168.1.20
+ 
+````
+
+
 Backup:
 
 ````shell
@@ -80,6 +88,13 @@ Restore:
 
 ````shell
 psql -U vasi -d companies < companies.backup
+
+````
+После восстановления предоставить права:
+
+````text
+GRANT ALL PRIVILEGES ON DATABASE "companies" to vasi;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO vasi;
 
 ````
 
