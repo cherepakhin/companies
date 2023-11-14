@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('git clone') {
             steps {
-                sh 'rm -r companies'
                 sh 'git clone https://github.com/cherepakhin/companies.git'
                 sh 'ls'
             }
