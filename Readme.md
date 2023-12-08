@@ -34,9 +34,19 @@
 
 ### Установка версии java:<br/>
 
+в Linux:p
 ````shell
 $ export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
 ````
+в Windows:
+(выполнять из cmd.exe)
+````shell
+C:\>echo %JAVA_HOME%
+C:\po\jdk-21
+
+Z:\prog\java\companies> export JAVA_HOME=c:\po\open-jdk11 ?????
+````
+
 Проверка:
 
 ````shell
@@ -156,6 +166,12 @@ NOTE: No tests were executed!  -DfailIfNoTests=false to ignore this error
 ````shell
 ./mvnw test -Dtest=*ImplTest -DfailIfNoTests=false
 ./mvnw test -Dtest=*IntegrationTest -DfailIfNoTests=false
+````
+
+Прогон теста в Windows:
+
+````shell
+.\mvnw.cmd test -Dtest=!*_IntegrationTest
 ````
 
 Сборка без тестов:
