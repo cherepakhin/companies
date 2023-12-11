@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    options {
+        durabilityHint 'MAX_SURVIVABILITY'
+    }
     stages {
         stage('git clone') {
             steps {
