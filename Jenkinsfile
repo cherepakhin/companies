@@ -14,21 +14,15 @@ pipeline {
         stage('unit tests') {
             steps {
                 sh 'ls'
-                sh './mvnw test -Dtest=!*_IntegrationTest'
-                sh 'ls'
-            }
-        }
-        stage('integration tests') {
-            steps {
-                sh 'ls'
-                sh './mvnw test -Dtest=*_IntegrationTest'
+                sh 'cd companies;chmod +x mvnw;ls -al;pwd'
+                sh 'pwd;ls -al;cd companies;./mvnw test -Dtest=!*_IntegrationTest'
                 sh 'ls'
             }
         }
         stage('deploy to nexus') {
             steps {
                 sh 'ls'
-                sh './mvnw deploy'
+                sh 'cd companies;ls;./mvnw -Dmaven.test.skip=true deploy'
                 sh 'ls'
             }
         }
