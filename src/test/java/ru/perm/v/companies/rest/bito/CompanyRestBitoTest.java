@@ -1,6 +1,9 @@
 package ru.perm.v.companies.rest.bito;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import ru.perm.v.companies.dto.CompanyDto;
@@ -13,13 +16,25 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test generated Bito in VS Code
+ */
 public class CompanyRestBitoTest {
+
+    @Mock
+    private CompanyService companyService;
+
+    @InjectMocks
+    private CompanyRest companyRest;
+
+    public CompanyRestBitoTest() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     void getAll_ReturnsListOfCompanyDto() {
         // Arrange
-        CompanyService companyService = mock(CompanyService.class);
-        CompanyRest companyRest = new CompanyRest(companyService);
+        // CompanyRest companyRest = new CompanyRest(companyService);
         
         EmployeeDto director100 = new EmployeeDto();
         director100.setN(100L);
@@ -58,4 +73,34 @@ public class CompanyRestBitoTest {
         
         verify(companyService, times(1)).getAll();
     }
+
+    @Test
+    void testGetByIdPositive() throws Exception {
+        Long companyId = 1L;
+        CompanyDto companyDto = new CompanyDto(); // Create a sample CompanyDto object
+
+        when(companyService.getByN(companyId)).thenReturn(companyDto);
+
+        ResponseEntity<CompanyDto> response = companyRest.getById(companyId);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(companyDto, response.getBody());
+
+        verify(companyService, times(1)).getByN(companyId);
+    }
+    
+    @Test
+    void testGetByIdNegative() throws Exception {
+        Long companyId = 1L;
+
+        when(companyService.getByN(companyId)).thenThrow(new Exception("Company not found"));
+
+        ResponseEntity<CompanyDto> response = companyRest.getById(companyId);
+
+        assertEquals(HttpStatus.BAD_GATEWAY, response.getStatusCode());
+        assertEquals("Company not found id=1",response.getBody());
+
+        verify(companyService, times(1)).getByN(companyId);
+    }    
 }
