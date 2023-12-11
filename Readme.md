@@ -342,6 +342,15 @@ pipeline {
 
 ````
 
+Примечание: каждый sh в stage начинает работу от рабочего каталога проекта Jenkins (см. stage('unit tests')): 
+
+````text
+       sh 'ls'
+       sh 'cd companies;chmod +x mvnw;ls -al;pwd'
+       sh 'pwd;ls -al;cd companies;./mvnw test -Dtest=!*_IntegrationTest'
+       sh 'ls'
+
+````
 
 ![jenkins_pipeline](doc/jenkins_pipeline.png)
 
