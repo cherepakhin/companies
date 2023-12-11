@@ -14,21 +14,21 @@ pipeline {
         stage('unit tests') {
             steps {
                 sh 'ls'
-                sh 'cd companies;ls;./mvnw test -Dtest=!*_IntegrationTest'
+                sh './mvnw test -Dtest=!*_IntegrationTest'
                 sh 'ls'
             }
         }
         stage('integration tests') {
             steps {
                 sh 'ls'
-                sh 'cd companies;ls;./mvnw test -Dtest=*_IntegrationTest'
+                sh './mvnw test -Dtest=*_IntegrationTest'
                 sh 'ls'
             }
         }
         stage('deploy to nexus') {
             steps {
                 sh 'ls'
-                sh 'cd companies;ls;./mvnw deploy'
+                sh './mvnw deploy'
                 sh 'ls'
             }
         }
