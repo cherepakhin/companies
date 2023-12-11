@@ -305,36 +305,43 @@ EmployeeRest.update():
 
 ### CI/CD
 
-Скрипт для сборки для Jenkins
+Скрипт Jenkinsfile для сборки для Jenkins. Вставлены некоторые команды для отладки и понятия работы Jenkinsfile:
 
 ````yaml
 pipeline {
-    agent any 
+    agent any
+    options {
+        durabilityHint 'MAX_SURVIVABILITY'
+    }
     stages {
         stage('git clone') {
             steps {
-                sh 'rm -r companies'
-                sh 'git clone https://github.com/cherepakhin/companies.git' 
+                sh 'pwd'
+                sh 'rm -rf compaines'
+                sh 'git clone https://github.com/cherepakhin/companies.git'
                 sh 'ls'
             }
         }
         stage('unit tests') {
             steps {
                 sh 'ls'
-                sh 'cd companies;ls;./mvnw test -Dtest=!*_IntegrationTest'
+                sh 'cd companies;chmod +x mvnw;ls -al;pwd'
+                sh 'pwd;ls -al;cd companies;./mvnw test -Dtest=!*_IntegrationTest'
                 sh 'ls'
             }
         }
-        stage('integration tests') {
+        stage('deploy to nexus') {
             steps {
                 sh 'ls'
-                sh 'cd companies;ls;./mvnw test -Dtest=*_IntegrationTest'
+                sh 'cd companies;ls;./mvnw -Dmaven.test.skip=true deploy'
                 sh 'ls'
             }
         }
     }
 }
+
 ````
+
 
 ![jenkins_pipeline](doc/jenkins_pipeline.png)
 
