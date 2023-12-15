@@ -310,7 +310,7 @@ EmployeeRest.update():
 ````yaml
 pipeline {
     agent any
-    options {
+    options {internal 
         durabilityHint 'MAX_SURVIVABILITY'
     }
     stages {
