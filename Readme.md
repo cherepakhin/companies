@@ -182,9 +182,10 @@ NOTE: No tests were executed!  -DfailIfNoTests=false to ignore this error
 // из cmd.exe
 companies>echo %JAVA_HOME%
 C:\po\jdk-21 
-companies>mvnw.cmd test -Dtest=!*_IntegrationTest
 // из PowerShell
-companies>./mvnw.cmd test -Dtest=!*_IntegrationTest
+companies>.\mvnw.cmd test -Dtest=*_IntegrationTest
+companies>.\mvnw.cmd test -Dtest=!*_IntegrationTest
+companies>.\mvnw.cmd test
 ````
 
 Сборка без тестов:
@@ -394,4 +395,12 @@ C:\>> ls env:PG_USER
 Name                           Value
 ----                           -----
 PG_USER                        vasi
+````
+
+Перестройка миграций flyway(при ошибках "Flyway: Found non-empty schema(s) "public" without schema history table! Use baseline() - on Empty database") установить в application.yaml: 
+
+````
+spring:
+   flyway:
+      baseline-on-migrate = true
 ````
