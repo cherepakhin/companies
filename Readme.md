@@ -34,9 +34,22 @@
 
 ### Установка версии java:<br/>
 
+в Linux:
+
 ````shell
-$ export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
 ````
+
+в Windows:
+(выполнять из cmd.exe)
+
+````shell
+C:\>echo %JAVA_HOME%
+C:\po\jdk-21
+
+Z:\prog\java\companies> export JAVA_HOME=c:\po\open-jdk11 ?????
+````
+
 Проверка:
 
 ````shell
@@ -57,39 +70,36 @@ OS name: "linux", version: "5.4.0-150-generic", arch: "amd64", family: "unix"
 Создание базы:
 
 ````shell
-$ psql
+psql
 # create database companies; 
 ````
+
 Для подключения к БД используются user/password из переменных операционной системы PG_USER, PG_PASSWORD. По умолчанию значения обеих переменных 'postgres'.
 
 Подключение через psql:
 
 ````shell
-$ psql --dbname=companies
- 
+psql --dbname=companies
 ````
 
 Подключение через psql с бД на хосте 192.168.1.20:
 
 ````shell
-$ psql -U vasi -d companies -h 192.168.1.20
- 
+psql -U vasi -d companies -h 192.168.1.20 
 ````
-
 
 Backup:
 
 ````shell
-$ pg_dump -U vasi -W companies > companies.backup
-
+pg_dump -U vasi -W companies > companies.backup
 ````
 
 Restore:
 
 ````shell
 psql -U vasi -d companies < companies.backup
-
 ````
+
 После восстановления предоставить права:
 
 ````text
@@ -131,6 +141,7 @@ Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
 ````
 
 Прогон только unit тестов:
+
 ````shell
 $ ./mvnw test -Dtest=\!*_IntegrationTest 
 
@@ -143,9 +154,11 @@ Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 ````
 
 Прогон конкретного тестового класса:
+
 ````shell
 ./mvnw test -Dtest=CompanyServiceImplTest -DfailIfNoTests=false
 ````
+
 NOTE: No tests were executed!  -DfailIfNoTests=false to ignore this error
 
 Прогон конкретного метода конкретного тестового класса:
@@ -163,6 +176,12 @@ NOTE: No tests were executed!  -DfailIfNoTests=false to ignore this error
 ./mvnw test -Dtest=*IntegrationTest -DfailIfNoTests=false
 ````
 
+Прогон теста в Windows:
+
+````shell
+.\mvnw.cmd test -Dtest=!*_IntegrationTest
+````
+
 Сборка без тестов:
 
 ````shell
@@ -174,8 +193,8 @@ NOTE: No tests were executed!  -DfailIfNoTests=false to ignore this error
 Использован [jacoco](https://www.eclemma.org/jacoco/). Генерация отчета:
 
 ````shell
-$ ./mvnw test
-$ ./mvnw jacoco:report
+$./mvnw test
+$./mvnw jacoco:report
 ````
 
 Отчет будет в папке target/site/jacoco/index.html
@@ -191,7 +210,7 @@ $ ./mvnw jacoco:report
 ### Запуск проекта
 
 ````shell
-$ ./mvnw clean spring-boot:run
+$./mvnw clean spring-boot:run
 ````
 
 ### Логирование
@@ -211,7 +230,7 @@ spring:
 Профиль можно указать при запуске:
 
 ````shell
-$ java -jar target/companies-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+$java -jar target/companies-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
 ````
 
 ### Validate DTO
@@ -291,35 +310,50 @@ EmployeeRest.update():
 
 ### CI/CD
 
-Скрипт для сборки для Jenkins
+Скрипт Jenkinsfile для сборки для Jenkins. Вставлены некоторые команды для отладки и понятия работы Jenkinsfile:
 
 ````yaml
 pipeline {
-    agent any 
+    agent any
+    options {
+        durabilityHint 'MAX_SURVIVABILITY'
+    }
     stages {
         stage('git clone') {
             steps {
-                sh 'rm -r companies'
-                sh 'git clone https://github.com/cherepakhin/companies.git' 
+                sh 'pwd'
+                sh 'rm -rf compaines'
+                sh 'git clone https://github.com/cherepakhin/companies.git'
                 sh 'ls'
             }
         }
         stage('unit tests') {
             steps {
                 sh 'ls'
-                sh 'cd companies;ls;./mvnw test -Dtest=!*_IntegrationTest'
+                sh 'cd companies;chmod +x mvnw;ls -al;pwd'
+                sh 'pwd;ls -al;cd companies;./mvnw test -Dtest=!*_IntegrationTest'
                 sh 'ls'
             }
         }
-        stage('integration tests') {
+        stage('deploy to nexus') {
             steps {
                 sh 'ls'
-                sh 'cd companies;ls;./mvnw test -Dtest=*_IntegrationTest'
+                sh 'cd companies;ls;./mvnw -Dmaven.test.skip=true deploy'
                 sh 'ls'
             }
         }
     }
 }
+
+````
+
+Примечание: каждый sh в stage начинает работу от рабочего каталога проекта Jenkins (см. stage('unit tests')): 
+
+````text
+ sh 'ls'
+ sh 'cd companies;chmod +x mvnw;ls -al;pwd'
+ sh 'pwd;ls -al;cd companies;./mvnw test -Dtest=!*_IntegrationTest'
+ sh 'ls'
 ````
 
 ![jenkins_pipeline](doc/jenkins_pipeline.png)

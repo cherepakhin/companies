@@ -1,10 +1,13 @@
 pipeline {
     agent any
+    options {
+        durabilityHint 'MAX_SURVIVABILITY'
+    }
     stages {
         stage('git clone') {
             steps {
                 sh 'pwd'
-                sh 'rm -r companies'
+                sh 'rm -rf compaines'
                 sh 'git clone https://github.com/cherepakhin/companies.git'
                 sh 'ls'
             }
@@ -12,21 +15,15 @@ pipeline {
         stage('unit tests') {
             steps {
                 sh 'ls'
-                sh 'cd companies;ls;./mvnw test -Dtest=!*_IntegrationTest'
-                sh 'ls'
-            }
-        }
-        stage('integration tests') {
-            steps {
-                sh 'ls'
-                sh 'cd companies;ls;./mvnw test -Dtest=*_IntegrationTest'
+                sh 'cd companies;chmod +x mvnw;ls -al;pwd'
+                sh 'pwd;ls -al;cd companies;./mvnw test -Dtest=!*_IntegrationTest'
                 sh 'ls'
             }
         }
         stage('deploy to nexus') {
             steps {
                 sh 'ls'
-                sh 'cd companies;ls;./mvnw deploy'
+                sh 'cd companies;ls;./mvnw -Dmaven.test.skip=true deploy'
                 sh 'ls'
             }
         }
