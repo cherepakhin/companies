@@ -1,8 +1,8 @@
 spring:
   dataSource:
     url: jdbc:postgresql://127.0.0.1:5432/companies
-    username: ${PG_USER:postgres}
-    password: ${PG_PASSWORD:postgres}
+    username: ${PG_USER:vasi}
+    password: ${PG_PASSWORD:pass}
   jpa:
     # show SQL statements in console.
     show-sql: true

@@ -147,6 +147,11 @@ $ ./mvnw test -Dtest=\!*_IntegrationTest
 
 Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 ````
+Из Windows:
+````shell
+./mvnw test -Dtest=!*_IntegrationTest
+.\mvnw.cmd test -Dtest=!*_IntegrationTest
+````
 
 Прогон конкретного тестового класса:
 
@@ -174,7 +179,13 @@ NOTE: No tests were executed!  -DfailIfNoTests=false to ignore this error
 Прогон теста в Windows:
 
 ````shell
-.\mvnw.cmd test -Dtest=!*_IntegrationTest
+// из cmd.exe
+companies>echo %JAVA_HOME%
+C:\po\jdk-21 
+// из PowerShell
+companies>.\mvnw.cmd test -Dtest=*_IntegrationTest
+companies>.\mvnw.cmd test -Dtest=!*_IntegrationTest
+companies>.\mvnw.cmd test
 ````
 
 Сборка без тестов:
@@ -373,3 +384,23 @@ Alt-F12 - переход в терминал
 Разные варианты LIKE [https://www.baeldung.com/spring-jpa-like-queries](https://www.baeldung.com/spring-jpa-like-queries)
 
 Неожиданно стал СИЛЬНО ТОРМОЗИТЬ запуск тестов в Idea. Удалил папку ".idea". 
+
+Просмотр и установка переменных в Windows из PowerShell:
+
+````shell
+C:\>$env:PG_USER="vasi"
+C:\>ls env:
+C:\>> ls env:PG_USER
+
+Name                           Value
+----                           -----
+PG_USER                        vasi
+````
+
+Перестройка миграций flyway(при ошибках "Flyway: Found non-empty schema(s) "public" without schema history table! Use baseline() - on Empty database") установить в application.yaml: 
+
+````
+spring:
+   flyway:
+      baseline-on-migrate = true
+````
