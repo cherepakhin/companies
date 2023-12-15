@@ -136,6 +136,11 @@ $ ./mvnw test -Dtest=\!*_IntegrationTest
 
 Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 ````
+Из Windows:
+````shell
+./mvnw test -Dtest=!*_IntegrationTest
+.\mvnw.cmd test -Dtest=!*_IntegrationTest
+````
 
 Прогон конкретного тестового класса:
 ````shell
