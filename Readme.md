@@ -364,6 +364,16 @@ pipeline {
 
 ![jenkins_pipeline](doc/jenkins_pipeline.png)
 
+Jenkins user: vasi
+Jenkins password: pass
+
+Deploy:
+
+```shell
+./mvnw deploy
+````
+
+
 ### Примечания:
 
 Для гибкой работы с СУБД используется [http://querydsl.com/](http://querydsl.com/)
