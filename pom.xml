@@ -130,7 +130,7 @@
 		<repository>
 			<id>ru.perm.v</id> <!-- by this id take name/pass from ~/.m2/settings.xml-->
 			<name>My Repository</name>
-			<url>http://v:8081/repository/ru.perm.v</url>
+			<url>http://v.perm.ru:8081/repository/ru.perm.v</url>
 		</repository>
 	</distributionManagement>
 </project>
