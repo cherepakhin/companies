@@ -364,8 +364,8 @@ pipeline {
 
 ![jenkins_pipeline](doc/jenkins_pipeline.png)
 
-Jenkins user: vasi
-Jenkins password: pass
+Jenkins user: vasi<br/>
+Jenkins password: pass<br/>
 
 Deploy:
 
