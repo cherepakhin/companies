@@ -34,3 +34,6 @@ build/
 logs/
 
 .trunk/
+
+*.lock
+*.part
