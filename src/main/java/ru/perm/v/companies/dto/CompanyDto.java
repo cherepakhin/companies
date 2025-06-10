@@ -32,7 +32,7 @@ public class CompanyDto {
     }
 
     public CompanyDto() {
-
+        super();
     }
 
     //
@@ -113,10 +113,10 @@ public class CompanyDto {
 
     @Override
     public String toString() {
-        return "CompanyEntity{" +
+        return "CompanyDto{" +
                 "n=" + n +
-                ", shortname='" + shortname + '\'' +
-                ", fullname='" + fullname + '\'' +
+                ", shortName='" + shortname + '\'' +
+                ", fullName='" + fullname + '\'' +
                 ", inn='" + inn + '\'' +
                 ", ogrn='" + ogrn + '\'' +
                 ", addressPost='" + addressPost + '\'' +

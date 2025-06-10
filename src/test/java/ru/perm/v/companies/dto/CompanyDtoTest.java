@@ -1,17 +1,11 @@
 package ru.perm.v.companies.dto;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-//import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 class CompanyDtoTest {
-    @Mock
-    ru.perm.v.companies.dto.EmployeeDto director;
-    @InjectMocks
-    ru.perm.v.companies.dto.CompanyDto companyDto;
 
     @BeforeEach
     void setUp() {
@@ -19,21 +13,30 @@ class CompanyDtoTest {
     }
 
     @Test
-    void testToString(){
-        java.lang.String result = companyDto.toString();
-        Assertions.assertEquals("replaceMeWithExpectedResult", result);
+    void testToString() {
+        EmployeeDto employeeDto = new EmployeeDto();
+        CompanyDto companyDto = new CompanyDto(1L, "SHORTNAME", "FULLNAME", "INN", "OGRN","ADDRESS_POST","ADDRESS_UR", employeeDto);
+        String result = companyDto.toString();
+
+        assertEquals("CompanyDto{n=1, shortName='SHORTNAME', fullName='FULLNAME', inn='INN', ogrn='OGRN', addressPost='ADDRESS_POST', addressUr='ADDRESS_UR'}", result.toString());
     }
 
     @Test
-    void testEquals(){
-        boolean result = companyDto.equals("o");
-        Assertions.assertEquals(true, result);
+    void testEquals() {
+        EmployeeDto employeeDto = new EmployeeDto();
+        CompanyDto companyDto1 = new CompanyDto(1L, "SHORTNAME", "FULLNAME", "INN", "OGRN","ADDRESS_POST","ADDRESS_UR", employeeDto);
+        CompanyDto companyDto2 = new CompanyDto(1L, "SHORTNAME", "FULLNAME", "INN", "OGRN","ADDRESS_POST","ADDRESS_UR", employeeDto);
+
+        boolean result = companyDto1.equals(companyDto2);
+
+        assertTrue(result);
     }
 
     @Test
-    void testHashCode(){
+    void testHashCode() {
+        CompanyDto companyDto = new CompanyDto();
         int result = companyDto.hashCode();
-        Assertions.assertEquals(0, result);
+        assertNotEquals(0, result);
     }
 }
 
