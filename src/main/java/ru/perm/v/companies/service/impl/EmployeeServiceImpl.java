@@ -9,6 +9,7 @@ import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.dto.EmployeeDto;
 import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.entity.EmployeeEntity;
+import ru.perm.v.companies.mapper.MapperCompany;
 import ru.perm.v.companies.repository.EmployeeRepository;
 import ru.perm.v.companies.service.CompanyService;
 import ru.perm.v.companies.service.EmployeeService;
@@ -67,7 +68,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withIgnorePaths("n", "lastname", "fathername", "birthday")
-                .withIncludeNullValues()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
         ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
@@ -82,12 +82,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     public List<EmployeeDto> findByLastnameOrderByNAsc(String lastName) {
-        return convertFromListEntity(employeeRepository.findByLastnameOrderByNAsc(lastName));
+        EmployeeEntity query = new EmployeeEntity();
+        query.setLastname(lastName);
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnorePaths("n", "firstname", "fathername", "birthday", "company_n")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
+        Example<EmployeeEntity> example = Example.of(query, matcher);
+        employeeRepository.findAll(example).forEach(entities::add);
+
+        return convertFromListEntity(entities);
     }
 
     @Override
     public List<EmployeeDto> findByLastnameLikeOrderByNDesc(String lastName) {
-        return convertFromListEntity(employeeRepository.findByLastnameOrderByNDesc(lastName));
+        return convertFromListEntity(employeeRepository.findByLastnameLikeOrderByNDesc(lastName));
     }
 
     @Override
@@ -122,8 +133,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         query.setLastname(lastName);
 
         ExampleMatcher matcher = ExampleMatcher.matching()
-                .withIgnorePaths("n", "firstname", "fathername", "birthday")
-                .withIncludeNullValues()
+                .withIgnorePaths("n", "firstname", "fathername", "birthday", "company_n")
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
         ArrayList<EmployeeEntity> ret = new ArrayList<EmployeeEntity>();
@@ -137,7 +147,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public static EmployeeEntity convertFromDtoToEntity(EmployeeDto dto) throws Exception {
-        CompanyDto company = companyService.getByN(dto.getCompanyN());
+        CompanyDto companyDto = companyService.getByN(dto.getCompanyN());
+        MapperCompany mapper = new MapperCompany();
+        CompanyEntity companyEntity = mapper.toEntity(companyDto);
 //        CompanyEntity companyEntity = ;
         return new EmployeeEntity(
                 dto.getN(),
@@ -145,7 +157,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 dto.getLastname(),
                 dto.getFathername(),
                 Util.fromStringToDate(dto.getBirthday()),
-                null
+                companyEntity
         );
     }
 

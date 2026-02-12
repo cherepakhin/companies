@@ -63,7 +63,8 @@ public class EmployeeServiceImpl_IntegrationTest {
     void findByLastnameLikeOrderByNAsc() {
         String lastName = "lastname_2";
         List<EmployeeDto> empls = employeeService.findByLastnameOrderByNAsc(lastName);
-        assertEquals(1, empls.size());
-        assertEquals(lastName, empls.get(0).getLastname());
+        assertEquals(2, empls.size());
+        assertEquals("lastname_2", empls.get(0).getLastname());
+        assertEquals("lastname_20", empls.get(1).getLastname());
     }
 }
