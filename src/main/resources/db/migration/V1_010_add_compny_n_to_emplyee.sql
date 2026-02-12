@@ -1,0 +1,1 @@
+alter table employee add column company_n integer not null default 0;
