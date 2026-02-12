@@ -14,5 +14,5 @@ public interface EmployeeService {
     List<EmployeeDto> findByLastnameOrderByNAsc(String lastName);
     List<EmployeeDto> findByLastnameLikeOrderByNDesc(String lastName);
     List<EmployeeDto> findByLastnameOrderByLastnameAsc(String lastName);
-    EmployeeDto create(EmployeeDto employee);
+    EmployeeDto create(EmployeeDto employee) throws Exception;
 }

@@ -23,6 +23,9 @@ public class EmployeeEntity {
     private String fathername = "";
     @Column(name = "birthday", columnDefinition = "TIMESTAMP")
     private LocalDate birthday = LocalDate.now();
+    @ManyToOne
+    @JoinColumn(name = "company_n")
+    private CompanyEntity companyEntity;
 
     public EmployeeEntity() {
         super();
@@ -71,6 +74,14 @@ public class EmployeeEntity {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public CompanyEntity getCompanyEntity() {
+        return companyEntity;
+    }
+
+    public void setCompanyEntity(CompanyEntity companyEntity) {
+        this.companyEntity = companyEntity;
     }
 
     @Override

@@ -1,5 +1,7 @@
 ## Типовой проект "Companies" (backend)
 
+База данных, ManyTo-One, REST, Unit tests, Integration tests, QueryDSL.
+
 Задание:<br/>
 1. Создать новый пустой Spring (5) Java-проект Web-приложения с поддержкой Maven, Java 11.  
    Проект должен поддерживать подключение к PostgreSQL (12 и выше) и механизм миграций на базе Liquibase.  

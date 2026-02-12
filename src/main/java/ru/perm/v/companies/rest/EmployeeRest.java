@@ -34,7 +34,8 @@ public class EmployeeRest {
                         e.getFirstname(),
                         e.getLastname(),
                         e.getFathername(),
-                        e.getBirthday()
+                        e.getBirthday(),
+                        e.getCompanyN()
                 ) {
                 })
                 .collect(Collectors.toList());

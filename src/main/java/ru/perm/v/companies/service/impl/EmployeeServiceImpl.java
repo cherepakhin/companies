@@ -5,9 +5,12 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
+import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.dto.EmployeeDto;
+import ru.perm.v.companies.entity.CompanyEntity;
 import ru.perm.v.companies.entity.EmployeeEntity;
 import ru.perm.v.companies.repository.EmployeeRepository;
+import ru.perm.v.companies.service.CompanyService;
 import ru.perm.v.companies.service.EmployeeService;
 import ru.perm.v.companies.util.Util;
 
@@ -20,15 +23,17 @@ import java.util.stream.StreamSupport;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private static EmployeeEntity nullEmployee = new EmployeeEntity(-1);
-    private static EmployeeDto nullEmployeeDto = new EmployeeDto(-1L, "", "", "", "");
+    private static EmployeeDto nullEmployeeDto = new EmployeeDto(-1L, "", "", "", "",-1L);
     private EmployeeRepository employeeRepository;
+    private static CompanyService companyService;
 
-    public EmployeeServiceImpl(@Autowired EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(@Autowired EmployeeRepository employeeRepository, CompanyService companyService) {
         this.employeeRepository = employeeRepository;
+        this.companyService = companyService;
     }
 
     @Override
-    public EmployeeDto create(EmployeeDto employee) {
+    public EmployeeDto create(EmployeeDto employee) throws Exception {
         //TODO validate employee
         EmployeeEntity entity = convertFromDtoToEntity(employee);
         EmployeeEntity created = employeeRepository.save(entity);
@@ -131,13 +136,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         return entities.stream().map(e -> convertFromEntityToDto(e)).collect(Collectors.toList());
     }
 
-    public static EmployeeEntity convertFromDtoToEntity(EmployeeDto dto) {
+    public static EmployeeEntity convertFromDtoToEntity(EmployeeDto dto) throws Exception {
+        CompanyDto company = companyService.getByN(dto.getCompanyN());
+//        CompanyEntity companyEntity = ;
         return new EmployeeEntity(
                 dto.getN(),
                 dto.getFirstname(),
                 dto.getLastname(),
                 dto.getFathername(),
-                Util.fromStringToDate(dto.getBirthday())
+                Util.fromStringToDate(dto.getBirthday()),
+                null
         );
     }
 
@@ -147,7 +155,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 entity.getFirstname(),
                 entity.getLastname(),
                 entity.getFathername(),
-                Util.fromDateToString(entity.getBirthday())
+                Util.fromDateToString(entity.getBirthday()),
+                entity.getCompanyEntity().getN()
         );
     }
 
