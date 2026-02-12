@@ -10,7 +10,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "employee")
 @AllArgsConstructor
-@NoArgsConstructor
 public class EmployeeEntity {
     @Id
     @Column(name = "n", nullable = false)
@@ -25,8 +24,12 @@ public class EmployeeEntity {
     @Column(name = "birthday", columnDefinition = "TIMESTAMP")
     private LocalDate birthday = LocalDate.now();
 
-    public EmployeeEntity(long n) {
+    public EmployeeEntity() {
         super();
+    }
+
+    public EmployeeEntity(long n) {
+        this();
         this.n = n;
     }
 

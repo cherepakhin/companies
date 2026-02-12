@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.entity.CompanyEntity;
+//import ru.perm.v.companies.entity.QCompanyEntity;
 import ru.perm.v.companies.entity.QCompanyEntity;
 import ru.perm.v.companies.repository.CompanyRepository;
 import ru.perm.v.companies.service.CompanyService;
@@ -96,7 +97,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void deleteById(Long id) {
-
+        companyRepository.deleteById(id);
     }
 
 // Разные способы получения результата отбора

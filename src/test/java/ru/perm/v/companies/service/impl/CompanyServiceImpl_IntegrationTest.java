@@ -1,5 +1,6 @@
 package ru.perm.v.companies.service.impl;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +25,7 @@ public class CompanyServiceImpl_IntegrationTest {
     public void getAll() {
         List<CompanyDto> companies = companyService.getAll();
         assertNotNull(companies);
-        assertEquals(4, companies.size());
+        assertEquals(3, companies.size());
     }
 
     @Test

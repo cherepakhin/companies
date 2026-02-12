@@ -57,7 +57,7 @@ public class CompanyRest {
     public ResponseEntity<Long> deleteById(@PathVariable Long id) {
         log.info(String.format("delete /company/deleteById/%d", id));
         try {
-            //TODO: delete
+            companyService.deleteById(id);
             return ResponseEntity.ok(id);
         } catch (Exception e) {
             log.error(e.getMessage());
