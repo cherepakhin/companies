@@ -45,4 +45,9 @@ public class CompanyRestTest {
         assertEquals(List.of(company1, company2), rest.getAll().getBody());
     }
 
+    @Test
+    public void save() {
+        //TODO
+    }
+
 }
