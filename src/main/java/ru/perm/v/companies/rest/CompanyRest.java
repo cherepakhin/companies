@@ -1,6 +1,7 @@
 package ru.perm.v.companies.rest;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +12,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@Slf4j
 @RequestMapping("/company")
 public class CompanyRest {
+
+    Logger log = LoggerFactory.getLogger(CompanyRest.class);
 
     private CompanyService companyService;
 
@@ -34,22 +36,27 @@ public class CompanyRest {
                         c.getInn(),
                         c.getOgrn(),
                         c.getAddressPost(),
-                        c.getAddressUr()
+                        c.getAddressUr(),
+                        c.getDirector()
                 ) {
                 })
                 .collect(Collectors.toList());
         return ResponseEntity.ok(dtos);
     }
 
+    
     @GetMapping("/{id}")
     public ResponseEntity<CompanyDto> getById(@PathVariable Long id) {
         log.info("------------------------");
         log.info(String.format("get /company/getById/%d", id));
+        log.
+
         try {
             return ResponseEntity.ok(companyService.getByN(id));
         } catch (Exception e) {
-            log.error(e.getMessage());
-            return new ResponseEntity(String.format("Company not found id=%s", id), HttpStatus.BAD_GATEWAY);
+            String errorMessage = String.format("Company not found id=%s", id);
+            log.error(errorMessage);
+            return new ResponseEntity(errorMessage, HttpStatus.BAD_GATEWAY);
         }
     }
 

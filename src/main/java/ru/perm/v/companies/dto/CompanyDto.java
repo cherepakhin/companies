@@ -1,12 +1,7 @@
 package ru.perm.v.companies.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 import java.util.Objects;
 
-@AllArgsConstructor
-@NoArgsConstructor
 public class CompanyDto {
     private Long n;
     private String shortname = "";
@@ -15,13 +10,32 @@ public class CompanyDto {
     private String ogrn = "";
     private String addressPost = "";
     private String addressUr = "";
-//    EmployeeEntity director = new EmployeeEntity();
+    private EmployeeDto director = new EmployeeDto();
+
 
     public CompanyDto(Long n) {
-        this();
         this.n = n;
     }
-//
+
+    public CompanyDto(
+            Long n, String shortname, String fullname,
+            String inn, String ogrn, String addressPost,
+            String addressUr, EmployeeDto director) {
+        this.n = n;
+        this.shortname = shortname;
+        this.fullname = fullname;
+        this.inn = inn;
+        this.ogrn = ogrn;
+        this.addressPost = addressPost;
+        this.addressUr = addressUr;
+        this.director = director;
+    }
+
+    public CompanyDto() {
+        super();
+    }
+
+    //
 //    public CompanyDto(Long n, String shortname, String fullname, String inn, String ogrn, String addressPost, String addressUr) {
 //        this.n = n;
 //        this.shortname = shortname;
@@ -89,6 +103,27 @@ public class CompanyDto {
         this.addressUr = addressUr;
     }
 
+    public EmployeeDto getDirector() {
+        return director;
+    }
+
+    public void setDirector(EmployeeDto director) {
+        this.director = director;
+    }
+
+    @Override
+    public String toString() {
+        return "CompanyDto{" +
+                "n=" + n +
+                ", shortName='" + shortname + '\'' +
+                ", fullName='" + fullname + '\'' +
+                ", inn='" + inn + '\'' +
+                ", ogrn='" + ogrn + '\'' +
+                ", addressPost='" + addressPost + '\'' +
+                ", addressUr='" + addressUr + '\'' +
+                '}';
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -102,16 +137,5 @@ public class CompanyDto {
         return Objects.hash(n, shortname, fullname, inn, ogrn, addressPost, addressUr);
     }
 
-    @Override
-    public String toString() {
-        return "CompanyEntity{" +
-                "n=" + n +
-                ", shortname='" + shortname + '\'' +
-                ", fullname='" + fullname + '\'' +
-                ", inn='" + inn + '\'' +
-                ", ogrn='" + ogrn + '\'' +
-                ", addressPost='" + addressPost + '\'' +
-                ", addressUr='" + addressUr + '\'' +
-                '}';
-    }
+
 }

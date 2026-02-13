@@ -4,15 +4,14 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.service.CompanyService;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @Transactional
@@ -53,7 +52,7 @@ public class CompanyServiceImpl_IntegrationTest {
 
     @Test
     public void getByShortName() {
-        String TEST_SHORT_NAME="shortname_1";
+        String TEST_SHORT_NAME = "shortname_1";
         List<CompanyDto> companies = companyService.getByShortName(TEST_SHORT_NAME);
         for (CompanyDto c : companies) {
             System.out.println(c.getN());
