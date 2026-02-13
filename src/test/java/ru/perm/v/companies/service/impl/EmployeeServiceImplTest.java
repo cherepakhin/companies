@@ -11,7 +11,7 @@ import ru.perm.v.companies.service.EmployeeService;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -44,5 +44,33 @@ public class EmployeeServiceImplTest {
         when(mockEmployeeRepository.findById(1L)).thenReturn(Optional.of(employeeEntity1));
 
         assertEquals(1L, employeeService.getByN(1L).getN());
+    }
+
+    @Test
+    void isSortColumnValid() {
+        EmployeeService employeeService = new EmployeeServiceImpl(mockEmployeeRepository, mockCompanyService);
+
+        assertTrue(employeeService.isSortColumnValid("n"));
+    }
+
+    @Test
+    void isSortColumnNotValid() {
+        EmployeeService employeeService = new EmployeeServiceImpl(mockEmployeeRepository, mockCompanyService);
+
+        assertFalse(employeeService.isSortColumnValid("aaa"));
+    }
+
+    @Test
+    void failOnNotValidSortColumn() {
+        EmployeeService employeeService = new EmployeeServiceImpl(mockEmployeeRepository, mockCompanyService);
+        boolean ok = false;
+        try {
+            employeeService.getByFirstNameOrderByColumn("any", "ERROR_SORT_COLUMN");
+        } catch (Exception e) {
+            assertTrue(e instanceof Exception);
+            assertEquals("ERROR_SORT_COLUMN is not valid sort column", e.getMessage());
+            ok = true;
+        }
+        assertTrue(ok);
     }
 }

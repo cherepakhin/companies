@@ -108,7 +108,12 @@ public class EmployeeServiceImpl_IntegrationTest {
     void getByFirstNameOrderByColumn() {
         String firstName = "firstname_2";
 
-        List<EmployeeDto> empls = employeeService.getByFirstNameOrderByColumn(firstName, "lastname");
+        List<EmployeeDto> empls = null;
+        try {
+            empls = employeeService.getByFirstNameOrderByColumn(firstName, "lastname");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         assertEquals(2, empls.size());
         assertEquals("lastname_2", empls.get(0).getLastname());

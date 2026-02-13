@@ -15,14 +15,18 @@ import ru.perm.v.companies.service.CompanyService;
 import ru.perm.v.companies.service.EmployeeService;
 import ru.perm.v.companies.util.Util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.lang.String.format;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     private static final EmployeeEntity nullEmployee = new EmployeeEntity(-1);
-    private static final EmployeeDto nullEmployeeDto = new EmployeeDto(-1L, "", "", "", "",-1L);
+    private static final EmployeeDto nullEmployeeDto = new EmployeeDto(-1L, "", "", "", "", -1L);
     private EmployeeRepository employeeRepository;
     private static CompanyService companyService;
 
@@ -46,6 +50,16 @@ public class EmployeeServiceImpl implements EmployeeService {
             return convertFromListEntity(employeeRepository.findByLastnameOrderByFirstnameAsc(lastName));
         }
         return List.of();
+    }
+
+    @Override
+    public boolean isSortColumnValid(String columnName) {
+        try {
+            EmployeeService.SORT_COLUMN.valueOf(columnName);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
     @Override
@@ -89,8 +103,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeDto> getByFirstNameOrderByColumn(String name, String sortColumnName) {
-        //TODO validate columnName
+    public List<EmployeeDto> getByFirstNameOrderByColumn(String name, String sortColumnName) throws Exception {
+        if (!isSortColumnValid(sortColumnName)) {
+            throw new Exception(format("%s is not valid sort column", sortColumnName));
+        }
+
         EmployeeEntity query = new EmployeeEntity();
         query.setFirstname(name);
 
