@@ -25,10 +25,10 @@ import static java.lang.String.format;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private static final EmployeeEntity nullEmployee = new EmployeeEntity(-1);
-    private static final EmployeeDto nullEmployeeDto = new EmployeeDto(-1L, "", "", "", "", -1L);
+    private final EmployeeEntity nullEmployee = new EmployeeEntity(-1);
+    private final EmployeeDto nullEmployeeDto = new EmployeeDto(-1L, "", "", "", "", -1L);
     private EmployeeRepository employeeRepository;
-    private static CompanyService companyService;
+    private CompanyService companyService;
 
 
     public EmployeeServiceImpl(@Autowired EmployeeRepository employeeRepository, CompanyService companyService) {
@@ -63,168 +63,178 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeDto> getAll() {
-        ArrayList<EmployeeDto> dtos = new ArrayList<>();
+    public EmployeeDto update(EmployeeDto dto) throws Exception {
+        if (dto.getN() == null) {
+            throw new Exception("N is null");
+        }
+
+        EmployeeEntity entity = convertFromDtoToEntity(dto);
+        EmployeeEntity updated = employeeRepository.save(entity);
+        return convertFromEntityToDto(updated);
+    }
+        return null;
+}
+
+@Override
+public List<EmployeeDto> getAll() {
+    ArrayList<EmployeeDto> dtos = new ArrayList<>();
 
 //        Iterable<EmployeeEntity> all = employeeRepository.findAll();
-        employeeRepository.findAllByOrderByNAsc().forEach(employeeEntity -> dtos.add(this.convertFromEntityToDto(employeeEntity)));
+    employeeRepository.findAllByOrderByNAsc().forEach(employeeEntity -> dtos.add(this.convertFromEntityToDto(employeeEntity)));
 //        all.iterator().forEachRemaining(entity -> dtos.add(this.convertFromEntityToDto(entity)));
 //        List<EmployeeEntity> enities = Streamable.of(all).toList(); OK
-        return dtos;
-    }
+    return dtos;
+}
 
-    @Override
-    public EmployeeDto getByN(Long n) {
-        Optional<EmployeeEntity> res = employeeRepository.findById(n);
+@Override
+public EmployeeDto getByN(Long n) {
+    Optional<EmployeeEntity> res = employeeRepository.findById(n);
 //        employeeRepository.findById(n).ifPresent(employee -> new EmployeeDto(employee));
-        if (res.isPresent()) {
-            return convertFromEntityToDto(res.get());
-        }
-        return nullEmployeeDto;
+    if (res.isPresent()) {
+        return convertFromEntityToDto(res.get());
     }
+    return nullEmployeeDto;
+}
 
-    @Override
-    public List<EmployeeDto> getByFirstName(String name) {
-        EmployeeEntity query = new EmployeeEntity();
-        query.setFirstname(name);
+@Override
+public List<EmployeeDto> getByFirstName(String name) {
+    EmployeeEntity query = new EmployeeEntity();
+    query.setFirstname(name);
 
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withIgnorePaths("n", "lastname", "fathername", "birthday")
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreCase();
+    ExampleMatcher matcher = ExampleMatcher.matching()
+            .withIgnorePaths("n", "lastname", "fathername", "birthday")
+            .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreCase();
 
-        ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
-        Example<EmployeeEntity> example = Example.of(query, matcher);
+    ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
+    Example<EmployeeEntity> example = Example.of(query, matcher);
 // Выборка подробно
 //        Iterable<EmployeeEntity> all = employeeRepository.findAll(example);
 //        all.forEach(ret::add);
 // Выборка коротко
-        employeeRepository.findAll(example, Sort.by("n").ascending()).forEach(entities::add);
-        return convertFromListEntity(entities);
+    employeeRepository.findAll(example, Sort.by("n").ascending()).forEach(entities::add);
+    return convertFromListEntity(entities);
+}
+
+@Override
+public List<EmployeeDto> getByFirstNameOrderByColumn(String name, String sortColumnName) throws Exception {
+    if (!isSortColumnValid(sortColumnName)) {
+        throw new Exception(format("%s is not valid sort column", sortColumnName));
     }
 
-    @Override
-    public List<EmployeeDto> getByFirstNameOrderByColumn(String name, String sortColumnName) throws Exception {
-        if (!isSortColumnValid(sortColumnName)) {
-            throw new Exception(format("%s is not valid sort column", sortColumnName));
-        }
+    EmployeeEntity query = new EmployeeEntity();
+    query.setFirstname(name);
 
-        EmployeeEntity query = new EmployeeEntity();
-        query.setFirstname(name);
+    ExampleMatcher matcher = ExampleMatcher.matching()
+            .withIgnorePaths("n", "lastname", "fathername", "birthday")
+            .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreCase();
 
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withIgnorePaths("n", "lastname", "fathername", "birthday")
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreCase();
+    ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
+    Example<EmployeeEntity> example = Example.of(query, matcher);
+    employeeRepository.findAll(example, Sort.by(sortColumnName).ascending()).forEach(entities::add);
+    return convertFromListEntity(entities);
+}
 
-        ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
-        Example<EmployeeEntity> example = Example.of(query, matcher);
-        employeeRepository.findAll(example, Sort.by(sortColumnName).ascending()).forEach(entities::add);
-        return convertFromListEntity(entities);
-    }
+@Override
+public List<EmployeeDto> getByFirstNameOrderByEnumColumn(String name, SORT_COLUMN column) {
+    EmployeeEntity query = new EmployeeEntity();
+    query.setFirstname(name);
 
-    @Override
-    public List<EmployeeDto> getByFirstNameOrderByEnumColumn(String name, SORT_COLUMN column) {
-        EmployeeEntity query = new EmployeeEntity();
-        query.setFirstname(name);
+    ExampleMatcher matcher = ExampleMatcher.matching()
+            .withIgnorePaths("n", "lastname", "fathername", "birthday")
+            .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreCase();
 
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withIgnorePaths("n", "lastname", "fathername", "birthday")
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreCase();
+    ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
+    Example<EmployeeEntity> example = Example.of(query, matcher);
+    employeeRepository.findAll(example, Sort.by(column.toString()).ascending()).forEach(entities::add);
+    return convertFromListEntity(entities);
+}
 
-        ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
-        Example<EmployeeEntity> example = Example.of(query, matcher);
-        employeeRepository.findAll(example, Sort.by(column.toString()).ascending()).forEach(entities::add);
-        return convertFromListEntity(entities);
-    }
+public List<EmployeeDto> findByLastnameOrderByNAsc(String lastName) {
+    EmployeeEntity query = new EmployeeEntity();
+    query.setLastname(lastName);
 
-    public List<EmployeeDto> findByLastnameOrderByNAsc(String lastName) {
-        EmployeeEntity query = new EmployeeEntity();
-        query.setLastname(lastName);
+    ExampleMatcher matcher = ExampleMatcher.matching()
+            .withIgnorePaths("n", "firstname", "fathername", "birthday", "company_n")
+            .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withIgnorePaths("n", "firstname", "fathername", "birthday", "company_n")
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+    ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
+    Example<EmployeeEntity> example = Example.of(query, matcher);
+    employeeRepository.findAll(example, Sort.by("n").ascending()).forEach(entities::add);
 
-        ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
-        Example<EmployeeEntity> example = Example.of(query, matcher);
-        employeeRepository.findAll(example, Sort.by("n").ascending()).forEach(entities::add);
+    return convertFromListEntity(entities);
+}
 
-        return convertFromListEntity(entities);
-    }
+@Override
+public List<EmployeeDto> findByLastnameLikeOrderByNDesc(String lastName) {
+    return convertFromListEntity(employeeRepository.findByLastnameLikeOrderByNDesc(lastName));
+}
 
-    @Override
-    public List<EmployeeDto> findByLastnameLikeOrderByNDesc(String lastName) {
-        return convertFromListEntity(employeeRepository.findByLastnameLikeOrderByNDesc(lastName));
-    }
-
-    @Override
-    public List<EmployeeDto> findByLastnameOrderByLastnameAsc(String lastName) {
-        return convertFromListEntity(employeeRepository.findByLastnameOrderByLastnameAsc(lastName));
-    }
+@Override
+public List<EmployeeDto> findByLastnameOrderByLastnameAsc(String lastName) {
+    return convertFromListEntity(employeeRepository.findByLastnameOrderByLastnameAsc(lastName));
+}
 
 
-    @Override
-    public List<EmployeeDto> findByLastnameOrderByNDesc(String lastName) {
-        EmployeeEntity query = new EmployeeEntity();
-        query.setLastname(lastName);
+@Override
+public List<EmployeeDto> findByLastnameOrderByNDesc(String lastName) {
+    EmployeeEntity query = new EmployeeEntity();
+    query.setLastname(lastName);
 
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withIgnorePaths("n", "firstname", "fathername", "birthday")
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+    ExampleMatcher matcher = ExampleMatcher.matching()
+            .withIgnorePaths("n", "firstname", "fathername", "birthday")
+            .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
-        ArrayList<EmployeeEntity> ret = new ArrayList<EmployeeEntity>();
-        Example<EmployeeEntity> example = Example.of(query, matcher);
+    ArrayList<EmployeeEntity> ret = new ArrayList<EmployeeEntity>();
+    Example<EmployeeEntity> example = Example.of(query, matcher);
 // Выборка подробно
 //        Iterable<EmployeeEntity> all = employeeRepository.findAll(example);
 //        all.forEach(ret::add);
 // Выборка коротко
-        employeeRepository.findAll(example, Sort.by("n").descending()).forEach(ret::add);
-        return convertFromListEntity(ret);
-    }
+    employeeRepository.findAll(example, Sort.by("n").descending()).forEach(ret::add);
+    return convertFromListEntity(ret);
+}
 
-    @Override
-    public List<EmployeeDto> findByLastnameLikeOrderByN(String lastName) {
-        EmployeeEntity query = new EmployeeEntity();
-        query.setLastname(lastName);
+@Override
+public List<EmployeeDto> findByLastnameLikeOrderByN(String lastName) {
+    EmployeeEntity query = new EmployeeEntity();
+    query.setLastname(lastName);
 
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withIgnorePaths("n", "firstname", "fathername", "birthday", "company_n")
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+    ExampleMatcher matcher = ExampleMatcher.matching()
+            .withIgnorePaths("n", "firstname", "fathername", "birthday", "company_n")
+            .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
-        ArrayList<EmployeeEntity> ret = new ArrayList<EmployeeEntity>();
-        Example<EmployeeEntity> example = Example.of(query, matcher);
-        employeeRepository.findAll(example).forEach(ret::add);
-        return convertFromListEntity(ret);
-    }
+    ArrayList<EmployeeEntity> ret = new ArrayList<EmployeeEntity>();
+    Example<EmployeeEntity> example = Example.of(query, matcher);
+    employeeRepository.findAll(example).forEach(ret::add);
+    return convertFromListEntity(ret);
+}
 
-    public static List<EmployeeDto> convertFromListEntity(List<EmployeeEntity> entities) {
-        return entities.stream().map(e -> convertFromEntityToDto(e)).collect(Collectors.toList());
-    }
+public static List<EmployeeDto> convertFromListEntity(List<EmployeeEntity> entities) {
+    return entities.stream().map(e -> convertFromEntityToDto(e)).collect(Collectors.toList());
+}
 
-    public static EmployeeEntity convertFromDtoToEntity(EmployeeDto dto) throws Exception {
-        CompanyDto companyDto = companyService.getByN(dto.getCompanyN());
-        MapperCompany mapper = new MapperCompany();
-        CompanyEntity companyEntity = mapper.toEntity(companyDto);
+public static EmployeeEntity convertFromDtoToEntity(EmployeeDto dto) throws Exception {
+    CompanyDto companyDto = companyService.getByN(dto.getCompanyN());
+    MapperCompany mapper = new MapperCompany();
+    CompanyEntity companyEntity = mapper.toEntity(companyDto);
 //        CompanyEntity companyEntity = ;
-        return new EmployeeEntity(
-                dto.getN(),
-                dto.getFirstname(),
-                dto.getLastname(),
-                dto.getFathername(),
-                Util.fromStringToDate(dto.getBirthday()),
-                companyEntity
-        );
-    }
+    return new EmployeeEntity(
+            dto.getN(),
+            dto.getFirstname(),
+            dto.getLastname(),
+            dto.getFathername(),
+            Util.fromStringToDate(dto.getBirthday()),
+            companyEntity
+    );
+}
 
-    public static EmployeeDto convertFromEntityToDto(EmployeeEntity entity) {
-        return new EmployeeDto(
-                entity.getN(),
-                entity.getFirstname(),
-                entity.getLastname(),
-                entity.getFathername(),
-                Util.fromDateToString(entity.getBirthday()),
-                entity.getCompanyEntity().getN()
-        );
-    }
-
-
+public static EmployeeDto convertFromEntityToDto(EmployeeEntity entity) {
+    return new EmployeeDto(
+            entity.getN(),
+            entity.getFirstname(),
+            entity.getLastname(),
+            entity.getFathername(),
+            Util.fromDateToString(entity.getBirthday()),
+            entity.getCompanyEntity().getN()
+    );
 }

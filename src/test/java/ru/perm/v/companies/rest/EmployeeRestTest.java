@@ -39,10 +39,10 @@ public class EmployeeRestTest {
 
         assertEquals(2, receivedEmpls.size());
         assertEquals(
-                new EmployeeDto(1L, "FIRST_NAME_1", "LAST_NAME_1", "FATHER_NAME_1", "2021/01/01"),
+                new EmployeeDto(1L, "FIRST_NAME_1", "LAST_NAME_1", "FATHER_NAME_1", "2021/01/01", 1),
                 receivedEmpls.get(0));
         assertEquals(
-                new EmployeeDto(2L, "FIRST_NAME_2", "LAST_NAME_2", "FATHER_NAME_2", "2022/12/02"),
+                new EmployeeDto(2L, "FIRST_NAME_2", "LAST_NAME_2", "FATHER_NAME_2", "2022/12/02",1),
                 receivedEmpls.get(1));
     }
 

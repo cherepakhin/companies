@@ -21,4 +21,5 @@ public interface EmployeeService {
 
     enum SORT_COLUMN { n, firstname, lastname, fathername, birthday, company_n };
     boolean isSortColumnValid(String columnName);
+    EmployeeDto update(EmployeeDto dto) throws Exception;
 }
