@@ -86,9 +86,64 @@ public class EmployeeServiceImpl_IntegrationTest {
     @Test
     void findByLastnameLikeOrderByNDesc() {
         String lastName = "lastname_2";
+
         List<EmployeeDto> empls = employeeService.findByLastnameOrderByNDesc(lastName);
+
         assertEquals(2, empls.size());
         assertEquals("lastname_20", empls.get(0).getLastname());
         assertEquals("lastname_2", empls.get(1).getLastname());
+    }
+
+    @Test
+    void findByLastnameOrderByLastnameAsc() {
+        String lastName = "lastname_2";
+
+        List<EmployeeDto> empls = employeeService.findByLastnameOrderByLastnameAsc(lastName);
+
+        assertEquals(1, empls.size());
+        assertEquals("lastname_2", empls.get(0).getLastname());
+    }
+
+    @Test
+    void getByFirstNameOrderByColumn() {
+        String firstName = "firstname_2";
+
+        List<EmployeeDto> empls = employeeService.getByFirstNameOrderByColumn(firstName, "lastname");
+
+        assertEquals(2, empls.size());
+        assertEquals("lastname_2", empls.get(0).getLastname());
+        assertEquals("lastname_20", empls.get(1).getLastname());
+    }
+
+    @Test
+    void getByFirstNameOrderByEnumColumnLastname() {
+        String firstName = "firstname_2";
+
+        List<EmployeeDto> empls = employeeService.getByFirstNameOrderByEnumColumn(firstName, EmployeeService.SORT_COLUMN.lastname);
+
+        assertEquals(2, empls.size());
+        assertEquals("lastname_2", empls.get(0).getLastname());
+        assertEquals("lastname_20", empls.get(1).getLastname());
+    }
+
+    @Test
+    void getByFirstNameOrderByEnumColumnFirstname() {
+        String firstName = "firstname_2";
+
+        List<EmployeeDto> empls = employeeService.getByFirstNameOrderByEnumColumn(firstName, EmployeeService.SORT_COLUMN.firstname);
+
+        assertEquals(2, empls.size());
+        assertEquals("lastname_2", empls.get(0).getLastname());
+        assertEquals("lastname_20", empls.get(1).getLastname());
+    }
+
+    @Test
+    void findByLastnameOrderByFirstnameAsc() {
+        String lastName = "lastname_2";
+
+        List<EmployeeDto> empls = employeeService.findByLastnameOrderByFirstnameAsc(lastName);
+
+        assertEquals(1, empls.size());
+        assertEquals("lastname_2", empls.get(0).getLastname());
     }
 }

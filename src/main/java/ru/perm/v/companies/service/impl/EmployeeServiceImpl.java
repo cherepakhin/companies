@@ -26,6 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
     private static CompanyService companyService;
 
+
     public EmployeeServiceImpl(@Autowired EmployeeRepository employeeRepository, CompanyService companyService) {
         this.employeeRepository = employeeRepository;
         this.companyService = companyService;
@@ -37,6 +38,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         EmployeeEntity entity = convertFromDtoToEntity(employee);
         EmployeeEntity created = employeeRepository.save(entity);
         return convertFromEntityToDto(created);
+    }
+
+    @Override
+    public List<EmployeeDto> findByLastnameOrderByFirstnameAsc(String lastName) {
+        if (lastName != null) {
+            return convertFromListEntity(employeeRepository.findByLastnameOrderByFirstnameAsc(lastName));
+        }
+        return List.of();
     }
 
     @Override
@@ -76,6 +85,37 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        all.forEach(ret::add);
 // Выборка коротко
         employeeRepository.findAll(example, Sort.by("n").ascending()).forEach(entities::add);
+        return convertFromListEntity(entities);
+    }
+
+    @Override
+    public List<EmployeeDto> getByFirstNameOrderByColumn(String name, String sortColumnName) {
+        //TODO validate columnName
+        EmployeeEntity query = new EmployeeEntity();
+        query.setFirstname(name);
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnorePaths("n", "lastname", "fathername", "birthday")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreCase();
+
+        ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
+        Example<EmployeeEntity> example = Example.of(query, matcher);
+        employeeRepository.findAll(example, Sort.by(sortColumnName).ascending()).forEach(entities::add);
+        return convertFromListEntity(entities);
+    }
+
+    @Override
+    public List<EmployeeDto> getByFirstNameOrderByEnumColumn(String name, SORT_COLUMN column) {
+        EmployeeEntity query = new EmployeeEntity();
+        query.setFirstname(name);
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnorePaths("n", "lastname", "fathername", "birthday")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreCase();
+
+        ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
+        Example<EmployeeEntity> example = Example.of(query, matcher);
+        employeeRepository.findAll(example, Sort.by(column.toString()).ascending()).forEach(entities::add);
         return convertFromListEntity(entities);
     }
 
@@ -168,5 +208,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 entity.getCompanyEntity().getN()
         );
     }
+
 
 }
