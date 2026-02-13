@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//TODO: add fake data for test
 @SpringBootTest
 @Transactional
 public class EmployeeServiceImpl_IntegrationTest {
@@ -23,7 +22,14 @@ public class EmployeeServiceImpl_IntegrationTest {
     @Test
     public void getAll() {
         List<EmployeeDto> empls = employeeService.getAll();
+
         assertEquals(5, empls.size());
+        // check sorting
+        assertEquals(0L, empls.get(0).getN());
+        assertEquals(1L, empls.get(1).getN());
+        assertEquals(2L, empls.get(2).getN());
+        assertEquals(3L, empls.get(3).getN());
+        assertEquals(4L, empls.get(4).getN());
     }
 
     @Test

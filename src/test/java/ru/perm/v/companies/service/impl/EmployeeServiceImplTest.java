@@ -28,7 +28,7 @@ public class EmployeeServiceImplTest {
         employee1.setCompanyEntity(companyEntity);
         EmployeeEntity employee2 = new EmployeeEntity(2L);
         employee2.setCompanyEntity(companyEntity);
-        when(mockEmployeeRepository.findAll()).thenReturn(List.of(employee1, employee2));
+        when(mockEmployeeRepository.findAllByOrderByNAsc()).thenReturn(List.of(employee1, employee2));
 
         List<EmployeeDto> empls = employeeService.getAll();
 

@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository
         extends CrudRepository<EmployeeEntity, Long>, QueryByExampleExecutor<EmployeeEntity> {
+    List<EmployeeEntity> findAllByOrderByNAsc();
     List<EmployeeEntity> findByLastnameOrderByFirstnameAsc(String lastName);
 
     List<EmployeeEntity> findByLastnameOrderByNDesc(String lastName);

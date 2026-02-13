@@ -3,7 +3,6 @@ package ru.perm.v.companies.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.dto.EmployeeDto;
@@ -17,14 +16,12 @@ import ru.perm.v.companies.util.Util;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private static EmployeeEntity nullEmployee = new EmployeeEntity(-1);
-    private static EmployeeDto nullEmployeeDto = new EmployeeDto(-1L, "", "", "", "",-1L);
+    private static final EmployeeEntity nullEmployee = new EmployeeEntity(-1);
+    private static final EmployeeDto nullEmployeeDto = new EmployeeDto(-1L, "", "", "", "",-1L);
     private EmployeeRepository employeeRepository;
     private static CompanyService companyService;
 
@@ -43,10 +40,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeDto> getAll() {
-        ArrayList<EmployeeDto> dtos = new ArrayList<EmployeeDto>();
+        ArrayList<EmployeeDto> dtos = new ArrayList<>();
 
-        Iterable<EmployeeEntity> all = employeeRepository.findAll();
-        all.iterator().forEachRemaining(entity -> dtos.add(this.convertFromEntityToDto(entity)));
+//        Iterable<EmployeeEntity> all = employeeRepository.findAll();
+        employeeRepository.findAllByOrderByNAsc().forEach(employeeEntity -> dtos.add(this.convertFromEntityToDto(employeeEntity)));
+//        all.iterator().forEachRemaining(entity -> dtos.add(this.convertFromEntityToDto(entity)));
 //        List<EmployeeEntity> enities = Streamable.of(all).toList(); OK
         return dtos;
     }

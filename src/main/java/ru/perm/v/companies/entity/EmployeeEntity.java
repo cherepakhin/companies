@@ -1,7 +1,5 @@
 package ru.perm.v.companies.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -9,7 +7,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "employee")
-@AllArgsConstructor
 public class EmployeeEntity {
     @Id
     @Column(name = "n", nullable = false)
@@ -34,6 +31,15 @@ public class EmployeeEntity {
     public EmployeeEntity(long n) {
         this();
         this.n = n;
+    }
+
+    public EmployeeEntity(Long n, String firstname, String lastname, String fathername, LocalDate birthday, CompanyEntity companyEntity) {
+        this.n = n;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.fathername = fathername;
+        this.birthday = birthday;
+        this.companyEntity = companyEntity;
     }
 
     public Long getN() {
