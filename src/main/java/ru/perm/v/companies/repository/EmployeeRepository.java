@@ -17,5 +17,9 @@ public interface EmployeeRepository
     List<EmployeeEntity> findByLastnameOrderByNAsc(String lastName);
     List<EmployeeEntity> findByLastnameLikeOrderByNDesc(String lastName);
     List<EmployeeEntity> findByLastnameOrderByLastnameAsc(String lastName);
+
+//    @Query(value = "select e from Employee e where e.job.desc = :desc")
+//    Page<Employee> findByDesc(Pageable pageable, @Param("desc") String desc);
+
 //    EmployeeEntity create(EmployeeEntity employee);
 }

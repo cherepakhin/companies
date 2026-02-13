@@ -3,6 +3,7 @@ package ru.perm.v.companies.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.perm.v.companies.dto.CompanyDto;
 import ru.perm.v.companies.dto.EmployeeDto;
@@ -66,7 +67,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withIgnorePaths("n", "lastname", "fathername", "birthday")
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreCase();
 
         ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
         Example<EmployeeEntity> example = Example.of(query, matcher);
@@ -74,10 +75,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        Iterable<EmployeeEntity> all = employeeRepository.findAll(example);
 //        all.forEach(ret::add);
 // Выборка коротко
-        employeeRepository.findAll(example).forEach(entities::add);
+        employeeRepository.findAll(example, Sort.by("n").ascending()).forEach(entities::add);
         return convertFromListEntity(entities);
     }
-
 
     public List<EmployeeDto> findByLastnameOrderByNAsc(String lastName) {
         EmployeeEntity query = new EmployeeEntity();
@@ -89,7 +89,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         ArrayList<EmployeeEntity> entities = new ArrayList<EmployeeEntity>();
         Example<EmployeeEntity> example = Example.of(query, matcher);
-        employeeRepository.findAll(example).forEach(entities::add);
+        employeeRepository.findAll(example, Sort.by("n").ascending()).forEach(entities::add);
 
         return convertFromListEntity(entities);
     }
@@ -112,7 +112,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withIgnorePaths("n", "firstname", "fathername", "birthday")
-                .withIncludeNullValues()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
         ArrayList<EmployeeEntity> ret = new ArrayList<EmployeeEntity>();
@@ -121,7 +120,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        Iterable<EmployeeEntity> all = employeeRepository.findAll(example);
 //        all.forEach(ret::add);
 // Выборка коротко
-        employeeRepository.findAll(example).forEach(ret::add);
+        employeeRepository.findAll(example, Sort.by("n").descending()).forEach(ret::add);
         return convertFromListEntity(ret);
     }
 

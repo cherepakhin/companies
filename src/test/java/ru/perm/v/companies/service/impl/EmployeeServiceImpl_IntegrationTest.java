@@ -52,12 +52,22 @@ public class EmployeeServiceImpl_IntegrationTest {
     }
 
     @Test
+    public void getByFirstNameCheckOrder() {
+        List<EmployeeDto> empls = employeeService.getByFirstName("firstname");
+
+        assertEquals(4, empls.size());
+        assertEquals("firstname_2", empls.get(0).getFirstname());
+        assertEquals("firstname_3", empls.get(1).getFirstname());
+        assertEquals("firstname_30", empls.get(2).getFirstname());
+        assertEquals("firstname_20", empls.get(3).getFirstname());
+    }
+
+    @Test
     void findByLastNameLikeOrderByN() {
         String lastName = "0";
         List<EmployeeDto> empls = employeeService.findByLastnameLikeOrderByN(lastName);
         assertEquals(2, empls.size());
 
-        // demo map
         List<Long> nn = empls.stream().map(EmployeeDto::getN).collect(Collectors.toList());
         assertEquals(List.of(3L, 4L), nn);
         List<String> names = empls.stream().map(EmployeeDto::getFirstname).collect(Collectors.toList());
@@ -71,5 +81,14 @@ public class EmployeeServiceImpl_IntegrationTest {
         assertEquals(2, empls.size());
         assertEquals("lastname_2", empls.get(0).getLastname());
         assertEquals("lastname_20", empls.get(1).getLastname());
+    }
+
+    @Test
+    void findByLastnameLikeOrderByNDesc() {
+        String lastName = "lastname_2";
+        List<EmployeeDto> empls = employeeService.findByLastnameOrderByNDesc(lastName);
+        assertEquals(2, empls.size());
+        assertEquals("lastname_20", empls.get(0).getLastname());
+        assertEquals("lastname_2", empls.get(1).getLastname());
     }
 }
